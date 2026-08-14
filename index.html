@@ -313,6 +313,20 @@
   .qr-canvas-wrap{ background:#fff; padding:14px; display:inline-block; border-radius:var(--radius); }
   .qr-help{ font-size:13px; color:var(--steel); line-height:1.5; margin:18px 0 20px; }
   .qr-actions{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
+  .qr-link-row{
+    display:flex; align-items:center; gap:8px; justify-content:center;
+    margin:-8px 0 18px; padding:8px 12px; background:var(--paper-dim); border-radius:var(--radius);
+  }
+  .qr-link{
+    font-family:'IBM Plex Mono'; font-size:11px; color:var(--gold-deep); text-decoration:none;
+    overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:230px;
+  }
+  .qr-link:hover{ text-decoration:underline; }
+  .qr-copy{
+    background:none; border:1px solid var(--ink); padding:3px 9px; font-family:'IBM Plex Mono';
+    font-size:10px; text-transform:uppercase; letter-spacing:0.06em; flex-shrink:0;
+  }
+  .qr-copy:hover{ background:var(--ink); color:var(--paper); }
 
   .scan-card{ max-width:420px; }
   .scan-video-wrap{
@@ -348,8 +362,8 @@
   }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jsqr/dist/jsQR.js"></script>
 </head>
 <body>
 
@@ -635,7 +649,11 @@
     <div class="qr-eyebrow" id="qrEyebrow">Your check-in code</div>
     <h3 class="qr-name" id="qrName">—</h3>
     <div class="qr-canvas-wrap"><canvas id="qrCanvas" width="240" height="240"></canvas></div>
-    <p class="qr-help">Save this or screenshot it. Scan it at the store on Thursday to check in instantly — or just show it to whoever's at the table.</p>
+    <p class="qr-help" id="qrHelpText">Save this or screenshot it. Scan it at the store on Thursday to check in instantly — or just show it to whoever's at the table.</p>
+    <div class="qr-link-row">
+      <a id="qrLink" class="qr-link" href="#" target="_blank" rel="noopener">—</a>
+      <button class="qr-copy" id="qrCopyLink" type="button" title="Copy link">Copy</button>
+    </div>
     <div class="qr-actions">
       <button class="btn gold" id="qrDownload" type="button">Download</button>
       <button class="btn ghost" id="qrScanInstead" type="button">Scan a runner instead</button>
@@ -1328,15 +1346,44 @@ function checkinUrlFor(token){
 
 function openQrModal(token, name, opts={}){
   const overlay = document.getElementById('qrOverlay');
+  const help = document.getElementById('qrHelpText');
   document.getElementById('qrName').textContent = name;
   document.getElementById('qrEyebrow').textContent = opts.justJoined ? "You're on the list — here's your code" : 'Your check-in code';
+
+  const url = checkinUrlFor(token);
+  const linkEl = document.getElementById('qrLink');
+  linkEl.href = url;
+  linkEl.textContent = url;
+
   const canvas = document.getElementById('qrCanvas');
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
   if(window.QRCode){
-    QRCode.toCanvas(canvas, checkinUrlFor(token), { width: 240, margin: 1, color: { dark: '#18140f', light: '#ffffff' } }, (err) => {
-      if(err) console.error('QR render failed', err);
+    QRCode.toCanvas(canvas, url, { width: 240, margin: 1, color: { dark: '#18140f', light: '#ffffff' } }, (err) => {
+      if(err){
+        console.error('QR render failed', err);
+        showQrFallback(canvas, help);
+      } else if(help){
+        help.textContent = "Save this or screenshot it. Scan it at the store on Thursday to check in instantly — or just show it to whoever's at the table.";
+      }
     });
+  } else {
+    console.error('QR library (window.QRCode) never loaded — check your connection and try refreshing the page.');
+    showQrFallback(canvas, help);
   }
   overlay.classList.add('show');
+}
+function showQrFallback(canvas, help){
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = '#f0ede6';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = '#18140f';
+  ctx.font = '13px sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText("QR code didn't load.", canvas.width/2, canvas.height/2 - 8);
+  ctx.fillText('Try refreshing the page.', canvas.width/2, canvas.height/2 + 12);
+  if(help) help.textContent = "Your QR code couldn't be generated — this usually means the QR library failed to load. Refresh the page and try again, or use \"My QR code\" from the check-in section later.";
 }
 function closeQrModal(){
   document.getElementById('qrOverlay').classList.remove('show');
@@ -1353,6 +1400,16 @@ document.getElementById('qrDownload').addEventListener('click', () => {
 document.getElementById('qrScanInstead').addEventListener('click', () => {
   closeQrModal();
   openScanner();
+});
+document.getElementById('qrCopyLink').addEventListener('click', async () => {
+  const url = document.getElementById('qrLink').href;
+  try{
+    await navigator.clipboard.writeText(url);
+    showToast('Link copied.');
+  }catch(err){
+    console.error('clipboard copy failed', err);
+    showToast("Couldn't copy — long-press the link to copy it instead.");
+  }
 });
 
 async function showMyQr(){
