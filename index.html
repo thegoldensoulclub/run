@@ -1023,8 +1023,10 @@ document.getElementById('joinForm').addEventListener('submit', async (e)=>{
   if(supabaseConfigured){
     const { data, error } = await sb.rpc('join_roster', { p_name: name, p_email: email, p_pace: selectedPace, p_waiver_agreed: waiverAgreed });
     if(error){ console.error('join_roster failed', error); msg.textContent = 'Something went wrong — try again.'; msg.className='form-msg'; return; }
+    console.log('join_roster response:', data);
     isUpdate = !data.is_new;
     token = data.token;
+    if(!token){ console.error('join_roster succeeded but returned no token. Full response:', data); }
   } else {
     // Demo mode: no shared backend, so the token only works for
     // scanning on this same browser/device — good enough to try the
@@ -1045,7 +1047,17 @@ document.getElementById('joinForm').addEventListener('submit', async (e)=>{
   await renderRoster();
   await renderCheckins();
   showToast('Welcome to the club, ' + name.split(' ')[0] + '.');
-  if(token) openQrModal(token, name, { justJoined: true });
+
+  if(token){
+    try{
+      openQrModal(token, name, { justJoined: true });
+    }catch(err){
+      console.error('openQrModal threw an error:', err);
+      showToast("You're signed up, but your QR code didn't load — try \"My QR code\" below.");
+    }
+  } else {
+    showToast("You're signed up, but your QR code didn't load — try \"My QR code\" below.");
+  }
 });
 
 /* ---------------- Check-in ---------------- */
