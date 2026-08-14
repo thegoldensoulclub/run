@@ -212,7 +212,11 @@
   }
 
   /* ---------- JOIN / SIGNUP ---------- */
-  .join-grid{ display:grid; grid-template-columns:1fr 1fr; gap:56px; }
+  .join-grid{ display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:stretch; }
+  .roster-card{
+    display:flex; flex-direction:column; justify-content:center;
+    border:2px solid var(--ink); padding:36px 32px; background:var(--paper-dim);
+  }
   .roster-count{ font-family:'IBM Plex Mono'; font-size:60px; font-weight:700; line-height:1; color:var(--gold-deep); }
   .roster-count.tick{ animation: rosterTick 0.5s ease; }
   @keyframes rosterTick{
@@ -240,13 +244,10 @@
 
   .waiver-field{ margin-top:2px; }
   .waiver-details{ border:1px solid var(--line); padding:2px 0; margin-bottom:12px; }
-  .waiver-details summary{
-    cursor:pointer; padding:12px 14px; font-family:'IBM Plex Mono'; font-size:12px;
-    text-transform:uppercase; letter-spacing:0.06em; color:var(--brick); list-style:none;
+  .waiver-label{
+    padding:12px 14px 6px; font-family:'IBM Plex Mono'; font-size:12px;
+    text-transform:uppercase; letter-spacing:0.06em; color:var(--brick);
   }
-  .waiver-details summary::-webkit-details-marker{ display:none; }
-  .waiver-details summary::before{ content:'+ '; }
-  .waiver-details[open] summary::before{ content:'– '; }
   .waiver-text{ padding:0 16px 16px; font-size:13px; line-height:1.6; color:#3a352b; max-height:220px; overflow-y:auto; }
   .waiver-text p{ margin:0 0 10px; }
   .waiver-text p:last-child{ margin-bottom:0; }
@@ -494,7 +495,7 @@
       <div class="section-tag">Free to join. Helps us plan pace groups and water stops each week.</div>
     </div>
     <div class="join-grid">
-      <div>
+      <div class="roster-card">
         <div class="roster-count mono"><span id="rosterCount">0</span></div>
         <div style="font-family:'IBM Plex Mono'; font-size:12px; color:var(--steel); text-transform:uppercase; letter-spacing:0.08em; margin-top:4px; display:flex; align-items:center; gap:2px;">runners on the list <span class="live-badge" id="rosterLiveBadge" style="display:none;">Live</span></div>
         <div class="roster-bar" id="rosterBar"></div>
@@ -518,15 +519,15 @@
           </div>
         </div>
         <div class="field waiver-field">
-          <details class="waiver-details">
-            <summary>Read the release of responsibility</summary>
+          <div class="waiver-details">
+            <div class="waiver-label">Release of responsibility</div>
             <div class="waiver-text">
               <p><strong>Release of Responsibility — Golden Soul Run Club</strong></p>
               <p>Running and related physical activity carry inherent risks, including but not limited to falls, collisions with other participants, vehicles, or objects, adverse weather, road or trail conditions, and medical events such as cardiac or heat-related illness.</p>
               <p>By signing up, I confirm that I am physically able to participate and that I voluntarily assume all risks associated with this activity. I release Golden Soul Club, its owners, staff, and run leaders from liability for injury, loss, or damage arising from my participation, except where caused by gross negligence or intentional misconduct.</p>
               <p>I consent to receive emergency medical care if needed, and understand Golden Soul Club is not responsible for the cost of that care. I understand participation is voluntary and I may leave the group run at any time.</p>
             </div>
-          </details>
+          </div>
           <label class="waiver-check">
             <input type="checkbox" id="waiverAgree" required>
             <span>I have read and agree to the release of responsibility above.</span>
