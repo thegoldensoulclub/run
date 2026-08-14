@@ -185,7 +185,7 @@
   .product-name{ font-weight:700; font-family:'Fraunces'; font-size:16px; margin:8px 0 10px; }
   .product-foot{ margin-top:auto; display:flex; justify-content:space-between; align-items:center; }
   .price{ font-family:'IBM Plex Mono'; font-weight:700; }
-  .add-btn{ border:1px solid var(--ink); background:transparent; padding:8px 12px; font-size:11px; text-transform:uppercase; letter-spacing:0.06em; font-weight:700; }
+  .add-btn{ display:inline-block; border:1px solid var(--ink); background:transparent; padding:8px 12px; font-size:11px; text-transform:uppercase; letter-spacing:0.06em; font-weight:700; text-decoration:none; color:var(--ink); }
   .add-btn:hover{ background:var(--ink); color:var(--paper); }
   .sold-out{ font-family:'IBM Plex Mono'; font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:var(--steel); border:1px solid var(--line); padding:8px 12px; }
 
@@ -406,12 +406,9 @@
       <a href="#checkin">Check In</a>
       <a href="#wall">Wall</a>
     </div>
-    <div style="display:flex; align-items:center; gap:6px;">
-      <button class="cart-pill" id="cartBtn">Bag · <span id="cartCount">0</span></button>
-      <button class="nav-burger" id="navBurger" aria-label="Menu" aria-expanded="false">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-      </button>
-    </div>
+    <button class="nav-burger" id="navBurger" aria-label="Menu" aria-expanded="false">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
   </div>
   <div class="mobile-menu" id="mobileMenu">
     <a href="#shop">Shop</a>
@@ -453,27 +450,6 @@
     <path d="M0,60 C120,10 220,10 320,55 C420,95 520,95 620,50 C720,5 820,5 900,45 C1000,88 1100,88 1200,40"/>
   </svg>
 </header>
-
-<section id="shop">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <span class="kicker">Featured picks</span>
-        <h2>Running. Everyday.<br>Same pursuit.</h2>
-      </div>
-      <div class="section-tag">A few pieces made to move between a Thursday long run and the rest of your week.</div>
-    </div>
-    <div class="product-grid" id="productGrid"></div>
-    <a href="https://thegoldensoulclub.com" target="_blank" rel="noopener" class="shop-all-link">
-      Shop the full collection
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-    </a>
-  </div>
-</section>
-
-<svg class="route-divider" viewBox="0 0 1200 90" preserveAspectRatio="none">
-  <path d="M0,40 C100,85 200,85 300,45 C400,5 500,5 600,50 C700,95 800,95 900,55 C1000,15 1100,15 1200,60"/>
-</svg>
 
 <section class="club-band" id="club">
   <div class="wrap">
@@ -616,6 +592,27 @@
       </form>
       <div id="wallFeed"></div>
     </div>
+  </div>
+</section>
+
+<svg class="route-divider" viewBox="0 0 1200 90" preserveAspectRatio="none">
+  <path d="M0,40 C100,85 200,85 300,45 C400,5 500,5 600,50 C700,95 800,95 900,55 C1000,15 1100,15 1200,60"/>
+</svg>
+
+<section id="shop">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="kicker">Featured picks</span>
+        <h2>Running. Everyday.<br>Same pursuit.</h2>
+      </div>
+      <div class="section-tag">A few pieces made to move between a Thursday long run and the rest of your week.</div>
+    </div>
+    <div class="product-grid" id="productGrid"></div>
+    <a href="https://thegoldensoulclub.com" target="_blank" rel="noopener" class="shop-all-link">
+      Shop the full collection
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
   </div>
 </section>
 
@@ -842,6 +839,9 @@ setInterval(tickCountdown, 1000);
 ------------------------------------------------------------------ */
 const SHOPIFY_DOMAIN = 'YOUR_STORE.myshopify.com';   // or your connected custom domain
 const SHOPIFY_STOREFRONT_TOKEN = 'YOUR_STOREFRONT_ACCESS_TOKEN';
+// The customer-facing domain product links should point to — usually
+// different from SHOPIFY_DOMAIN above, which is the API domain.
+const SHOPIFY_STOREFRONT_URL = 'https://thegoldensoulclub.com';
 
 const storefrontConfigured = SHOPIFY_DOMAIN.indexOf('YOUR_') === -1 && SHOPIFY_STOREFRONT_TOKEN.indexOf('YOUR_') === -1;
 
@@ -852,6 +852,7 @@ const SHOPIFY_PRODUCTS_QUERY = `
         node {
           id
           title
+          handle
           productType
           featuredImage { url altText }
           priceRange { minVariantPrice { amount } }
@@ -885,7 +886,8 @@ async function fetchShopifyProducts(){
         cat: n.productType || '',
         image: n.featuredImage ? n.featuredImage.url : null,
         price: Math.round(parseFloat(n.priceRange.minVariantPrice.amount)),
-        soldOut: variant ? !variant.availableForSale : false
+        soldOut: variant ? !variant.availableForSale : false,
+        url: `${SHOPIFY_STOREFRONT_URL}/products/${n.handle}`
       };
     });
   }catch(err){
@@ -915,30 +917,29 @@ const ICONS = {
 // entry below (e.g. image:'https://...') to use a real photo now.
 const MANUAL_PRODUCTS = [
   // Running — thegoldensoulclub.com/collections/running
-  { name:'Running Singlets', collection:'Running', cat:'Tops', icon:'singlet', price:55, featured:true, image:'https://thegoldensoulclub.com/cdn/shop/files/IMG_2678.heic?v=1786133606&width=1200&format=jpg' },
-  { name:'Training Shorts 6"', collection:'Running', cat:'Shorts', icon:'short', price:50, image:'https://thegoldensoulclub.com/cdn/shop/files/IMG_4913.heic?v=1764703636&width=1200&format=jpg' },
-  { name:'Compression Socks', collection:'Running', cat:'Accessories', icon:'sock', price:20, image:'https://thegoldensoulclub.com/cdn/shop/files/DSC04771.jpg?v=1750106825&width=1200&format=jpg' },
-  { name:'5 Panel Running Cap', collection:'Running', cat:'Headwear', icon:'cap', price:35, soldOut:true, image:'https://thegoldensoulclub.com/cdn/shop/files/IMG_1657.heic?v=1784059095&width=1200&format=jpg' },
-  { name:'2.5" Short', collection:'Running', cat:'Shorts', icon:'short', price:50, image:'https://thegoldensoulclub.com/cdn/shop/files/IMG_4456.heic?v=1764789868&width=1200&format=jpg' },
-  { name:'Running Windbreaker', collection:'Running', cat:'Outerwear', icon:'jacket', price:65, featured:true, image:'https://thegoldensoulclub.com/cdn/shop/files/IMG_0114_c186e47d-d0ad-40de-b69a-9ca8f2b5022c.heic?v=1749673183&width=1200&format=jpg' },
-  { name:'Neon Green Running Cap', collection:'Running', cat:'Headwear', icon:'cap', price:35, image:'https://thegoldensoulclub.com/cdn/shop/files/IMG_1603.heic?v=1755030424&width=1200&format=jpg' },
-  { name:'Training Tee', collection:'Running', cat:'Tops', icon:'tee', price:45, image:'https://thegoldensoulclub.com/cdn/shop/files/IMG_1862.heic?v=1755958279&width=1200&format=jpg' },
-  { name:'All Black Running Cap', collection:'Running', cat:'Headwear', icon:'cap', price:35, image:'https://thegoldensoulclub.com/cdn/shop/files/IMG_1562.heic?v=1755030555&width=1200&format=jpg' },
-  { name:"Women's Biker Short", collection:'Running', cat:'Shorts', icon:'short', price:50, image:'https://thegoldensoulclub.com/cdn/shop/files/IMG_9186.heic?v=1777660977&width=1200&format=jpg' },
+  { name:'Running Singlets', collection:'Running', cat:'Tops', icon:'singlet', price:55, featured:true, url:'https://thegoldensoulclub.com/products/running-singlet-earth-tones', image:'https://thegoldensoulclub.com/cdn/shop/files/IMG_2678.heic?v=1786133606&width=1200&format=jpg' },
+  { name:'Training Shorts 6"', collection:'Running', cat:'Shorts', icon:'short', price:50, url:'https://thegoldensoulclub.com/products/training-shorts', image:'https://thegoldensoulclub.com/cdn/shop/files/IMG_4913.heic?v=1764703636&width=1200&format=jpg' },
+  { name:'Compression Socks', collection:'Running', cat:'Accessories', icon:'sock', price:20, url:'https://thegoldensoulclub.com/products/compression-socks', image:'https://thegoldensoulclub.com/cdn/shop/files/DSC04771.jpg?v=1750106825&width=1200&format=jpg' },
+  { name:'5 Panel Running Cap', collection:'Running', cat:'Headwear', icon:'cap', price:35, soldOut:true, url:'https://thegoldensoulclub.com/products/5-panel-running-cap', image:'https://thegoldensoulclub.com/cdn/shop/files/IMG_1657.heic?v=1784059095&width=1200&format=jpg' },
+  { name:'2.5" Short', collection:'Running', cat:'Shorts', icon:'short', price:50, url:'https://thegoldensoulclub.com/products/2-5-short', image:'https://thegoldensoulclub.com/cdn/shop/files/IMG_4456.heic?v=1764789868&width=1200&format=jpg' },
+  { name:'Running Windbreaker', collection:'Running', cat:'Outerwear', icon:'jacket', price:65, featured:true, url:'https://thegoldensoulclub.com/products/running-windbreaker', image:'https://thegoldensoulclub.com/cdn/shop/files/IMG_0114_c186e47d-d0ad-40de-b69a-9ca8f2b5022c.heic?v=1749673183&width=1200&format=jpg' },
+  { name:'Neon Green Running Cap', collection:'Running', cat:'Headwear', icon:'cap', price:35, url:'https://thegoldensoulclub.com/products/neon-green-running-cap', image:'https://thegoldensoulclub.com/cdn/shop/files/IMG_1603.heic?v=1755030424&width=1200&format=jpg' },
+  { name:'Training Tee', collection:'Running', cat:'Tops', icon:'tee', price:45, url:'https://thegoldensoulclub.com/products/training-tee', image:'https://thegoldensoulclub.com/cdn/shop/files/IMG_1862.heic?v=1755958279&width=1200&format=jpg' },
+  { name:'All Black Running Cap', collection:'Running', cat:'Headwear', icon:'cap', price:35, url:'https://thegoldensoulclub.com/products/all-black-running-caps', image:'https://thegoldensoulclub.com/cdn/shop/files/IMG_1562.heic?v=1755030555&width=1200&format=jpg' },
+  { name:"Women's Biker Short", collection:'Running', cat:'Shorts', icon:'short', price:50, url:'https://thegoldensoulclub.com/products/womens-biker-short', image:'https://thegoldensoulclub.com/cdn/shop/files/IMG_9186.heic?v=1777660977&width=1200&format=jpg' },
 
   // Everyday Wear — thegoldensoulclub.com/collections/lifestyle
-  { name:'Pursuit Oversized Tee', collection:'Everyday Wear', cat:'Tops', icon:'tee', price:50, image:'https://thegoldensoulclub.com/cdn/shop/files/IMG_7749.heic?v=1772828501&width=1200&format=jpg' },
-  { name:'Jersey de Fútbol', collection:'Everyday Wear', cat:'Tops', icon:'jersey', price:65, image:'https://thegoldensoulclub.com/cdn/shop/files/IMG_1352.heic?v=1783615969&width=1200&format=jpg' },
-  { name:'Athletic Dept. Ringer Tee', collection:'Everyday Wear', cat:'Tops', icon:'tee', price:50, image:'https://thegoldensoulclub.com/cdn/shop/files/IMG_8277.heic?v=1774464508&width=1200&format=jpg' },
-  { name:'Athletic Dept. Oversized Tee', collection:'Everyday Wear', cat:'Tops', icon:'tee', price:50, featured:true, image:'https://thegoldensoulclub.com/cdn/shop/files/IMG_8282.heic?v=1774463647&width=1200&format=jpg' },
-  { name:'Baseball Cap', collection:'Everyday Wear', cat:'Headwear', icon:'cap', price:40, image:'https://thegoldensoulclub.com/cdn/shop/files/IMG_4986.jpg?v=1764706289&width=1200&format=jpg' },
-  { name:'Run The Race Tee', collection:'Everyday Wear', cat:'Tops', icon:'tee', price:50, image:'https://thegoldensoulclub.com/cdn/shop/files/IMG_90837.heic?v=1776975293&width=1200&format=jpg' },
-  { name:'Athletic Dept. Sweater', collection:'Everyday Wear', cat:'Outerwear', icon:'sweater', price:85, image:'https://thegoldensoulclub.com/cdn/shop/files/IMG_8291.heic?v=1774466128&width=1200&format=jpg' },
-  { name:'I Love Puerto Rico Tee', collection:'Everyday Wear', cat:'Tops', icon:'tee', price:42, featured:true, image:'https://thegoldensoulclub.com/cdn/shop/files/IMG_0943.heic?v=1755705515&width=1200&format=jpg' },
+  { name:'Pursuit Oversized Tee', collection:'Everyday Wear', cat:'Tops', icon:'tee', price:50, url:'https://thegoldensoulclub.com/products/pursuit-oversized-tee', image:'https://thegoldensoulclub.com/cdn/shop/files/IMG_7749.heic?v=1772828501&width=1200&format=jpg' },
+  { name:'Jersey de Fútbol', collection:'Everyday Wear', cat:'Tops', icon:'jersey', price:65, url:'https://thegoldensoulclub.com/products/jersey-de-futbol', image:'https://thegoldensoulclub.com/cdn/shop/files/IMG_1352.heic?v=1783615969&width=1200&format=jpg' },
+  { name:'Athletic Dept. Ringer Tee', collection:'Everyday Wear', cat:'Tops', icon:'tee', price:50, url:'https://thegoldensoulclub.com/products/athletic-dept-ringer-tee', image:'https://thegoldensoulclub.com/cdn/shop/files/IMG_8277.heic?v=1774464508&width=1200&format=jpg' },
+  { name:'Athletic Dept. Oversized Tee', collection:'Everyday Wear', cat:'Tops', icon:'tee', price:50, featured:true, url:'https://thegoldensoulclub.com/products/athletic-dept-oversized-tee', image:'https://thegoldensoulclub.com/cdn/shop/files/IMG_8282.heic?v=1774463647&width=1200&format=jpg' },
+  { name:'Baseball Cap', collection:'Everyday Wear', cat:'Headwear', icon:'cap', price:40, url:'https://thegoldensoulclub.com/products/baseball-cap', image:'https://thegoldensoulclub.com/cdn/shop/files/IMG_4986.jpg?v=1764706289&width=1200&format=jpg' },
+  { name:'Run The Race Tee', collection:'Everyday Wear', cat:'Tops', icon:'tee', price:50, url:'https://thegoldensoulclub.com/products/run-the-race-tee', image:'https://thegoldensoulclub.com/cdn/shop/files/IMG_90837.heic?v=1776975293&width=1200&format=jpg' },
+  { name:'Athletic Dept. Sweater', collection:'Everyday Wear', cat:'Outerwear', icon:'sweater', price:85, url:'https://thegoldensoulclub.com/products/athletic-dept-sweater', image:'https://thegoldensoulclub.com/cdn/shop/files/IMG_8291.heic?v=1774466128&width=1200&format=jpg' },
+  { name:'I Love Puerto Rico Tee', collection:'Everyday Wear', cat:'Tops', icon:'tee', price:42, featured:true, url:'https://thegoldensoulclub.com/products/i-love-puerto-rico', image:'https://thegoldensoulclub.com/cdn/shop/files/IMG_0943.heic?v=1755705515&width=1200&format=jpg' },
 ];
 
 let productsData = [];
-let cartCount = 0;
 
 function productArt(p){
   if(p.image) return `<img src="${p.image}" alt="${escapeHtml(p.name)}" style="width:100%; height:100%; object-fit:cover;">`;
@@ -956,6 +957,9 @@ function renderProducts(){
   list.forEach(p=>{
     const card = document.createElement('div');
     card.className = 'product-card';
+    const seeProduct = p.url
+      ? `<a class="add-btn" href="${p.url}" target="_blank" rel="noopener">See Product</a>`
+      : `<span class="add-btn" style="opacity:0.5; cursor:default;">See Product</span>`;
     card.innerHTML = `
       <div class="product-art">${productArt(p)}</div>
       <div class="product-collection">${escapeHtml(p.collection)}</div>
@@ -963,15 +967,8 @@ function renderProducts(){
       <div class="product-name">${escapeHtml(p.name)}</div>
       <div class="product-foot">
         <span class="price mono">$${p.price}</span>
-        ${p.soldOut ? '<span class="sold-out">Sold out</span>' : '<button class="add-btn">Add to bag</button>'}
+        ${p.soldOut ? '<span class="sold-out">Sold out</span>' : seeProduct}
       </div>`;
-    if(!p.soldOut){
-      card.querySelector('.add-btn').onclick = () => {
-        cartCount++;
-        document.getElementById('cartCount').textContent = cartCount;
-        showToast(p.name + ' added to your bag');
-      };
-    }
     grid.appendChild(card);
   });
 }
