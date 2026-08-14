@@ -1,0 +1,1503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Golden Soul Club — Run Club & Shop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#18140f;
+    --paper:#ffffff;
+    --paper-dim:#f0ede6;
+    --gold:#c1922e;
+    --gold-deep:#8a6116;
+    --gold-bright:#e7c364;
+    --signal:#cbe552;
+    --brick:#a8532c;
+    --steel:#7c7466;
+    --line: rgba(24,20,15,0.14);
+    --line-soft: rgba(244,236,221,0.16);
+    --radius: 2px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.01ms !important; transition-duration:0.01ms !important;}
+  }
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{
+    font-family:'Fraunces', serif;
+    font-weight:700;
+    letter-spacing:-0.01em;
+    margin:0;
+  }
+  .mono{ font-family:'IBM Plex Mono', monospace; }
+  a{ color:inherit; }
+  button{ font-family:inherit; cursor:pointer; }
+  .wrap{ max-width:1120px; margin:0 auto; padding:0 28px; }
+  ::selection{ background:var(--gold-bright); color:var(--ink); }
+  :focus-visible{ outline:3px solid var(--brick); outline-offset:2px; }
+
+  /* ---------- NAV ---------- */
+  .nav{
+    position:sticky; top:0; z-index:50;
+    background:var(--ink);
+    color:var(--paper);
+    border-bottom:1px solid var(--line-soft);
+  }
+  .nav-inner{
+    max-width:1120px; margin:0 auto; padding:0 28px;
+    display:flex; align-items:center; justify-content:space-between;
+    height:66px;
+  }
+  .brand{ display:flex; align-items:center; gap:10px; }
+  .brand-mark{ height:28px; width:auto; flex-shrink:0; display:block; }
+  .brand-wordmark{ height:15px; width:auto; display:block; }
+  .navlinks{ display:flex; gap:2px; align-items:center; }
+  .navlinks a{
+    text-decoration:none; color:var(--paper); opacity:0.75;
+    font-size:12px; letter-spacing:0.1em; text-transform:uppercase;
+    padding:10px 14px; position:relative; font-weight:500;
+  }
+  .navlinks a:hover{ opacity:1; }
+  .navlinks a.active{ opacity:1; }
+  .navlinks a.active::after{
+    content:''; position:absolute; left:14px; right:14px; bottom:8px;
+    height:2px; background:var(--gold-bright);
+  }
+  .cart-pill{
+    display:flex; align-items:center; gap:6px;
+    background:var(--gold-bright); color:var(--ink);
+    border-radius:999px; padding:7px 14px; font-size:11px;
+    font-weight:700; letter-spacing:0.06em; text-transform:uppercase;
+    border:none;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{ padding:72px 0 36px; position:relative; overflow:hidden; }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'IBM Plex Mono'; font-size:12px; letter-spacing:0.1em;
+    text-transform:uppercase; color:var(--brick); margin-bottom:20px;
+  }
+  .eyebrow::before{ content:''; width:7px; height:7px; background:var(--brick); border-radius:50%; }
+  .hero h1{
+    font-size:clamp(52px, 9vw, 108px);
+    line-height:0.94;
+    font-weight:700;
+  }
+  .hero h1 em{ font-style:italic; font-weight:500; color:var(--gold-deep); }
+  .hero-sub{
+    font-size:17px; max-width:460px; margin-top:24px; color:#3a352b;
+    line-height:1.6;
+  }
+  .hero-grid{ display:grid; grid-template-columns: 1.3fr 1fr; gap:40px; align-items:end; margin-top:8px; }
+  .hero-actions{ display:flex; gap:12px; margin-top:32px; flex-wrap:wrap; }
+  .btn{
+    border:2px solid var(--ink); background:var(--ink); color:var(--paper);
+    padding:14px 26px; font-weight:600; text-transform:uppercase;
+    letter-spacing:0.06em; font-size:12.5px; text-decoration:none;
+    display:inline-flex; align-items:center; gap:8px; border-radius:var(--radius);
+    transition: transform 0.15s ease;
+  }
+  .btn:hover{ transform:translateY(-2px); }
+  .btn.ghost{ background:transparent; color:var(--ink); }
+  .btn.gold{ background:var(--gold); border-color:var(--gold); color:var(--ink); }
+
+  .clock-card{ background:var(--ink); color:var(--paper); padding:26px 26px 22px; border-radius:var(--radius); position:relative; }
+  .clock-label{ font-family:'IBM Plex Mono'; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--gold-bright); margin-bottom:14px; }
+  .clock-row{ display:flex; gap:18px; }
+  .clock-unit{ text-align:left; }
+  .clock-num{ font-family:'IBM Plex Mono'; font-weight:700; font-size:36px; line-height:1; }
+  .clock-unit small{ display:block; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--steel); margin-top:6px; }
+  .clock-meta{ margin-top:18px; padding-top:16px; border-top:1px solid var(--line-soft); font-size:13px; color:#cdc3ac; display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; }
+
+  /* ---------- ROUTE DIVIDER ---------- */
+  .route-divider{ width:100%; display:block; margin:6px 0; }
+  .route-divider path{
+    fill:none; stroke:var(--gold-deep); stroke-width:2; opacity:0.4;
+    stroke-dasharray:2400; stroke-dashoffset:2400;
+    transition: stroke-dashoffset 1.8s cubic-bezier(.2,.7,.2,1);
+  }
+  .route-divider.in-view path{ stroke-dashoffset:0; }
+
+  /* ---------- SECTION SHARED ---------- */
+  section{ padding:62px 0; }
+  .section-head{
+    display:flex; justify-content:space-between; align-items:flex-end;
+    gap:20px; margin-bottom:34px; flex-wrap:wrap;
+    border-bottom:2px solid var(--ink); padding-bottom:18px;
+  }
+  .section-head h2{ font-size:clamp(30px,4.6vw,48px); }
+  .section-tag{ font-family:'IBM Plex Mono'; font-size:12px; color:var(--steel); letter-spacing:0.04em; max-width:280px; text-align:right; line-height:1.5; }
+  .kicker{ font-family:'IBM Plex Mono'; font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color:var(--brick); margin-bottom:10px; display:block; }
+  .live-badge{
+    display:inline-flex; align-items:center; gap:6px; vertical-align:middle;
+    font-family:'IBM Plex Mono'; font-size:12px; font-weight:400; text-transform:uppercase;
+    letter-spacing:0.08em; color:var(--steel); margin-left:4px;
+  }
+  .live-badge::before{ content:''; width:7px; height:7px; background:var(--signal); border-radius:50%; animation:pulse 1.8s ease-in-out infinite; }
+
+  /* ---------- SHOP ---------- */
+  .filter-row{ display:flex; gap:8px; margin-bottom:28px; flex-wrap:wrap; }
+  .chip{ border:1px solid var(--ink); background:transparent; padding:8px 16px; font-size:12px; text-transform:uppercase; letter-spacing:0.06em; font-weight:600; border-radius:999px; }
+  .chip.active{ background:var(--ink); color:var(--paper); }
+  .product-grid{ display:grid; grid-template-columns:repeat(4, 1fr); gap:1px; background:var(--line); border:1px solid var(--line); }
+  .product-card{ background:var(--paper); padding:22px; display:flex; flex-direction:column; }
+  .product-art{ aspect-ratio:1/1; background:var(--paper-dim); display:flex; align-items:center; justify-content:center; margin-bottom:16px; position:relative; overflow:hidden; }
+  .product-art svg{ width:56%; height:56%; }
+  .product-collection{ font-family:'IBM Plex Mono'; font-size:9px; text-transform:uppercase; color:var(--brick); letter-spacing:0.1em; }
+  .product-cat{ font-family:'IBM Plex Mono'; font-size:10px; text-transform:uppercase; color:var(--steel); letter-spacing:0.08em; margin-top:2px; }
+  .product-name{ font-weight:700; font-family:'Fraunces'; font-size:16px; margin:8px 0 10px; }
+  .product-foot{ margin-top:auto; display:flex; justify-content:space-between; align-items:center; }
+  .price{ font-family:'IBM Plex Mono'; font-weight:700; }
+  .add-btn{ border:1px solid var(--ink); background:transparent; padding:8px 12px; font-size:11px; text-transform:uppercase; letter-spacing:0.06em; font-weight:700; }
+  .add-btn:hover{ background:var(--ink); color:var(--paper); }
+  .sold-out{ font-family:'IBM Plex Mono'; font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:var(--steel); border:1px solid var(--line); padding:8px 12px; }
+
+  /* ---------- CLUB INFO ---------- */
+  .club-band{ background:var(--ink); color:var(--paper); }
+  .club-grid{ display:grid; grid-template-columns:1fr 1fr; gap:48px; }
+  .fact-list{ list-style:none; margin:22px 0 0; padding:0; display:grid; gap:16px; }
+  .fact-list li{ display:flex; gap:14px; align-items:flex-start; border-top:1px solid var(--line-soft); padding-top:14px; }
+  .fact-list li:first-child{ border-top:none; padding-top:0; }
+  .fact-num{ font-family:'IBM Plex Mono'; color:var(--gold-bright); font-size:13px; padding-top:2px; min-width:26px; }
+  .fact-body b{ display:block; font-size:15px; margin-bottom:2px; font-family:'Fraunces'; font-weight:700; }
+  .fact-body span{ font-size:13px; color:#c7bda3; }
+
+  .pace-table{ width:100%; border-collapse:collapse; margin-top:8px; }
+  .pace-table th{ text-align:left; font-family:'IBM Plex Mono'; font-size:11px; text-transform:uppercase; letter-spacing:0.08em; color:var(--gold-bright); padding-bottom:10px; border-bottom:1px solid var(--line-soft); font-weight:400; }
+  .pace-table td{ padding:14px 0; border-bottom:1px solid var(--line-soft); font-size:14px; vertical-align:top; }
+  .pace-swatch{ width:11px; height:11px; border-radius:50%; display:inline-block; margin-right:8px; }
+  .pace-table tr:last-child td{ border-bottom:none; }
+
+  .quote-block{
+    margin-top:28px; padding:20px 0 0; border-top:1px solid var(--line-soft);
+    font-family:'Fraunces'; font-style:italic; font-weight:500; font-size:16px; color:var(--gold-bright);
+    line-height:1.5;
+  }
+
+  /* ---------- JOIN / SIGNUP ---------- */
+  .join-grid{ display:grid; grid-template-columns:1fr 1fr; gap:56px; }
+  .roster-count{ font-family:'IBM Plex Mono'; font-size:60px; font-weight:700; line-height:1; color:var(--gold-deep); }
+  .roster-count.tick{ animation: rosterTick 0.5s ease; }
+  @keyframes rosterTick{
+    0%{ transform: translateY(0); opacity:1; }
+    35%{ transform: translateY(-10px); opacity:0.4; }
+    36%{ transform: translateY(10px); }
+    100%{ transform: translateY(0); opacity:1; }
+  }
+  .roster-bar{ margin-top:26px; display:grid; gap:10px; }
+  .roster-row{ display:grid; grid-template-columns:110px 1fr 40px; align-items:center; gap:10px; font-size:12px; }
+  .roster-row .track{ height:10px; background:var(--paper-dim); position:relative; }
+  .roster-row .fill{ position:absolute; inset:0; background:var(--ink); width:0%; transition:width 0.6s ease; }
+
+  form{ display:grid; gap:14px; }
+  .field label{ display:block; font-family:'IBM Plex Mono'; font-size:11px; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:6px; color:var(--steel); }
+  .field input, .field select, .field textarea{
+    width:100%; border:none; border-bottom:2px solid var(--ink);
+    background:transparent; padding:10px 2px; font-size:15px; font-family:inherit; color:var(--ink);
+  }
+  .field textarea{ resize:vertical; min-height:70px; border:2px solid var(--ink); padding:10px; }
+  .field input:focus, .field select:focus, .field textarea:focus{ outline:none; border-color:var(--brick); }
+  .pace-pick{ display:flex; gap:8px; flex-wrap:wrap; }
+  .pace-opt{ border:2px solid var(--ink); padding:9px 14px; font-size:12px; font-weight:700; text-transform:uppercase; background:transparent; }
+  .pace-opt.sel{ background:var(--ink); color:var(--paper); }
+
+  .waiver-field{ margin-top:2px; }
+  .waiver-details{ border:1px solid var(--line); padding:2px 0; margin-bottom:12px; }
+  .waiver-details summary{
+    cursor:pointer; padding:12px 14px; font-family:'IBM Plex Mono'; font-size:12px;
+    text-transform:uppercase; letter-spacing:0.06em; color:var(--brick); list-style:none;
+  }
+  .waiver-details summary::-webkit-details-marker{ display:none; }
+  .waiver-details summary::before{ content:'+ '; }
+  .waiver-details[open] summary::before{ content:'– '; }
+  .waiver-text{ padding:0 16px 16px; font-size:13px; line-height:1.6; color:#3a352b; max-height:220px; overflow-y:auto; }
+  .waiver-text p{ margin:0 0 10px; }
+  .waiver-text p:last-child{ margin-bottom:0; }
+  .waiver-check{ display:flex; align-items:flex-start; gap:10px; font-size:13px; color:var(--ink); cursor:pointer; }
+  .waiver-check input{ margin-top:3px; width:16px; height:16px; accent-color:var(--gold-deep); flex-shrink:0; }
+  .form-msg{ font-size:13px; font-family:'IBM Plex Mono'; min-height:18px; }
+  .form-msg.ok{ color:#5c7a3d; }
+
+  /* ---------- CHECK-IN ---------- */
+  .checkin-band{ background:var(--paper-dim); }
+  .checkin-card{ background:var(--paper); border:2px solid var(--ink); padding:32px; display:flex; justify-content:space-between; align-items:center; gap:24px; flex-wrap:wrap; }
+  .checkin-status{ font-family:'IBM Plex Mono'; font-size:13px; color:var(--steel); }
+  .checkin-note{ font-size:14px; color:var(--steel); max-width:560px; line-height:1.5; margin:-8px 0 24px; }
+  .checkin-action{ display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
+  .btn.checked{ background:transparent; border-color:var(--brick); color:var(--brick); }
+  .edit-link{ background:none; border:none; color:var(--steel); text-decoration:underline; font-family:'IBM Plex Mono'; font-size:11px; padding:0; }
+  .edit-link:hover{ color:var(--ink); }
+  .checkin-list{ display:flex; flex-wrap:wrap; gap:8px; margin-top:24px; }
+  .runner-chip{ display:flex; align-items:center; gap:8px; background:var(--ink); color:var(--paper); padding:7px 12px 7px 7px; border-radius:999px; font-size:12px; font-weight:600; }
+  .runner-chip .av{ width:22px; height:22px; border-radius:50%; background:var(--gold-bright); color:var(--ink); display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:800; }
+  .runner-chip.you{ background:var(--brick); }
+
+  /* ---------- WALL ---------- */
+  .wall-grid{ display:grid; grid-template-columns:1fr 1.2fr; gap:44px; }
+  .wall-post{ border-top:1px solid var(--line); padding:18px 0; }
+  .wall-post:first-child{ border-top:none; padding-top:0; }
+  .wall-post-flash{ animation: wallFlash 1.6s ease; }
+  @keyframes wallFlash{
+    0%{ background: rgba(231,195,100,0.32); }
+    100%{ background: transparent; }
+  }
+  .wall-head{ display:flex; justify-content:space-between; align-items:baseline; margin-bottom:6px; }
+  .wall-name{ font-weight:700; font-size:14px; font-family:'Fraunces'; }
+  .wall-name .tag{ background:var(--gold-bright); font-family:'IBM Plex Mono'; font-size:9px; padding:2px 6px; margin-left:6px; text-transform:uppercase; }
+  .wall-time{ font-family:'IBM Plex Mono'; font-size:11px; color:var(--steel); }
+  .wall-text{ font-size:14px; line-height:1.5; color:#2a251c; }
+  .wall-empty{ color:var(--steel); font-size:14px; font-family:'IBM Plex Mono'; }
+
+  /* ---------- FOOTER ---------- */
+  footer{ background:var(--ink); color:var(--paper); padding:56px 0 32px; }
+  .foot-grid{ display:grid; grid-template-columns:1.3fr 0.9fr 0.9fr 1.1fr; gap:36px; }
+  .foot-brand{ display:flex; align-items:center; gap:12px; }
+  .foot-brand .brand-mark{ height:36px; }
+  .foot-brand .brand-wordmark{ height:19px; }
+  footer p{ color:#c7bda3; font-size:14px; line-height:1.6; }
+  footer h4{ font-family:'IBM Plex Mono'; font-size:11px; text-transform:uppercase; letter-spacing:0.1em; color:var(--gold-bright); margin-bottom:14px; }
+  .foot-links{ list-style:none; padding:0; margin:0; display:grid; gap:8px; }
+  .foot-links a{ text-decoration:none; color:#d8d0ba; font-size:14px; }
+  .foot-links a:hover{ color:var(--gold-bright); }
+  .foot-links li{ color:#d8d0ba; font-size:14px; }
+  .news-row{ display:flex; gap:0; border-bottom:2px solid var(--gold-bright); }
+  .news-row input{ flex:1; background:transparent; border:none; color:var(--paper); padding:10px 2px; font-family:inherit; font-size:14px; }
+  .news-row input::placeholder{ color:#8a8271; }
+  .news-row input:focus{ outline:none; }
+  .news-row button{ background:none; border:none; color:var(--gold-bright); font-family:'IBM Plex Mono'; font-size:12px; text-transform:uppercase; letter-spacing:0.06em; padding:0 4px; }
+  .foot-bottom{ border-top:1px solid var(--line-soft); margin-top:40px; padding-top:20px; font-family:'IBM Plex Mono'; font-size:11px; color:var(--steel); display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; }
+
+  .toast{
+    position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(20px);
+    background:var(--ink); color:var(--paper); padding:14px 22px; font-size:13px;
+    font-family:'IBM Plex Mono'; border-radius:var(--radius); opacity:0; pointer-events:none;
+    transition: all 0.3s ease; z-index:100; border:1px solid var(--gold-bright);
+  }
+  .toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
+
+  .scan-trigger{
+    display:inline-flex; align-items:center; gap:8px; margin-top:20px;
+    background:transparent; border:1px solid var(--ink); padding:10px 16px;
+    font-family:'IBM Plex Mono'; font-size:12px; text-transform:uppercase; letter-spacing:0.06em; font-weight:600;
+  }
+  .scan-trigger:hover{ background:var(--ink); color:var(--paper); }
+
+  .qr-overlay{
+    display:none; position:fixed; inset:0; z-index:200;
+    background:rgba(24,20,15,0.82); align-items:center; justify-content:center; padding:20px;
+  }
+  .qr-overlay.show{ display:flex; }
+  .qr-card{
+    background:var(--paper); max-width:380px; width:100%; padding:32px 28px 28px;
+    position:relative; text-align:center; border-radius:var(--radius);
+  }
+  .qr-close{
+    position:absolute; top:12px; right:14px; background:none; border:none;
+    font-size:22px; line-height:1; color:var(--steel); padding:4px;
+  }
+  .qr-close:hover{ color:var(--ink); }
+  .qr-eyebrow{ font-family:'IBM Plex Mono'; font-size:11px; text-transform:uppercase; letter-spacing:0.1em; color:var(--brick); margin-bottom:6px; }
+  .qr-name{ font-family:'Fraunces'; font-size:24px; margin-bottom:18px; }
+  .qr-canvas-wrap{ background:#fff; padding:14px; display:inline-block; border-radius:var(--radius); }
+  .qr-help{ font-size:13px; color:var(--steel); line-height:1.5; margin:18px 0 20px; }
+  .qr-actions{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
+
+  .scan-card{ max-width:420px; }
+  .scan-video-wrap{
+    position:relative; width:100%; aspect-ratio:1/1; background:var(--ink);
+    overflow:hidden; border-radius:var(--radius); margin-top:6px;
+  }
+  .scan-video-wrap video{ width:100%; height:100%; object-fit:cover; }
+  .scan-frame{
+    position:absolute; inset:14%; border:2px solid var(--gold-bright); border-radius:8px;
+    box-shadow:0 0 0 999px rgba(24,20,15,0.35); pointer-events:none;
+  }
+  .scan-confirm{
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    background:rgba(24,20,15,0.9); color:var(--paper); font-family:'Fraunces'; font-size:22px;
+    opacity:0; pointer-events:none; transition:opacity 0.2s ease; text-align:center; padding:20px;
+  }
+  .scan-confirm.show{ opacity:1; }
+  .scan-confirm .tick{ color:var(--signal); font-size:34px; display:block; margin-bottom:6px; }
+
+  @media (max-width:900px){
+    .hero-grid, .club-grid, .join-grid, .wall-grid{ grid-template-columns:1fr; }
+    .foot-grid{ grid-template-columns:1fr 1fr; }
+    .product-grid{ grid-template-columns:repeat(2,1fr); }
+    .navlinks{ display:none; }
+  }
+  @media (max-width:600px){
+    .wrap{ padding:0 18px; }
+    .product-grid{ grid-template-columns:1fr 1fr; }
+    .section-head{ flex-direction:column; align-items:flex-start; }
+    .section-tag{ text-align:left; }
+    .checkin-card{ flex-direction:column; align-items:flex-start; }
+    .foot-grid{ grid-template-columns:1fr; }
+  }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="brand">
+      <img src="assets/heart-white.png" alt="" class="brand-mark">
+      <img src="assets/wordmark-white.png" alt="Golden Soul Club" class="brand-wordmark">
+    </div>
+    <div class="navlinks" id="navlinks">
+      <a href="#shop">Shop</a>
+      <a href="#club">Run Club</a>
+      <a href="#join">Join</a>
+      <a href="#checkin">Check In</a>
+      <a href="#wall">Wall</a>
+    </div>
+    <button class="cart-pill" id="cartBtn">Bag · <span id="cartCount">0</span></button>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow">Concept store · Río Piedras</span>
+        <h1>Growth<br>&amp; <em>balance.</em></h1>
+        <p class="hero-sub">Golden Soul Club is a running and everyday-wear shop built as a gathering place first. Every Thursday at 6:00 PM, that philosophy leaves the shelves and hits the street with the Golden Soul Run Club, free and open to every pace.</p>
+        <div class="hero-actions">
+          <a href="#join" class="btn gold">Join the run club</a>
+          <a href="#shop" class="btn ghost">Shop the store</a>
+        </div>
+      </div>
+      <div class="clock-card">
+        <div class="clock-label">Next Golden Soul run in</div>
+        <div class="clock-row" id="countdown">
+          <div class="clock-unit"><div class="clock-num" id="cd-d">00</div><small>Days</small></div>
+          <div class="clock-unit"><div class="clock-num" id="cd-h">00</div><small>Hrs</small></div>
+          <div class="clock-unit"><div class="clock-num" id="cd-m">00</div><small>Min</small></div>
+          <div class="clock-unit"><div class="clock-num" id="cd-s">00</div><small>Sec</small></div>
+        </div>
+        <div class="clock-meta">
+          <span id="nextDateLabel">—</span>
+          <span>6:00 PM · The store</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <svg class="route-divider" id="routeSvg" viewBox="0 0 1200 90" preserveAspectRatio="none">
+    <path d="M0,60 C120,10 220,10 320,55 C420,95 520,95 620,50 C720,5 820,5 900,45 C1000,88 1100,88 1200,40"/>
+  </svg>
+</header>
+
+<section id="shop">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="kicker">The Shop</span>
+        <h2>Running. Everyday.<br>Same pursuit.</h2>
+      </div>
+      <div class="section-tag">Two collections, one shop floor. Pieces made to move between a Thursday long run and the rest of your week.</div>
+    </div>
+    <div class="filter-row" id="filterRow"></div>
+    <div class="product-grid" id="productGrid"></div>
+  </div>
+</section>
+
+<svg class="route-divider" viewBox="0 0 1200 90" preserveAspectRatio="none">
+  <path d="M0,40 C100,85 200,85 300,45 C400,5 500,5 600,50 C700,95 800,95 900,55 C1000,15 1100,15 1200,60"/>
+</svg>
+
+<section class="club-band" id="club">
+  <div class="wrap">
+    <div class="club-grid">
+      <div>
+        <span class="kicker" style="color:var(--gold-bright)">The Golden Soul Run Club</span>
+        <h2 style="color:var(--paper); font-size:clamp(28px,4vw,42px)">Started with pizza. Kept going anyway.</h2>
+        <ul class="fact-list">
+          <li>
+            <span class="fact-num">01</span>
+            <div class="fact-body"><b>Every Thursday, 6:00 PM</b><span>What began as loose fun runs with a few neighborhood spots — a run, then pizza or coffee — turned into a standing weekly date once enough people kept asking for one.</span></div>
+          </li>
+          <li>
+            <span class="fact-num">02</span>
+            <div class="fact-body"><b>Meet at the store</b><span>The shop doubles as clubhouse. Show up before 6:00, leave your bag behind the counter, head out together.</span></div>
+          </li>
+          <li>
+            <span class="fact-num">03</span>
+            <div class="fact-body"><b>Choose 5K, 8K, or 10K</b><span>All three loops end back at the store — for coffee, or whatever the neighbors are serving that week.</span></div>
+          </li>
+          <li>
+            <span class="fact-num">04</span>
+            <div class="fact-body"><b>Bring reflective gear</b><span>The sun's down before the run ends. A light layer, water, and ID cover it — the rest is optional.</span></div>
+          </li>
+          <li>
+            <span class="fact-num">05</span>
+            <div class="fact-body"><b>Free, every week, open to everyone</b><span>You don't need to sign up to show up. It just helps us plan pace groups and know who's coming.</span></div>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <span class="kicker" style="color:var(--gold-bright)">Pace groups</span>
+        <table class="pace-table">
+          <thead><tr><th>Group</th><th>Pace</th><th>Feel</th></tr></thead>
+          <tbody>
+            <tr><td><span class="pace-swatch" style="background:var(--signal)"></span>Recovery</td><td class="mono">6:00–6:30 /km</td><td>Social, chatty, first-timers welcome</td></tr>
+            <tr><td><span class="pace-swatch" style="background:#c8a978"></span>Steady</td><td class="mono">5:15–5:45 /km</td><td>Conversational, comfortably hard</td></tr>
+            <tr><td><span class="pace-swatch" style="background:var(--gold-bright)"></span>Tempo</td><td class="mono">4:30–5:00 /km</td><td>Controlled effort, short sentences only</td></tr>
+            <tr><td><span class="pace-swatch" style="background:var(--brick)"></span>Speed</td><td class="mono">Sub 4:30 /km</td><td>Track-style pickups, drills after</td></tr>
+          </tbody>
+        </table>
+        <p class="quote-block">"I just want to hear people's stories, and share this one too."</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="join">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="kicker">Join the club</span>
+        <h2>Get on the list.</h2>
+      </div>
+      <div class="section-tag">Free to join. Helps us plan pace groups and water stops each week.</div>
+    </div>
+    <div class="join-grid">
+      <div>
+        <div class="roster-count mono"><span id="rosterCount">0</span></div>
+        <div style="font-family:'IBM Plex Mono'; font-size:12px; color:var(--steel); text-transform:uppercase; letter-spacing:0.08em; margin-top:4px; display:flex; align-items:center; gap:2px;">runners on the list <span class="live-badge" id="rosterLiveBadge" style="display:none;">Live</span></div>
+        <div class="roster-bar" id="rosterBar"></div>
+      </div>
+      <form id="joinForm">
+        <div class="field">
+          <label for="jName">Name</label>
+          <input id="jName" type="text" placeholder="Your name" required maxlength="60">
+        </div>
+        <div class="field">
+          <label for="jEmail">Email</label>
+          <input id="jEmail" type="email" placeholder="you@email.com" required maxlength="120">
+        </div>
+        <div class="field">
+          <label>Pace group</label>
+          <div class="pace-pick" id="pacePick">
+            <button type="button" class="pace-opt" data-pace="Recovery">Recovery</button>
+            <button type="button" class="pace-opt" data-pace="Steady">Steady</button>
+            <button type="button" class="pace-opt" data-pace="Tempo">Tempo</button>
+            <button type="button" class="pace-opt" data-pace="Speed">Speed</button>
+          </div>
+        </div>
+        <div class="field waiver-field">
+          <details class="waiver-details">
+            <summary>Read the release of responsibility</summary>
+            <div class="waiver-text">
+              <p><strong>Release of Responsibility — Golden Soul Run Club</strong></p>
+              <p>Running and related physical activity carry inherent risks, including but not limited to falls, collisions with other participants, vehicles, or objects, adverse weather, road or trail conditions, and medical events such as cardiac or heat-related illness.</p>
+              <p>By signing up, I confirm that I am physically able to participate and that I voluntarily assume all risks associated with this activity. I release Golden Soul Club, its owners, staff, and run leaders from liability for injury, loss, or damage arising from my participation, except where caused by gross negligence or intentional misconduct.</p>
+              <p>I consent to receive emergency medical care if needed, and understand Golden Soul Club is not responsible for the cost of that care. I understand participation is voluntary and I may leave the group run at any time.</p>
+            </div>
+          </details>
+          <label class="waiver-check">
+            <input type="checkbox" id="waiverAgree" required>
+            <span>I have read and agree to the release of responsibility above.</span>
+          </label>
+        </div>
+        <button type="submit" class="btn gold" style="justify-self:start; margin-top:8px;">Sign up for Thursdays</button>
+        <div class="form-msg" id="joinMsg"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="checkin-band" id="checkin">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="kicker">This week</span>
+        <h2>Who's running today.</h2>
+      </div>
+      <div class="section-tag" id="checkinDateTag">—</div>
+    </div>
+    <p class="checkin-note">This is separate from club sign-up. It helps us track who's showing up this Thursday.</p>
+    <div class="checkin-card">
+      <div>
+        <div style="font-weight:700; font-size:16px; font-family:'Fraunces';" id="checkinTitle">Running this Thursday?</div>
+        <div class="checkin-status" id="checkinStatus">—</div>
+      </div>
+      <div class="checkin-action" id="checkinAction"></div>
+    </div>
+    <div class="checkin-list" id="checkinList"></div>
+    <button class="scan-trigger" id="scanTrigger" type="button">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7V4a1 1 0 011-1h3M17 3h3a1 1 0 011 1v3M21 17v3a1 1 0 01-1 1h-3M7 21H4a1 1 0 01-1-1v-3"/><line x1="7" y1="12" x2="17" y2="12"/></svg>
+      Scan a runner's QR to check them in
+    </button>
+  </div>
+</section>
+
+<svg class="route-divider" viewBox="0 0 1200 90" preserveAspectRatio="none">
+  <path d="M0,55 C150,5 300,5 420,50 C540,95 660,95 780,45 C900,-5 1020,-5 1200,55"/>
+</svg>
+
+<section id="wall">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="kicker">Runner to runner</span>
+        <h2>The club wall. <span class="live-badge" id="liveBadge" style="display:none;">Live</span></h2>
+      </div>
+      <div class="section-tag">Trade routes, ask about the group, or post your splits. Visible to everyone in the club.</div>
+    </div>
+    <div class="wall-grid">
+      <form id="wallForm">
+        <div class="field">
+          <label for="wName">Your name</label>
+          <input id="wName" type="text" placeholder="Your name" required maxlength="60">
+        </div>
+        <div class="field">
+          <label for="wMsg">Message</label>
+          <textarea id="wMsg" placeholder="Anyone up for the 10K loop this week?" required maxlength="400"></textarea>
+        </div>
+        <button type="submit" class="btn ghost" style="justify-self:start;">Post to the wall</button>
+        <div class="form-msg" id="wallMsg"></div>
+      </form>
+      <div id="wallFeed"></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">
+          <img src="assets/heart-white.png" alt="" class="brand-mark">
+          <img src="assets/wordmark-white.png" alt="Golden Soul Club" class="brand-wordmark">
+        </div>
+        <p style="max-width:280px; margin-top:14px;">In the pursuit of continued growth and balance. A concept store and running club in Río Piedras.</p>
+      </div>
+      <div>
+        <h4>Store</h4>
+        <ul class="foot-links">
+          <li>Río Piedras, San Juan</li>
+          <li>Open daily · check hours</li>
+          <li><a href="mailto:info@thegoldensoulclub.com" style="color:inherit; text-decoration:none;">info@thegoldensoulclub.com</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Run club</h4>
+        <ul class="foot-links">
+          <li><a href="#club">How it works</a></li>
+          <li><a href="#join">Sign up</a></li>
+          <li><a href="#checkin">Check in</a></li>
+          <li><a href="#wall">Community wall</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Stay in the loop</h4>
+        <p style="margin-bottom:12px;">Restocks, new drops, and Thursday route changes.</p>
+        <form id="newsForm">
+          <div class="news-row">
+            <input id="newsEmail" type="email" placeholder="Email" required>
+            <button type="submit">Sign up</button>
+          </div>
+        </form>
+        <div class="form-msg" id="newsMsg" style="color:var(--gold-bright); margin-top:8px;"></div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Golden Soul Club</span>
+      <span id="footRosterLine">— runners in the club</span>
+    </div>
+    <div class="foot-bottom" id="storageNotice" style="display:none; border-top:none; margin-top:8px; padding-top:0;">
+      <span>Running on local device storage — sign-ups aren't shared across visitors yet.</span>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<!-- QR code modal: shown after sign-up, or via "My QR code" -->
+<div class="qr-overlay" id="qrOverlay">
+  <div class="qr-card">
+    <button class="qr-close" id="qrClose" aria-label="Close">×</button>
+    <div class="qr-eyebrow" id="qrEyebrow">Your check-in code</div>
+    <h3 class="qr-name" id="qrName">—</h3>
+    <div class="qr-canvas-wrap"><canvas id="qrCanvas" width="240" height="240"></canvas></div>
+    <p class="qr-help">Save this or screenshot it. Scan it at the store on Thursday to check in instantly — or just show it to whoever's at the table.</p>
+    <div class="qr-actions">
+      <button class="btn gold" id="qrDownload" type="button">Download</button>
+      <button class="btn ghost" id="qrScanInstead" type="button">Scan a runner instead</button>
+    </div>
+  </div>
+</div>
+
+<!-- Scanner modal: for whoever's running the check-in table -->
+<div class="qr-overlay" id="scanOverlay">
+  <div class="qr-card scan-card">
+    <button class="qr-close" id="scanClose" aria-label="Close">×</button>
+    <div class="qr-eyebrow">Scan a runner's QR</div>
+    <div class="scan-video-wrap">
+      <video id="scanVideo" playsinline autoplay muted></video>
+      <div class="scan-frame"></div>
+      <div class="scan-confirm" id="scanConfirm"></div>
+    </div>
+    <canvas id="scanCanvas" style="display:none;"></canvas>
+    <p class="qr-help" id="scanStatus">Point the camera at a runner's QR code.</p>
+  </div>
+</div>
+
+<script>
+/* ----------------------------------------------------------------
+   SUPABASE CONFIG
+   Fill these in from your project: Settings → API in the Supabase
+   dashboard. Until you do, the app runs in demo mode using
+   Claude.ai / localStorage storage (see below) so it still works.
+------------------------------------------------------------------ */
+const SUPABASE_URL = 'https://guvcawvhavtofeftqhmm.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd1dmNhd3ZoYXZ0b2ZlZnRxaG1tIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY2NTQ0NzAsImV4cCI6MjEwMjIzMDQ3MH0.BqhTnEVta_1-BAB0RFD0ByTn86bMFnTTYTpRSnb3aiY';
+
+const supabaseConfigured = SUPABASE_URL.indexOf('YOUR_') === -1 && SUPABASE_ANON_KEY.indexOf('YOUR_') === -1;
+const sb = supabaseConfigured ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+
+/* ----------------------------------------------------------------
+   Storage helpers.
+   Primary: window.storage — only exists inside Claude.ai artifacts,
+   and is SHARED across everyone viewing the artifact there.
+   Fallback: localStorage — used automatically once this file is
+   hosted elsewhere (GitHub Pages, your own domain, etc). It works,
+   but it's PER BROWSER ONLY: each visitor sees their own roster/
+   check-ins/wall, not a shared one.
+   Neither of these is used once SUPABASE_URL/SUPABASE_ANON_KEY are
+   filled in above — Supabase takes over as the real, shared backend.
+------------------------------------------------------------------ */
+const hasClaudeStorage = (typeof window !== 'undefined' && !!window.storage);
+
+async function storeGet(key, shared){
+  if(hasClaudeStorage){
+    try{
+      const r = await window.storage.get(key, shared);
+      return r ? JSON.parse(r.value) : null;
+    }catch(e){ return null; }
+  }
+  try{
+    const raw = localStorage.getItem('gsc_fallback:' + key);
+    return raw ? JSON.parse(raw) : null;
+  }catch(e){ return null; }
+}
+async function storeSet(key, value, shared){
+  if(hasClaudeStorage){
+    try{ await window.storage.set(key, JSON.stringify(value), shared); }
+    catch(e){ console.error('storage set failed', e); }
+    return;
+  }
+  try{ localStorage.setItem('gsc_fallback:' + key, JSON.stringify(value)); }
+  catch(e){ console.error('localStorage set failed', e); }
+}
+
+/* ---------------- Toast ---------------- */
+let toastTimer;
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>t.classList.remove('show'), 2400);
+}
+
+/* ---------------- Nav active state ---------------- */
+const navlinks = document.querySelectorAll('.navlinks a');
+const sections = ['shop','club','join','checkin','wall'].map(id=>document.getElementById(id));
+const navObserver = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      navlinks.forEach(a=>a.classList.remove('active'));
+      const link = document.querySelector('.navlinks a[href="#'+entry.target.id+'"]');
+      if(link) link.classList.add('active');
+    }
+  });
+}, { rootMargin: '-40% 0px -50% 0px' });
+sections.forEach(s=>navObserver.observe(s));
+
+/* ---------------- Route divider draw-on-scroll ---------------- */
+const routeObserver = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in-view'); });
+}, { threshold:0.3 });
+document.querySelectorAll('.route-divider').forEach(el=>routeObserver.observe(el));
+
+/* ---------------- Countdown to next Thursday 6:00pm ---------------- */
+function getNextRunDate(){
+  const now = new Date();
+  const target = new Date(now);
+  const day = now.getDay();
+  let diff = (4 - day + 7) % 7;
+  target.setDate(now.getDate() + diff);
+  target.setHours(18,0,0,0);
+  if(target <= now){ target.setDate(target.getDate() + 7); }
+  return target;
+}
+function weekKeyFor(date){ return date.toISOString().slice(0,10); }
+let nextRun = getNextRunDate();
+const dateFmt = new Intl.DateTimeFormat('en-US', { weekday:'long', month:'short', day:'numeric' });
+document.getElementById('nextDateLabel').textContent = dateFmt.format(nextRun);
+document.getElementById('checkinDateTag').textContent = 'Checking in for ' + dateFmt.format(nextRun);
+
+function pad(n){ return String(n).padStart(2,'0'); }
+function tickCountdown(){
+  nextRun = getNextRunDate();
+  const now = new Date();
+  let ms = nextRun - now;
+  if(ms < 0) ms = 0;
+  const d = Math.floor(ms/86400000);
+  const h = Math.floor((ms%86400000)/3600000);
+  const m = Math.floor((ms%3600000)/60000);
+  const s = Math.floor((ms%60000)/1000);
+  document.getElementById('cd-d').textContent = pad(d);
+  document.getElementById('cd-h').textContent = pad(h);
+  document.getElementById('cd-m').textContent = pad(m);
+  document.getElementById('cd-s').textContent = pad(s);
+}
+tickCountdown();
+setInterval(tickCountdown, 1000);
+
+/* ----------------------------------------------------------------
+   SHOPIFY CONFIG
+   Fill these in once you've created a custom app in Shopify admin
+   (Settings → Apps and sales channels → Develop apps → Create an app
+   → Configure Storefront API scopes, read access to products is
+   enough → Install → copy the Storefront API access token).
+   Until you do, the shop below runs on the MANUAL_PRODUCTS list
+   further down — edit that directly to reflect your real catalog.
+------------------------------------------------------------------ */
+const SHOPIFY_DOMAIN = 'YOUR_STORE.myshopify.com';   // or your connected custom domain
+const SHOPIFY_STOREFRONT_TOKEN = 'YOUR_STOREFRONT_ACCESS_TOKEN';
+
+const storefrontConfigured = SHOPIFY_DOMAIN.indexOf('YOUR_') === -1 && SHOPIFY_STOREFRONT_TOKEN.indexOf('YOUR_') === -1;
+
+const SHOPIFY_PRODUCTS_QUERY = `
+  query StoreProducts($first: Int!) {
+    products(first: $first) {
+      edges {
+        node {
+          id
+          title
+          productType
+          featuredImage { url altText }
+          priceRange { minVariantPrice { amount } }
+          variants(first: 1) { edges { node { id availableForSale } } }
+        }
+      }
+    }
+  }
+`;
+
+async function fetchShopifyProducts(){
+  if(!storefrontConfigured) return null;
+  try{
+    const res = await fetch(`https://${SHOPIFY_DOMAIN}/api/2024-10/graphql.json`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Shopify-Storefront-Access-Token': SHOPIFY_STOREFRONT_TOKEN
+      },
+      body: JSON.stringify({ query: SHOPIFY_PRODUCTS_QUERY, variables: { first: 50 } })
+    });
+    const json = await res.json();
+    const edges = (json && json.data && json.data.products && json.data.products.edges) || [];
+    if(json.errors) console.error('Shopify Storefront API errors', json.errors);
+    return edges.map(({ node: n }) => {
+      const variant = n.variants.edges[0] && n.variants.edges[0].node;
+      return {
+        id: n.id,
+        name: n.title,
+        collection: n.productType || 'Shop',
+        cat: n.productType || '',
+        image: n.featuredImage ? n.featuredImage.url : null,
+        price: Math.round(parseFloat(n.priceRange.minVariantPrice.amount)),
+        soldOut: variant ? !variant.availableForSale : false
+      };
+    });
+  }catch(err){
+    console.error('Shopify product fetch failed', err);
+    return null;
+  }
+}
+
+/* ---------------- Product icons (used only for the manual fallback list) ---------------- */
+const ICONS = {
+  shoe: `<svg viewBox="0 0 100 100" fill="none" stroke="#18140f" stroke-width="3"><path d="M10 68 C10 58 18 52 28 50 L46 46 C52 44 56 40 58 34 L64 20 C70 22 74 30 72 38 L70 46 C82 46 90 54 90 64 L90 74 L10 74 Z"/><path d="M28 50 L34 66"/><path d="M46 46 L50 62"/></svg>`,
+  tee: `<svg viewBox="0 0 100 100" fill="none" stroke="#18140f" stroke-width="3"><path d="M30 18 L50 26 L70 18 L88 32 L76 46 L70 40 L70 86 L30 86 L30 40 L24 46 L12 32 Z"/></svg>`,
+  short: `<svg viewBox="0 0 100 100" fill="none" stroke="#18140f" stroke-width="3"><path d="M18 20 H82 V50 L74 88 H58 L52 54 H48 L42 88 H26 L18 50 Z"/></svg>`,
+  jacket: `<svg viewBox="0 0 100 100" fill="none" stroke="#18140f" stroke-width="3"><path d="M30 16 L50 24 L70 16 L90 34 L78 48 L70 42 L70 88 H30 V42 L22 48 L10 34 Z"/><line x1="50" y1="24" x2="50" y2="88"/></svg>`,
+  cap: `<svg viewBox="0 0 100 100" fill="none" stroke="#18140f" stroke-width="3"><path d="M14 58 C14 36 30 22 50 22 C70 22 86 36 86 58 Z"/><path d="M50 22 V58"/><path d="M86 58 C92 58 96 62 96 66 C96 60 90 58 84 58"/></svg>`,
+  sock: `<svg viewBox="0 0 100 100" fill="none" stroke="#18140f" stroke-width="3"><path d="M38 10 H64 V52 L84 74 C88 82 82 90 72 88 L46 82 C36 80 30 72 30 62 V10 Z"/><line x1="38" y1="34" x2="64" y2="34"/></svg>`,
+  singlet: `<svg viewBox="0 0 100 100" fill="none" stroke="#18140f" stroke-width="3"><path d="M34 16 C34 24 30 28 24 30 L30 40 L36 36 V86 H64 V36 L70 40 L76 30 C70 28 66 24 66 16 Z"/></svg>`,
+  sweater: `<svg viewBox="0 0 100 100" fill="none" stroke="#18140f" stroke-width="3"><path d="M28 20 L50 28 L72 20 L90 36 L78 50 L70 44 L70 86 L30 86 L30 44 L22 50 L10 36 Z"/><path d="M38 28 C42 34 58 34 62 28"/></svg>`,
+  jersey: `<svg viewBox="0 0 100 100" fill="none" stroke="#18140f" stroke-width="3"><path d="M30 18 L50 26 L70 18 L88 32 L76 46 L70 40 L70 86 L30 86 L30 40 L24 46 L12 32 Z"/><circle cx="50" cy="58" r="10"/></svg>`
+};
+
+// Fallback catalog — used only when Shopify isn't configured above.
+// This is your real catalog, pulled directly from your Running and
+// Everyday Wear collection pages (18 items: 10 + 8, matching what's
+// listed on each page). Icons stand in for photos until the
+// Storefront API is connected — or add an "image" field to any
+// entry below (e.g. image:'https://...') to use a real photo now.
+const MANUAL_PRODUCTS = [
+  // Running — thegoldensoulclub.com/collections/running
+  { name:'Running Singlets', collection:'Running', cat:'Tops', icon:'singlet', price:55, image:'https://thegoldensoulclub.com/cdn/shop/files/IMG_2678.heic?v=1786133606&width=1200&format=jpg' },
+  { name:'Training Shorts 6"', collection:'Running', cat:'Shorts', icon:'short', price:50, image:'https://thegoldensoulclub.com/cdn/shop/files/IMG_4913.heic?v=1764703636&width=1200&format=jpg' },
+  { name:'Compression Socks', collection:'Running', cat:'Accessories', icon:'sock', price:20, image:'https://thegoldensoulclub.com/cdn/shop/files/DSC04771.jpg?v=1750106825&width=1200&format=jpg' },
+  { name:'5 Panel Running Cap', collection:'Running', cat:'Headwear', icon:'cap', price:35, soldOut:true, image:'https://thegoldensoulclub.com/cdn/shop/files/IMG_1657.heic?v=1784059095&width=1200&format=jpg' },
+  { name:'2.5" Short', collection:'Running', cat:'Shorts', icon:'short', price:50, image:'https://thegoldensoulclub.com/cdn/shop/files/IMG_4456.heic?v=1764789868&width=1200&format=jpg' },
+  { name:'Running Windbreaker', collection:'Running', cat:'Outerwear', icon:'jacket', price:65, image:'https://thegoldensoulclub.com/cdn/shop/files/IMG_0114_c186e47d-d0ad-40de-b69a-9ca8f2b5022c.heic?v=1749673183&width=1200&format=jpg' },
+  { name:'Neon Green Running Cap', collection:'Running', cat:'Headwear', icon:'cap', price:35, image:'https://thegoldensoulclub.com/cdn/shop/files/IMG_1603.heic?v=1755030424&width=1200&format=jpg' },
+  { name:'Training Tee', collection:'Running', cat:'Tops', icon:'tee', price:45, image:'https://thegoldensoulclub.com/cdn/shop/files/IMG_1862.heic?v=1755958279&width=1200&format=jpg' },
+  { name:'All Black Running Cap', collection:'Running', cat:'Headwear', icon:'cap', price:35, image:'https://thegoldensoulclub.com/cdn/shop/files/IMG_1562.heic?v=1755030555&width=1200&format=jpg' },
+  { name:"Women's Biker Short", collection:'Running', cat:'Shorts', icon:'short', price:50, image:'https://thegoldensoulclub.com/cdn/shop/files/IMG_9186.heic?v=1777660977&width=1200&format=jpg' },
+
+  // Everyday Wear — thegoldensoulclub.com/collections/lifestyle
+  { name:'Pursuit Oversized Tee', collection:'Everyday Wear', cat:'Tops', icon:'tee', price:50, image:'https://thegoldensoulclub.com/cdn/shop/files/IMG_7749.heic?v=1772828501&width=1200&format=jpg' },
+  { name:'Jersey de Fútbol', collection:'Everyday Wear', cat:'Tops', icon:'jersey', price:65, image:'https://thegoldensoulclub.com/cdn/shop/files/IMG_1352.heic?v=1783615969&width=1200&format=jpg' },
+  { name:'Athletic Dept. Ringer Tee', collection:'Everyday Wear', cat:'Tops', icon:'tee', price:50, image:'https://thegoldensoulclub.com/cdn/shop/files/IMG_8277.heic?v=1774464508&width=1200&format=jpg' },
+  { name:'Athletic Dept. Oversized Tee', collection:'Everyday Wear', cat:'Tops', icon:'tee', price:50, image:'https://thegoldensoulclub.com/cdn/shop/files/IMG_8282.heic?v=1774463647&width=1200&format=jpg' },
+  { name:'Baseball Cap', collection:'Everyday Wear', cat:'Headwear', icon:'cap', price:40, image:'https://thegoldensoulclub.com/cdn/shop/files/IMG_4986.jpg?v=1764706289&width=1200&format=jpg' },
+  { name:'Run The Race Tee', collection:'Everyday Wear', cat:'Tops', icon:'tee', price:50, image:'https://thegoldensoulclub.com/cdn/shop/files/IMG_90837.heic?v=1776975293&width=1200&format=jpg' },
+  { name:'Athletic Dept. Sweater', collection:'Everyday Wear', cat:'Outerwear', icon:'sweater', price:85, image:'https://thegoldensoulclub.com/cdn/shop/files/IMG_8291.heic?v=1774466128&width=1200&format=jpg' },
+  { name:'I Love Puerto Rico Tee', collection:'Everyday Wear', cat:'Tops', icon:'tee', price:42, image:'https://thegoldensoulclub.com/cdn/shop/files/IMG_0943.heic?v=1755705515&width=1200&format=jpg' },
+];
+
+let productsData = [];
+let PRODUCT_CATS = ['All'];
+let activeCat = 'All';
+let cartCount = 0;
+
+function productArt(p){
+  if(p.image) return `<img src="${p.image}" alt="${escapeHtml(p.name)}" style="width:100%; height:100%; object-fit:cover;">`;
+  return ICONS[p.icon] || '';
+}
+
+function renderFilters(){
+  const row = document.getElementById('filterRow');
+  row.innerHTML = '';
+  PRODUCT_CATS.forEach(cat=>{
+    const b = document.createElement('button');
+    b.className = 'chip' + (cat===activeCat ? ' active' : '');
+    b.textContent = cat;
+    b.onclick = () => { activeCat = cat; renderFilters(); renderProducts(); };
+    row.appendChild(b);
+  });
+}
+
+function renderProducts(){
+  const grid = document.getElementById('productGrid');
+  grid.innerHTML = '';
+  const list = productsData.filter(p => activeCat==='All' || p.collection===activeCat);
+  list.forEach(p=>{
+    const card = document.createElement('div');
+    card.className = 'product-card';
+    card.innerHTML = `
+      <div class="product-art">${productArt(p)}</div>
+      <div class="product-collection">${escapeHtml(p.collection)}</div>
+      <div class="product-cat">${escapeHtml(p.cat)}</div>
+      <div class="product-name">${escapeHtml(p.name)}</div>
+      <div class="product-foot">
+        <span class="price mono">$${p.price}</span>
+        ${p.soldOut ? '<span class="sold-out">Sold out</span>' : '<button class="add-btn">Add to bag</button>'}
+      </div>`;
+    if(!p.soldOut){
+      card.querySelector('.add-btn').onclick = () => {
+        cartCount++;
+        document.getElementById('cartCount').textContent = cartCount;
+        showToast(p.name + ' added to your bag');
+      };
+    }
+    grid.appendChild(card);
+  });
+}
+
+async function loadProducts(){
+  const shopifyProducts = storefrontConfigured ? await fetchShopifyProducts() : null;
+  productsData = (shopifyProducts && shopifyProducts.length) ? shopifyProducts : MANUAL_PRODUCTS;
+  const cats = Array.from(new Set(productsData.map(p => p.collection).filter(Boolean)));
+  PRODUCT_CATS = ['All', ...cats];
+  if(!PRODUCT_CATS.includes(activeCat)) activeCat = 'All';
+  renderFilters();
+  renderProducts();
+}
+
+/* ---------------- Profile (personal, prefill) ---------------- */
+let profile = null;
+async function loadProfile(){
+  profile = await storeGet('gsc:profile', false);
+  if(profile){
+    document.getElementById('jName').value = profile.name || '';
+    document.getElementById('jEmail').value = profile.email || '';
+    document.getElementById('wName').value = profile.name || '';
+    if(profile.pace){
+      document.querySelectorAll('.pace-opt').forEach(b=>{
+        b.classList.toggle('sel', b.dataset.pace === profile.pace);
+      });
+      selectedPace = profile.pace;
+    }
+  }
+}
+async function saveProfile(patch){
+  profile = Object.assign({}, profile, patch);
+  await storeSet('gsc:profile', profile, false);
+}
+
+/* ---------------- Roster / Join ---------------- */
+let selectedPace = null;
+document.querySelectorAll('.pace-opt').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.pace-opt').forEach(b=>b.classList.remove('sel'));
+    btn.classList.add('sel');
+    selectedPace = btn.dataset.pace;
+  });
+});
+
+const PACE_COLORS = { Recovery:'#cbe552', Steady:'#c8a978', Tempo:'#e7c364', Speed:'#a8532c' };
+
+async function fetchRoster(){
+  if(supabaseConfigured){
+    const { data, error } = await sb.from('roster').select('*');
+    if(error){ console.error('roster fetch failed', error); return []; }
+    return data || [];
+  }
+  return (await storeGet('gsc:roster', true)) || [];
+}
+
+let lastRosterCount = null;
+
+async function renderRoster(){
+  const roster = await fetchRoster();
+  const countEl = document.getElementById('rosterCount');
+  const newCount = roster.length;
+  countEl.textContent = newCount;
+  if(lastRosterCount !== null && newCount !== lastRosterCount){
+    countEl.parentElement.classList.remove('tick');
+    // Force reflow so the animation restarts even if it's already mid-run
+    void countEl.parentElement.offsetWidth;
+    countEl.parentElement.classList.add('tick');
+  }
+  lastRosterCount = newCount;
+  document.getElementById('footRosterLine').textContent = newCount + ' runners in the club';
+  const bar = document.getElementById('rosterBar');
+  bar.innerHTML = '';
+  const groups = ['Recovery','Steady','Tempo','Speed'];
+  const max = Math.max(1, ...groups.map(g => roster.filter(r=>r.pace===g).length));
+  groups.forEach(g=>{
+    const count = roster.filter(r=>r.pace===g).length;
+    const pct = Math.round((count/max)*100);
+    const row = document.createElement('div');
+    row.className = 'roster-row';
+    row.innerHTML = `<span>${g}</span><div class="track"><div class="fill" style="width:${pct}%; background:${PACE_COLORS[g]}"></div></div><span class="mono">${count}</span>`;
+    bar.appendChild(row);
+  });
+  return roster;
+}
+
+document.getElementById('joinForm').addEventListener('submit', async (e)=>{
+  e.preventDefault();
+  const name = document.getElementById('jName').value.trim();
+  const email = document.getElementById('jEmail').value.trim();
+  const msg = document.getElementById('joinMsg');
+  const waiverAgreed = document.getElementById('waiverAgree').checked;
+  if(!selectedPace){ msg.textContent = 'Pick a pace group first.'; msg.className='form-msg'; return; }
+  if(!waiverAgreed){ msg.textContent = 'You need to agree to the release of responsibility to join.'; msg.className='form-msg'; return; }
+
+  let isUpdate = false;
+  let token = null;
+
+  if(supabaseConfigured){
+    const { data, error } = await sb.rpc('join_roster', { p_name: name, p_email: email, p_pace: selectedPace, p_waiver_agreed: waiverAgreed });
+    if(error){ console.error('join_roster failed', error); msg.textContent = 'Something went wrong — try again.'; msg.className='form-msg'; return; }
+    isUpdate = !data.is_new;
+    token = data.token;
+  } else {
+    // Demo mode: no shared backend, so the token only works for
+    // scanning on this same browser/device — good enough to try the
+    // flow, not a substitute for Supabase at an actual event.
+    const roster = (await storeGet('gsc:roster', true)) || [];
+    const existing = roster.find(r => r.email.toLowerCase() === email.toLowerCase());
+    isUpdate = !!existing;
+    token = existing ? existing.checkin_token : (crypto.randomUUID ? crypto.randomUUID() : 'r'+Date.now()+Math.random());
+    const entry = { id: existing ? existing.id : 'r'+Date.now(), name, email, pace: selectedPace, checkin_token: token, waiverAgreedAt: Date.now(), ts: Date.now() };
+    const updated = existing ? roster.map(r=> r.id===entry.id ? entry : r) : [...roster, entry];
+    await storeSet('gsc:roster', updated, true);
+  }
+
+  await saveProfile({ name, email, pace: selectedPace });
+  msg.textContent = isUpdate ? 'Your sign-up was updated.' : "You're on the list for Thursday.";
+  msg.className = 'form-msg ok';
+  document.getElementById('wName').value = name;
+  await renderRoster();
+  await renderCheckins();
+  showToast('Welcome to the club, ' + name.split(' ')[0] + '.');
+  if(token) openQrModal(token, name, { justJoined: true });
+});
+
+/* ---------------- Check-in ---------------- */
+// This "checkins" write is what the Supabase → Google Sheet webhook
+// listens for — see the setup notes at the end of this file.
+function currentWeekKey(){ return weekKeyFor(nextRun); }
+let quickEditMode = false;
+
+async function fetchCheckins(){
+  const week = currentWeekKey();
+  if(supabaseConfigured){
+    const { data, error } = await sb.from('checkins').select('*').eq('week_key', week).order('created_at', { ascending:true });
+    if(error){ console.error('checkins fetch failed', error); return []; }
+    return data || [];
+  }
+  const key = 'gsc:checkins:' + week;
+  return (await storeGet(key, true)) || [];
+}
+
+async function doCheckin(name){
+  if(!name){ showToast('Enter your name to check in.'); return; }
+  const week = currentWeekKey();
+  if(supabaseConfigured){
+    const { error } = await sb.from('checkins').upsert({ name, week_key: week }, { onConflict: 'name,week_key' });
+    if(error){ console.error('checkin failed', error); showToast('Something went wrong — try again.'); return; }
+  } else {
+    const key = 'gsc:checkins:' + week;
+    const list = (await storeGet(key, true)) || [];
+    if(!list.some(c=>c.name===name)){
+      const updated = [...list, { id:'c'+Date.now(), name, ts:Date.now() }];
+      await storeSet(key, updated, true);
+    }
+  }
+  await saveProfile({ name });
+  quickEditMode = false;
+  await renderCheckins();
+  showToast('Checked in — see you Thursday, ' + name.split(' ')[0] + '.');
+}
+
+async function cancelCheckin(name){
+  const week = currentWeekKey();
+  if(supabaseConfigured){
+    const { error } = await sb.from('checkins').delete().match({ name, week_key: week });
+    if(error){ console.error('cancel checkin failed', error); showToast('Something went wrong — try again.'); return; }
+  } else {
+    const key = 'gsc:checkins:' + week;
+    const list = (await storeGet(key, true)) || [];
+    const updated = list.filter(c => c.name !== name);
+    await storeSet(key, updated, true);
+  }
+  await renderCheckins();
+  showToast("You're off this week's list.");
+}
+
+function buildCheckinAction(list){
+  const action = document.getElementById('checkinAction');
+  action.innerHTML = '';
+  const name = profile && profile.name;
+  const checkedIn = !!(name && list.some(c => c.name === name));
+
+  if(!name || quickEditMode){
+    // Quick one-field entry — only needed the first time, or if editing the name.
+    const row = document.createElement('div');
+    row.style.cssText = 'display:flex; gap:10px; flex-wrap:wrap; align-items:center;';
+    const input = document.createElement('input');
+    input.className = 'field';
+    input.placeholder = 'Your name';
+    input.style.cssText = 'border:2px solid var(--ink); padding:12px 14px; font-size:14px; min-width:200px;';
+    input.value = name || '';
+    const submit = document.createElement('button');
+    submit.className = 'btn gold';
+    submit.textContent = "I'm in";
+    submit.onclick = () => doCheckin(input.value.trim());
+    input.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter'){ e.preventDefault(); doCheckin(input.value.trim()); }
+    });
+    row.appendChild(input);
+    row.appendChild(submit);
+    action.appendChild(row);
+    input.focus();
+  } else {
+    // Returning runner — one tap, no typing.
+    const btn = document.createElement('button');
+    btn.className = 'btn' + (checkedIn ? ' checked' : ' gold');
+    btn.textContent = checkedIn ? "You're in ✓  ·  tap to cancel" : "I'm in — " + name;
+    btn.onclick = () => checkedIn ? cancelCheckin(name) : doCheckin(name);
+    action.appendChild(btn);
+
+    const edit = document.createElement('button');
+    edit.className = 'edit-link';
+    edit.textContent = 'Not you?';
+    edit.onclick = () => { quickEditMode = true; buildCheckinAction(list); };
+    action.appendChild(edit);
+
+    if(profile && profile.email){
+      const qrLink = document.createElement('button');
+      qrLink.className = 'edit-link';
+      qrLink.textContent = 'My QR code';
+      qrLink.onclick = () => showMyQr();
+      action.appendChild(qrLink);
+    }
+  }
+}
+
+async function renderCheckins(){
+  const list = await fetchCheckins();
+  const wrap = document.getElementById('checkinList');
+  wrap.innerHTML = '';
+  if(list.length === 0){
+    wrap.innerHTML = '<div class="wall-empty">No one has checked in yet — be the first.</div>';
+  } else {
+    list.forEach(c=>{
+      const chip = document.createElement('div');
+      const isYou = profile && profile.name && c.name === profile.name;
+      chip.className = 'runner-chip' + (isYou ? ' you' : '');
+      const initials = c.name.split(' ').map(w=>w[0]).slice(0,2).join('').toUpperCase();
+      chip.innerHTML = `<span class="av">${initials}</span> ${c.name}`;
+      wrap.appendChild(chip);
+    });
+  }
+  const status = document.getElementById('checkinStatus');
+  const name = profile && profile.name;
+  const checkedIn = !!(name && list.some(c => c.name === name));
+  document.getElementById('checkinTitle').textContent = checkedIn ? "You're set for Thursday." : 'Running this Thursday?';
+  status.textContent = checkedIn
+    ? list.length + ' runner' + (list.length===1?'':'s') + ' checked in so far.'
+    : (list.length === 0 ? 'Be the first to check in this week.' : list.length + ' runner' + (list.length===1?'':'s') + ' checked in so far.');
+  buildCheckinAction(list);
+  return list;
+}
+
+/* ---------------- Wall ---------------- */
+const relTime = (ts)=>{
+  const diff = Date.now() - ts;
+  const mins = Math.floor(diff/60000);
+  if(mins < 1) return 'just now';
+  if(mins < 60) return mins + 'm ago';
+  const hrs = Math.floor(mins/60);
+  if(hrs < 24) return hrs + 'h ago';
+  return Math.floor(hrs/24) + 'd ago';
+};
+
+async function fetchWall(){
+  if(supabaseConfigured){
+    const { data, error } = await sb.from('wall_posts').select('*').order('created_at', { ascending:false }).limit(100);
+    if(error){ console.error('wall fetch failed', error); return []; }
+    return (data || []).map(p => ({ id:p.id, name:p.name, message:p.message, ts: new Date(p.created_at).getTime() }));
+  }
+  let posts = await storeGet('gsc:wall', true);
+  if(!posts){
+    posts = [
+      { id:'seed1', name:'Golden Soul Crew', message:'Reminder: the 10K loop has a water stop at the halfway point this week. See everyone at 6:00!', ts: Date.now() - 3600000*20 },
+      { id:'seed2', name:'Marcos R.', message:"First time joining this Thursday — which group is friendliest for someone coming back from a knee injury?", ts: Date.now() - 3600000*5 }
+    ];
+    await storeSet('gsc:wall', posts, true);
+  }
+  return posts;
+}
+
+async function renderWall(){
+  const posts = await fetchWall();
+  const feed = document.getElementById('wallFeed');
+  feed.innerHTML = '';
+  const sorted = [...posts].sort((a,b)=>b.ts-a.ts);
+  sorted.forEach(p=>{
+    const isYou = profile && profile.name && p.name === profile.name;
+    const el = document.createElement('div');
+    el.className = 'wall-post';
+    el.innerHTML = `
+      <div class="wall-head">
+        <span class="wall-name">${escapeHtml(p.name)}${isYou ? '<span class="tag">You</span>' : ''}</span>
+        <span class="wall-time mono">${relTime(p.ts)}</span>
+      </div>
+      <div class="wall-text">${escapeHtml(p.message)}</div>`;
+    feed.appendChild(el);
+  });
+}
+function escapeHtml(str){
+  const d = document.createElement('div');
+  d.textContent = str;
+  return d.innerHTML;
+}
+
+document.getElementById('wallForm').addEventListener('submit', async (e)=>{
+  e.preventDefault();
+  const name = document.getElementById('wName').value.trim();
+  const message = document.getElementById('wMsg').value.trim();
+  const msg = document.getElementById('wallMsg');
+  if(supabaseConfigured){
+    const { error } = await sb.from('wall_posts').insert({ name, message });
+    if(error){ console.error('wall post failed', error); msg.textContent = 'Something went wrong — try again.'; msg.className='form-msg'; return; }
+  } else {
+    const posts = (await storeGet('gsc:wall', true)) || [];
+    const updated = [...posts, { id:'w'+Date.now(), name, message, ts: Date.now() }];
+    await storeSet('gsc:wall', updated, true);
+  }
+  await saveProfile({ name });
+  document.getElementById('wMsg').value = '';
+  msg.textContent = 'Posted to the wall.';
+  msg.className = 'form-msg ok';
+  await renderWall();
+});
+
+/* ---------------- Newsletter ---------------- */
+document.getElementById('newsForm').addEventListener('submit', async (e)=>{
+  e.preventDefault();
+  const email = document.getElementById('newsEmail').value.trim();
+  const msg = document.getElementById('newsMsg');
+  if(supabaseConfigured){
+    const { error } = await sb.from('newsletter').upsert({ email }, { onConflict: 'email', ignoreDuplicates: true });
+    if(error){ console.error('newsletter signup failed', error); msg.textContent = 'Something went wrong — try again.'; return; }
+  } else {
+    const list = (await storeGet('gsc:newsletter', true)) || [];
+    if(!list.includes(email)){
+      list.push(email);
+      await storeSet('gsc:newsletter', list, true);
+    }
+  }
+  document.getElementById('newsEmail').value = '';
+  msg.textContent = "You're signed up.";
+  showToast('Added to the newsletter list.');
+});
+
+/* ---------------- Roster: realtime ---------------- */
+let rosterChannel = null;
+function subscribeRosterRealtime(){
+  if(!supabaseConfigured || rosterChannel) return;
+  rosterChannel = sb
+    .channel('roster-realtime')
+    .on('postgres_changes', { event: '*', schema: 'public', table: 'roster' }, () => {
+      renderRoster();
+    })
+    .subscribe();
+}
+
+/* ---------------- Wall: realtime ---------------- */
+// Subscribes to new inserts on wall_posts so posts from other people
+// appear without anyone needing to refresh. Only runs once Supabase
+// is configured — demo mode has no live channel to listen on.
+let wallChannel = null;
+function subscribeWallRealtime(){
+  if(!supabaseConfigured || wallChannel) return;
+  wallChannel = sb
+    .channel('wall-realtime')
+    .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'wall_posts' }, async () => {
+      await renderWall();
+      flashLatestPost();
+    })
+    .subscribe();
+}
+function flashLatestPost(){
+  const feed = document.getElementById('wallFeed');
+  const first = feed && feed.firstElementChild;
+  if(first){
+    first.classList.add('wall-post-flash');
+    setTimeout(() => first.classList.remove('wall-post-flash'), 1600);
+  }
+}
+
+/* ---------------- QR check-in ---------------- */
+// The QR encodes a plain URL back to this page with ?checkin=<token>.
+// That means ANY phone's stock camera app can check someone in by
+// just opening the link — the in-app scanner below is a faster path
+// for whoever's working the table, not the only way in.
+function checkinUrlFor(token){
+  return `${location.origin}${location.pathname}?checkin=${token}`;
+}
+
+function openQrModal(token, name, opts={}){
+  const overlay = document.getElementById('qrOverlay');
+  document.getElementById('qrName').textContent = name;
+  document.getElementById('qrEyebrow').textContent = opts.justJoined ? "You're on the list — here's your code" : 'Your check-in code';
+  const canvas = document.getElementById('qrCanvas');
+  if(window.QRCode){
+    QRCode.toCanvas(canvas, checkinUrlFor(token), { width: 240, margin: 1, color: { dark: '#18140f', light: '#ffffff' } }, (err) => {
+      if(err) console.error('QR render failed', err);
+    });
+  }
+  overlay.classList.add('show');
+}
+function closeQrModal(){
+  document.getElementById('qrOverlay').classList.remove('show');
+}
+document.getElementById('qrClose').addEventListener('click', closeQrModal);
+document.getElementById('qrOverlay').addEventListener('click', (e) => { if(e.target.id === 'qrOverlay') closeQrModal(); });
+document.getElementById('qrDownload').addEventListener('click', () => {
+  const canvas = document.getElementById('qrCanvas');
+  const link = document.createElement('a');
+  link.download = 'golden-soul-club-checkin.png';
+  link.href = canvas.toDataURL('image/png');
+  link.click();
+});
+document.getElementById('qrScanInstead').addEventListener('click', () => {
+  closeQrModal();
+  openScanner();
+});
+
+async function showMyQr(){
+  if(!profile || !profile.email) return;
+  let token = null;
+  if(supabaseConfigured){
+    const { data, error } = await sb.rpc('get_my_token', { p_email: profile.email });
+    if(error){ console.error('get_my_token failed', error); showToast('Could not load your QR code.'); return; }
+    token = data;
+  } else {
+    const roster = (await storeGet('gsc:roster', true)) || [];
+    const mine = roster.find(r => r.email.toLowerCase() === profile.email.toLowerCase());
+    token = mine ? mine.checkin_token : null;
+  }
+  if(!token){ showToast('No QR code found for that email yet.'); return; }
+  openQrModal(token, profile.name || 'Runner');
+}
+
+async function checkinByToken(token){
+  const week = currentWeekKey();
+  if(supabaseConfigured){
+    const { data, error } = await sb.rpc('checkin_by_token', { p_token: token, p_week: week });
+    if(error){ console.error('checkin_by_token failed', error); return null; }
+    return data; // runner's name, or null if the token doesn't match anyone
+  }
+  const roster = (await storeGet('gsc:roster', true)) || [];
+  const match = roster.find(r => r.checkin_token === token);
+  if(!match) return null;
+  const key = 'gsc:checkins:' + week;
+  const list = (await storeGet(key, true)) || [];
+  if(!list.some(c => c.name === match.name)){
+    await storeSet(key, [...list, { id:'c'+Date.now(), name: match.name, ts: Date.now() }], true);
+  }
+  return match.name;
+}
+
+// Handles someone opening a QR link directly (scanned with their own
+// camera app rather than the in-app scanner).
+async function handleCheckinUrlParam(){
+  const params = new URLSearchParams(location.search);
+  const token = params.get('checkin');
+  if(!token) return;
+  history.replaceState({}, '', location.pathname); // don't re-trigger on refresh/share
+  const name = await checkinByToken(token);
+  await renderCheckins();
+  document.getElementById('checkin').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  if(name){
+    await saveProfile({ name });
+    showToast("You're checked in, " + name.split(' ')[0] + '. See you Thursday.');
+  } else {
+    showToast("That QR code didn't match anyone — try signing up first.");
+  }
+}
+
+/* ---------------- QR scanner (for the check-in table) ---------------- */
+let scanStream = null;
+let scanLoopId = null;
+
+async function openScanner(){
+  const overlay = document.getElementById('scanOverlay');
+  const status = document.getElementById('scanStatus');
+  overlay.classList.add('show');
+  status.textContent = 'Point the camera at a runner\'s QR code.';
+  try{
+    scanStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
+    const video = document.getElementById('scanVideo');
+    video.srcObject = scanStream;
+    await video.play();
+    scanLoop();
+  }catch(err){
+    console.error('camera access failed', err);
+    status.textContent = "Couldn't access the camera — check your browser's camera permission for this site.";
+  }
+}
+function closeScanner(){
+  document.getElementById('scanOverlay').classList.remove('show');
+  if(scanLoopId) cancelAnimationFrame(scanLoopId);
+  scanLoopId = null;
+  if(scanStream){ scanStream.getTracks().forEach(t => t.stop()); scanStream = null; }
+}
+document.getElementById('scanClose').addEventListener('click', closeScanner);
+document.getElementById('scanOverlay').addEventListener('click', (e) => { if(e.target.id === 'scanOverlay') closeScanner(); });
+document.getElementById('scanTrigger').addEventListener('click', openScanner);
+
+let lastScannedToken = null;
+let lastScannedAt = 0;
+
+function scanLoop(){
+  const video = document.getElementById('scanVideo');
+  const canvas = document.getElementById('scanCanvas');
+  if(video.readyState === video.HAVE_ENOUGH_DATA && window.jsQR){
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    const code = jsQR(imageData.data, imageData.width, imageData.height);
+    if(code && code.data){
+      handleScannedText(code.data);
+    }
+  }
+  scanLoopId = requestAnimationFrame(scanLoop);
+}
+
+async function handleScannedText(text){
+  let token = null;
+  try{
+    const url = new URL(text);
+    token = url.searchParams.get('checkin');
+  }catch(e){
+    // Not a URL — ignore whatever else got scanned.
+    return;
+  }
+  if(!token) return;
+
+  const now = Date.now();
+  if(token === lastScannedToken && now - lastScannedAt < 4000) return; // debounce repeat frames of the same code
+  lastScannedToken = token;
+  lastScannedAt = now;
+
+  const name = await checkinByToken(token);
+  const confirm = document.getElementById('scanConfirm');
+  if(name){
+    confirm.innerHTML = `<span><span class="tick">✓</span>${escapeHtml(name)}<br><span style="font-size:13px; font-family:'IBM Plex Mono'; color:var(--steel);">checked in</span></span>`;
+    await renderCheckins();
+  } else {
+    confirm.innerHTML = `<span style="font-family:'IBM Plex Mono'; font-size:15px;">QR code not recognized</span>`;
+  }
+  confirm.classList.add('show');
+  setTimeout(() => confirm.classList.remove('show'), 1400);
+}
+
+/* ---------------- Init ---------------- */
+(async function init(){
+  const notice = document.getElementById('storageNotice');
+  if(notice){
+    if(supabaseConfigured){
+      notice.style.display = 'none';
+    } else if(!hasClaudeStorage){
+      notice.querySelector('span').textContent = 'Running on local device storage — sign-ups aren\'t shared across visitors yet. Add Supabase credentials to go live.';
+      notice.style.display = 'flex';
+    }
+  }
+  const liveBadge = document.getElementById('liveBadge');
+  if(liveBadge) liveBadge.style.display = supabaseConfigured ? 'inline-flex' : 'none';
+  const rosterLiveBadge = document.getElementById('rosterLiveBadge');
+  if(rosterLiveBadge) rosterLiveBadge.style.display = supabaseConfigured ? 'inline-flex' : 'none';
+
+  await loadProfile();
+  await loadProducts();
+  await renderRoster();
+  await renderCheckins();
+  await renderWall();
+  subscribeWallRealtime();
+  subscribeRosterRealtime();
+  await handleCheckinUrlParam();
+})();
+</script>
+</body>
+</html>
