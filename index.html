@@ -772,7 +772,7 @@ async function storeSet(key, value, shared){
 /* ----------------------------------------------------------------
    Language / translations
 ------------------------------------------------------------------ */
-const I18N = {
+const I18N_FALLBACK = {
   en: {
     nav_club:'Run Club', nav_join:'Join', nav_checkin:'Check In', nav_wall:'Wall', nav_shop:'Shop',
     hero_eyebrow:'Concept store · Río Piedras',
@@ -929,6 +929,45 @@ const I18N = {
   }
 };
 
+// The live copy tr() actually reads from. Starts as a copy of the
+// hardcoded fallback above, then gets overridden — key by key — by
+// whatever's in content/site-en.json / content/site-es.json once
+// that loads. If those files are missing, incomplete, or fail to
+// fetch, the fallback values simply stay in place for those keys —
+// the page never ends up with missing text.
+const I18N = { en: { ...I18N_FALLBACK.en }, es: { ...I18N_FALLBACK.es } };
+
+// Fetches one language's CMS-managed content file and flattens its
+// grouped sections (hero, club, join, ...) back into a flat key→value
+// map, since that's what tr() expects — the grouping in the JSON file
+// only exists to make the Sveltia CMS editing screen organized.
+async function loadSiteTextFile(lang){
+  try{
+    const res = await fetch(`content/site-${lang}.json`, { cache: 'no-store' });
+    if(!res.ok) throw new Error(`content/site-${lang}.json not found (${res.status})`);
+    const grouped = await res.json();
+    const flat = {};
+    Object.values(grouped).forEach(group => {
+      if(group && typeof group === 'object') Object.assign(flat, group);
+    });
+    return flat;
+  }catch(err){
+    console.warn(`Using built-in fallback text for "${lang}" —`, err.message);
+    return null;
+  }
+}
+
+// Loads both languages once (in parallel) and merges them over the
+// hardcoded fallback. Called once during init, before the first
+// applyLanguage() — everything downstream (tr(), applyLanguage) stays
+// exactly as it was, since I18N still ends up being a plain flat
+// key→value object per language either way.
+async function loadSiteTextOverrides(){
+  const [en, es] = await Promise.all([loadSiteTextFile('en'), loadSiteTextFile('es')]);
+  if(en) Object.assign(I18N.en, en);
+  if(es) Object.assign(I18N.es, es);
+}
+
 let currentLang = localStorage.getItem('gsc_lang') || 'en';
 function tr(key){
   return (I18N[currentLang] && I18N[currentLang][key]) || I18N.en[key] || key;
@@ -1068,11 +1107,11 @@ setInterval(tickCountdown, 1000);
    (Settings → Apps and sales channels → Develop apps → Create an app
    → Configure Storefront API scopes, read access to products is
    enough → Install → copy the Storefront API access token).
-   Until you do, the shop below runs on the MANUAL_PRODUCTS list
-   further down — edit that directly to reflect your real catalog.
+   Until you do, the shop below runs on content/products.json
+   (editable via /admin/, or directly) — edit that to update your catalog.
 ------------------------------------------------------------------ */
-const SHOPIFY_DOMAIN = 'YOUR_STORE.myshopify.com';   // or your connected custom domain
-const SHOPIFY_STOREFRONT_TOKEN = 'YOUR_STOREFRONT_ACCESS_TOKEN';
+const SHOPIFY_DOMAIN = 'the-golden-soul-club.myshopify.com';
+const SHOPIFY_STOREFRONT_TOKEN = '45290cff97b23b986432e3c2951d1110';
 // The customer-facing domain product links should point to — usually
 // different from SHOPIFY_DOMAIN above, which is the API domain.
 const SHOPIFY_STOREFRONT_URL = 'https://thegoldensoulclub.com';
@@ -1143,13 +1182,12 @@ const ICONS = {
   jersey: `<svg viewBox="0 0 100 100" fill="none" stroke="#18140f" stroke-width="3"><path d="M30 18 L50 26 L70 18 L88 32 L76 46 L70 40 L70 86 L30 86 L30 40 L24 46 L12 32 Z"/><circle cx="50" cy="58" r="10"/></svg>`
 };
 
-// Fallback catalog — used only when Shopify isn't configured above.
-// This is your real catalog, pulled directly from your Running and
-// Everyday Wear collection pages (18 items: 10 + 8, matching what's
-// listed on each page). Icons stand in for photos until the
-// Storefront API is connected — or add an "image" field to any
-// entry below (e.g. image:'https://...') to use a real photo now.
-const MANUAL_PRODUCTS = [
+// Fallback catalog — used only if content/products.json can't be
+// loaded (e.g. it hasn't been created yet, or the fetch fails) AND
+// Shopify isn't configured above. The real, editable catalog lives in
+// content/products.json — edit it directly, or through the Sveltia
+// CMS admin panel at /admin/ once that's set up.
+const MANUAL_PRODUCTS_FALLBACK = [
   // Running — thegoldensoulclub.com/collections/running
   { name:'Running Singlets', collection:'Running', cat:'Tops', icon:'singlet', price:55, featured:true, url:'https://thegoldensoulclub.com/products/running-singlet-earth-tones', image:'https://thegoldensoulclub.com/cdn/shop/files/IMG_2678.heic?v=1786133606&width=1200&format=jpg' },
   { name:'Training Shorts 6"', collection:'Running', cat:'Shorts', icon:'short', price:50, url:'https://thegoldensoulclub.com/products/training-shorts', image:'https://thegoldensoulclub.com/cdn/shop/files/IMG_4913.heic?v=1764703636&width=1200&format=jpg' },
@@ -1172,6 +1210,22 @@ const MANUAL_PRODUCTS = [
   { name:'Athletic Dept. Sweater', collection:'Everyday Wear', cat:'Outerwear', icon:'sweater', price:85, url:'https://thegoldensoulclub.com/products/athletic-dept-sweater', image:'https://thegoldensoulclub.com/cdn/shop/files/IMG_8291.heic?v=1774466128&width=1200&format=jpg' },
   { name:'I Love Puerto Rico Tee', collection:'Everyday Wear', cat:'Tops', icon:'tee', price:42, featured:true, url:'https://thegoldensoulclub.com/products/i-love-puerto-rico', image:'https://thegoldensoulclub.com/cdn/shop/files/IMG_0943.heic?v=1755705515&width=1200&format=jpg' },
 ];
+
+// Loads the real, editable catalog from content/products.json (what
+// Sveltia CMS writes to). Falls back to the list above if that file
+// is missing or fails to load, so the shop section is never empty.
+async function loadManualProducts(){
+  try{
+    const res = await fetch('content/products.json', { cache: 'no-store' });
+    if(!res.ok) throw new Error('content/products.json not found (' + res.status + ')');
+    const data = await res.json();
+    if(Array.isArray(data.products) && data.products.length) return data.products;
+    throw new Error('content/products.json had no products');
+  }catch(err){
+    console.warn('Using built-in fallback product list —', err.message);
+    return MANUAL_PRODUCTS_FALLBACK;
+  }
+}
 
 let productsData = [];
 
@@ -1209,7 +1263,7 @@ function renderProducts(){
 
 async function loadProducts(){
   const shopifyProducts = storefrontConfigured ? await fetchShopifyProducts() : null;
-  productsData = (shopifyProducts && shopifyProducts.length) ? shopifyProducts : MANUAL_PRODUCTS;
+  productsData = (shopifyProducts && shopifyProducts.length) ? shopifyProducts : await loadManualProducts();
   renderProducts();
 }
 
@@ -1840,6 +1894,7 @@ function updateStorageNotice(){
 }
 
 (async function init(){
+  await loadSiteTextOverrides();
   applyLanguage(currentLang);
   updateStorageNotice();
   const liveBadge = document.getElementById('liveBadge');
