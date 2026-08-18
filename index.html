@@ -58,6 +58,18 @@
     display:none; background:none; border:none; color:var(--paper);
     padding:8px; cursor:pointer; align-items:center; justify-content:center;
   }
+  .lang-toggle{
+    background:transparent; border:1px solid var(--line-soft); color:var(--paper);
+    font-family:'IBM Plex Mono'; font-size:11px; letter-spacing:0.06em;
+    padding:6px 11px; border-radius:999px; margin-left:14px; cursor:pointer;
+  }
+  .lang-toggle:hover{ border-color:var(--gold-bright); color:var(--gold-bright); }
+  .mobile-lang-toggle{
+    background:none; border:none; color:var(--gold-bright); text-align:left;
+    padding:16px 28px; font-size:13px; text-transform:uppercase; letter-spacing:0.08em;
+    font-family:'IBM Plex Mono'; font-weight:500; border-top:1px solid var(--line-soft);
+    cursor:pointer;
+  }
   .mobile-menu{
     display:none; flex-direction:column;
     background:var(--ink); border-top:1px solid var(--line-soft);
@@ -401,22 +413,24 @@
       <img src="assets/wordmark-white.png" alt="Golden Soul Club" class="brand-wordmark">
     </div>
     <div class="navlinks" id="navlinks">
-      <a href="#shop">Shop</a>
-      <a href="#club">Run Club</a>
-      <a href="#join">Join</a>
-      <a href="#checkin">Check In</a>
-      <a href="#wall">Wall</a>
+      <a href="#club" data-i18n="nav_club">Run Club</a>
+      <a href="#join" data-i18n="nav_join">Join</a>
+      <a href="#checkin" data-i18n="nav_checkin">Check In</a>
+      <a href="#wall" data-i18n="nav_wall">Wall</a>
+      <a href="#shop" data-i18n="nav_shop">Shop</a>
     </div>
+    <button class="lang-toggle" id="langToggle" type="button" aria-label="Switch language">ES</button>
     <button class="nav-burger" id="navBurger" aria-label="Menu" aria-expanded="false">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
     </button>
   </div>
   <div class="mobile-menu" id="mobileMenu">
-    <a href="#shop">Shop</a>
-    <a href="#club">Run Club</a>
-    <a href="#join">Join</a>
-    <a href="#checkin">Check In</a>
-    <a href="#wall">Wall</a>
+    <a href="#club" data-i18n="nav_club">Run Club</a>
+    <a href="#join" data-i18n="nav_join">Join</a>
+    <a href="#checkin" data-i18n="nav_checkin">Check In</a>
+    <a href="#wall" data-i18n="nav_wall">Wall</a>
+    <a href="#shop" data-i18n="nav_shop">Shop</a>
+    <button class="mobile-lang-toggle" id="mobileLangToggle" type="button">Español</button>
   </div>
 </nav>
 
@@ -424,25 +438,25 @@
   <div class="wrap">
     <div class="hero-grid">
       <div>
-        <span class="eyebrow">Concept store · Río Piedras</span>
-        <h1>Growth<br>&amp; <em>balance.</em></h1>
-        <p class="hero-sub">Golden Soul Club is a running and everyday-wear shop built as a gathering place first. Every Thursday at 6:00 PM, that philosophy leaves the shelves and hits the street with the Golden Soul Run Club, free and open to every pace.</p>
+        <span class="eyebrow" data-i18n="hero_eyebrow">Concept store · Río Piedras</span>
+        <h1 data-i18n-html="hero_h1">Growth<br>&amp; <em>balance.</em></h1>
+        <p class="hero-sub" data-i18n="hero_sub">Golden Soul Club is a running and everyday-wear shop built as a gathering place first. Every Thursday at 6:00 PM, that philosophy leaves the shelves and hits the street with the Golden Soul Run Club, free and open to every pace.</p>
         <div class="hero-actions">
-          <a href="#join" class="btn gold">Join the run club</a>
-          <a href="#shop" class="btn ghost">Shop the store</a>
+          <a href="#join" class="btn gold" data-i18n="hero_btn_join">Join the run club</a>
+          <a href="#shop" class="btn ghost" data-i18n="hero_btn_shop">Shop the store</a>
         </div>
       </div>
       <div class="clock-card">
-        <div class="clock-label">Next Golden Soul run in</div>
+        <div class="clock-label" data-i18n="clock_label">Next Golden Soul run in</div>
         <div class="clock-row" id="countdown">
-          <div class="clock-unit"><div class="clock-num" id="cd-d">00</div><small>Days</small></div>
-          <div class="clock-unit"><div class="clock-num" id="cd-h">00</div><small>Hrs</small></div>
-          <div class="clock-unit"><div class="clock-num" id="cd-m">00</div><small>Min</small></div>
-          <div class="clock-unit"><div class="clock-num" id="cd-s">00</div><small>Sec</small></div>
+          <div class="clock-unit"><div class="clock-num" id="cd-d">00</div><small data-i18n="clock_days">Days</small></div>
+          <div class="clock-unit"><div class="clock-num" id="cd-h">00</div><small data-i18n="clock_hrs">Hrs</small></div>
+          <div class="clock-unit"><div class="clock-num" id="cd-m">00</div><small data-i18n="clock_min">Min</small></div>
+          <div class="clock-unit"><div class="clock-num" id="cd-s">00</div><small data-i18n="clock_sec">Sec</small></div>
         </div>
         <div class="clock-meta">
           <span id="nextDateLabel">—</span>
-          <span>6:00 PM · The store</span>
+          <span data-i18n="clock_meta">6:00 PM · The store</span>
         </div>
       </div>
     </div>
@@ -456,28 +470,28 @@
   <div class="wrap">
     <div class="club-grid" style="grid-template-columns:1fr;">
       <div style="max-width:640px;">
-        <span class="kicker" style="color:var(--gold-bright)">The Golden Soul Run Club</span>
-        <h2 style="color:var(--paper); font-size:clamp(28px,4vw,42px)">Same time, every week.</h2>
+        <span class="kicker" style="color:var(--gold-bright)" data-i18n="club_kicker">Golden Soul Run Club</span>
+        <h2 style="color:var(--paper); font-size:clamp(28px,4vw,42px)" data-i18n="club_h2">Same time, every week.</h2>
         <ul class="fact-list">
           <li>
             <span class="fact-num">01</span>
-            <div class="fact-body"><b>Every Thursday, 6:00 PM</b><span>Rain or shine — we start together right outside the store.</span></div>
+            <div class="fact-body"><b data-i18n="fact1_t">Every Thursday, 6:00 PM</b><span data-i18n="fact1_b">Rain or shine — we start together right outside the store.</span></div>
           </li>
           <li>
             <span class="fact-num">02</span>
-            <div class="fact-body"><b>Meet at the store</b><span>The shop doubles as clubhouse. Show up before 6:00, leave your bag behind the counter, head out together.</span></div>
+            <div class="fact-body"><b data-i18n="fact2_t">Meet at the store</b><span data-i18n="fact2_b">The shop doubles as clubhouse. Show up before 6:00, leave your bag behind the counter, head out together.</span></div>
           </li>
           <li>
             <span class="fact-num">03</span>
-            <div class="fact-body"><b>Choose 5K, 8K, or 10K</b><span>All three loops end back at the store — for coffee, or whatever the neighbors are serving that week.</span></div>
+            <div class="fact-body"><b data-i18n="fact3_t">Choose 5K, 8K, or 10K</b><span data-i18n="fact3_b">All three loops end back at the store — for coffee, or whatever the neighbors are serving that week.</span></div>
           </li>
           <li>
             <span class="fact-num">04</span>
-            <div class="fact-body"><b>Bring reflective gear</b><span>The sun's down before the run ends. A light layer, water, and ID cover it — the rest is optional.</span></div>
+            <div class="fact-body"><b data-i18n="fact4_t">Bring reflective gear</b><span data-i18n="fact4_b">The sun's down before the run ends. A light layer, water, and ID cover it — the rest is optional.</span></div>
           </li>
           <li>
             <span class="fact-num">05</span>
-            <div class="fact-body"><b>Free, every week, open to everyone</b><span>You don't need to sign up to show up. It just helps us plan pace groups and know who's coming.</span></div>
+            <div class="fact-body"><b data-i18n="fact5_t">Free, every week, open to everyone</b><span data-i18n="fact5_b">You don't need to sign up to show up. It just helps us plan pace groups and know who's coming.</span></div>
           </li>
         </ul>
       </div>
@@ -489,51 +503,49 @@
   <div class="wrap">
     <div class="section-head">
       <div>
-        <span class="kicker">Join the club</span>
-        <h2>Get on the list.</h2>
+        <span class="kicker" data-i18n="join_kicker">Join the club</span>
+        <h2 data-i18n="join_h2">Get on the list.</h2>
       </div>
-      <div class="section-tag">Free to join. Helps us plan pace groups and water stops each week.</div>
+      <div class="section-tag" data-i18n="join_tag">Free to join. Helps us plan pace groups and water stops each week.</div>
     </div>
     <div class="join-grid">
       <div class="roster-card">
         <div class="roster-count mono"><span id="rosterCount">0</span></div>
-        <div style="font-family:'IBM Plex Mono'; font-size:12px; color:var(--steel); text-transform:uppercase; letter-spacing:0.08em; margin-top:4px; display:flex; align-items:center; gap:2px;">runners on the list <span class="live-badge" id="rosterLiveBadge" style="display:none;">Live</span></div>
+        <div style="font-family:'IBM Plex Mono'; font-size:12px; color:var(--steel); text-transform:uppercase; letter-spacing:0.08em; margin-top:4px; display:flex; align-items:center; gap:2px;"><span data-i18n="runners_on_list">runners on the list</span> <span class="live-badge" id="rosterLiveBadge" style="display:none;" data-i18n="live_label">Live</span></div>
         <div class="roster-bar" id="rosterBar"></div>
       </div>
       <form id="joinForm">
         <div class="field">
-          <label for="jName">Name</label>
-          <input id="jName" type="text" placeholder="Your name" required maxlength="60">
+          <label for="jName" data-i18n="field_name">Name</label>
+          <input id="jName" type="text" placeholder="Your name" data-i18n-placeholder="placeholder_name" required maxlength="60">
         </div>
         <div class="field">
-          <label for="jEmail">Email</label>
+          <label for="jEmail" data-i18n="field_email">Email</label>
           <input id="jEmail" type="email" placeholder="you@email.com" required maxlength="120">
         </div>
         <div class="field">
-          <label>Pace group</label>
+          <label data-i18n="field_pace_group">Pace group</label>
           <div class="pace-pick" id="pacePick">
-            <button type="button" class="pace-opt" data-pace="Recovery">Recovery</button>
-            <button type="button" class="pace-opt" data-pace="Steady">Steady</button>
-            <button type="button" class="pace-opt" data-pace="Tempo">Tempo</button>
-            <button type="button" class="pace-opt" data-pace="Speed">Speed</button>
+            <button type="button" class="pace-opt" data-pace="Corredores">Corredores</button>
+            <button type="button" class="pace-opt" data-pace="Caminantes">Caminantes</button>
           </div>
         </div>
         <div class="field waiver-field">
           <div class="waiver-details">
-            <div class="waiver-label">Release of responsibility</div>
+            <div class="waiver-label" data-i18n="waiver_label">Release of responsibility</div>
             <div class="waiver-text">
-              <p><strong>Release of Responsibility — Golden Soul Run Club</strong></p>
-              <p>Running and related physical activity carry inherent risks, including but not limited to falls, collisions with other participants, vehicles, or objects, adverse weather, road or trail conditions, and medical events such as cardiac or heat-related illness.</p>
-              <p>By signing up, I confirm that I am physically able to participate and that I voluntarily assume all risks associated with this activity. I release Golden Soul Club, its owners, staff, and run leaders from liability for injury, loss, or damage arising from my participation, except where caused by gross negligence or intentional misconduct.</p>
-              <p>I consent to receive emergency medical care if needed, and understand Golden Soul Club is not responsible for the cost of that care. I understand participation is voluntary and I may leave the group run at any time.</p>
+              <p><strong data-i18n="waiver_title">Release of Responsibility — Golden Soul Run Club</strong></p>
+              <p data-i18n="waiver_p1">Running and related physical activity carry inherent risks, including but not limited to falls, collisions with other participants, vehicles, or objects, adverse weather, road or trail conditions, and medical events such as cardiac or heat-related illness.</p>
+              <p data-i18n="waiver_p2">By signing up, I confirm that I am physically able to participate and that I voluntarily assume all risks associated with this activity. I release Golden Soul Club, its owners, staff, and run leaders from liability for injury, loss, or damage arising from my participation, except where caused by gross negligence or intentional misconduct.</p>
+              <p data-i18n="waiver_p3">I consent to receive emergency medical care if needed, and understand Golden Soul Club is not responsible for the cost of that care. I understand participation is voluntary and I may leave the group run at any time.</p>
             </div>
           </div>
           <label class="waiver-check">
             <input type="checkbox" id="waiverAgree" required>
-            <span>I have read and agree to the release of responsibility above.</span>
+            <span data-i18n="waiver_check_label">I have read and agree to the release of responsibility above.</span>
           </label>
         </div>
-        <button type="submit" class="btn gold" style="justify-self:start; margin-top:8px;">Sign up for Thursdays</button>
+        <button type="submit" class="btn gold" style="justify-self:start; margin-top:8px;" data-i18n="join_submit">Sign up for Thursdays</button>
         <div class="form-msg" id="joinMsg"></div>
       </form>
     </div>
@@ -544,15 +556,15 @@
   <div class="wrap">
     <div class="section-head">
       <div>
-        <span class="kicker">This week</span>
-        <h2>Who's running today.</h2>
+        <span class="kicker" data-i18n="checkin_kicker">This week</span>
+        <h2 data-i18n="checkin_h2">Who's running today.</h2>
       </div>
       <div class="section-tag" id="checkinDateTag">—</div>
     </div>
-    <p class="checkin-note">This is separate from club sign-up. It helps us track who's showing up this Thursday.</p>
+    <p class="checkin-note" data-i18n="checkin_note">This is separate from club sign-up. It helps us track who's showing up this Thursday.</p>
     <div class="checkin-card">
       <div>
-        <div style="font-weight:700; font-size:16px; font-family:'Fraunces';" id="checkinTitle">Running this Thursday?</div>
+        <div style="font-weight:700; font-size:16px; font-family:'Fraunces';" id="checkinTitle" data-i18n="checkin_title_default">Running this Thursday?</div>
         <div class="checkin-status" id="checkinStatus">—</div>
       </div>
       <div class="checkin-action" id="checkinAction"></div>
@@ -560,7 +572,7 @@
     <div class="checkin-list" id="checkinList"></div>
     <button class="scan-trigger" id="scanTrigger" type="button">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7V4a1 1 0 011-1h3M17 3h3a1 1 0 011 1v3M21 17v3a1 1 0 01-1 1h-3M7 21H4a1 1 0 01-1-1v-3"/><line x1="7" y1="12" x2="17" y2="12"/></svg>
-      Scan a runner's QR to check them in
+      <span data-i18n="scan_trigger">Scan a runner's QR to check them in</span>
     </button>
   </div>
 </section>
@@ -573,22 +585,22 @@
   <div class="wrap">
     <div class="section-head">
       <div>
-        <span class="kicker">Runner to runner</span>
-        <h2>The club wall. <span class="live-badge" id="liveBadge" style="display:none;">Live</span></h2>
+        <span class="kicker" data-i18n="wall_kicker">Runner to runner</span>
+        <h2><span data-i18n="wall_h2">The club wall.</span> <span class="live-badge" id="liveBadge" style="display:none;" data-i18n="live_label">Live</span></h2>
       </div>
-      <div class="section-tag">Trade routes, ask about the group, or post your splits. Visible to everyone in the club.</div>
+      <div class="section-tag" data-i18n="wall_tag">Trade routes, ask about the group, or post your splits. Visible to everyone in the club.</div>
     </div>
     <div class="wall-grid">
       <form id="wallForm">
         <div class="field">
-          <label for="wName">Your name</label>
-          <input id="wName" type="text" placeholder="Your name" required maxlength="60">
+          <label for="wName" data-i18n="field_your_name">Your name</label>
+          <input id="wName" type="text" placeholder="Your name" data-i18n-placeholder="placeholder_name" required maxlength="60">
         </div>
         <div class="field">
-          <label for="wMsg">Message</label>
-          <textarea id="wMsg" placeholder="Anyone up for the 10K loop this week?" required maxlength="400"></textarea>
+          <label for="wMsg" data-i18n="field_message">Message</label>
+          <textarea id="wMsg" placeholder="Anyone up for the 10K loop this week?" data-i18n-placeholder="placeholder_wall_msg" required maxlength="400"></textarea>
         </div>
-        <button type="submit" class="btn ghost" style="justify-self:start;">Post to the wall</button>
+        <button type="submit" class="btn ghost" style="justify-self:start;" data-i18n="wall_submit">Post to the wall</button>
         <div class="form-msg" id="wallMsg"></div>
       </form>
       <div id="wallFeed"></div>
@@ -604,14 +616,14 @@
   <div class="wrap">
     <div class="section-head">
       <div>
-        <span class="kicker">Featured picks</span>
-        <h2>Running. Everyday.<br>Same pursuit.</h2>
+        <span class="kicker" data-i18n="shop_kicker">Featured picks</span>
+        <h2 data-i18n-html="shop_h2">Running. Everyday.<br>Same pursuit.</h2>
       </div>
-      <div class="section-tag">A few pieces made to move between a Thursday long run and the rest of your week.</div>
+      <div class="section-tag" data-i18n="shop_tag">A few pieces made to move between a Thursday long run and the rest of your week.</div>
     </div>
     <div class="product-grid" id="productGrid"></div>
     <a href="https://thegoldensoulclub.com" target="_blank" rel="noopener" class="shop-all-link">
-      Shop the full collection
+      <span data-i18n="shop_all_link">Shop the full collection</span>
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
     </a>
   </div>
@@ -625,32 +637,32 @@
           <img src="assets/heart-white.png" alt="" class="brand-mark">
           <img src="assets/wordmark-white.png" alt="Golden Soul Club" class="brand-wordmark">
         </div>
-        <p style="max-width:280px; margin-top:14px;">In the pursuit of continued growth and balance. A concept store and running club in Río Piedras.</p>
+        <p style="max-width:280px; margin-top:14px;" data-i18n="foot_tagline">In the pursuit of continued growth and balance. A concept store and running club in Río Piedras.</p>
       </div>
       <div>
-        <h4>Store</h4>
+        <h4 data-i18n="foot_store_h4">Store</h4>
         <ul class="foot-links">
           <li>Río Piedras, San Juan</li>
-          <li>Open daily · check hours</li>
+          <li data-i18n="foot_hours">Open daily · check hours</li>
           <li><a href="mailto:info@thegoldensoulclub.com" style="color:inherit; text-decoration:none;">info@thegoldensoulclub.com</a></li>
         </ul>
       </div>
       <div>
-        <h4>Run club</h4>
+        <h4 data-i18n="foot_runclub_h4">Run club</h4>
         <ul class="foot-links">
-          <li><a href="#club">How it works</a></li>
-          <li><a href="#join">Sign up</a></li>
-          <li><a href="#checkin">Check in</a></li>
-          <li><a href="#wall">Community wall</a></li>
+          <li><a href="#club" data-i18n="foot_how_it_works">How it works</a></li>
+          <li><a href="#join" data-i18n="foot_sign_up">Sign up</a></li>
+          <li><a href="#checkin" data-i18n="foot_check_in">Check in</a></li>
+          <li><a href="#wall" data-i18n="foot_community_wall">Community wall</a></li>
         </ul>
       </div>
       <div>
-        <h4>Stay in the loop</h4>
-        <p style="margin-bottom:12px;">Restocks, new drops, and Thursday route changes.</p>
+        <h4 data-i18n="foot_newsletter_h4">Stay in the loop</h4>
+        <p style="margin-bottom:12px;" data-i18n="foot_newsletter_sub">Restocks, new drops, and Thursday route changes.</p>
         <form id="newsForm">
           <div class="news-row">
-            <input id="newsEmail" type="email" placeholder="Email" required>
-            <button type="submit">Sign up</button>
+            <input id="newsEmail" type="email" placeholder="Email" data-i18n-placeholder="newsletter_placeholder" required>
+            <button type="submit" data-i18n="newsletter_submit">Sign up</button>
           </div>
         </form>
         <div class="form-msg" id="newsMsg" style="color:var(--gold-bright); margin-top:8px;"></div>
@@ -661,7 +673,7 @@
       <span id="footRosterLine">— runners in the club</span>
     </div>
     <div class="foot-bottom" id="storageNotice" style="display:none; border-top:none; margin-top:8px; padding-top:0;">
-      <span>Running on local device storage — sign-ups aren't shared across visitors yet.</span>
+      <span id="storageNoticeText">Running on local device storage — sign-ups aren't shared across visitors yet.</span>
     </div>
   </div>
 </footer>
@@ -672,17 +684,17 @@
 <div class="qr-overlay" id="qrOverlay">
   <div class="qr-card">
     <button class="qr-close" id="qrClose" aria-label="Close">×</button>
-    <div class="qr-eyebrow" id="qrEyebrow">Your check-in code</div>
+    <div class="qr-eyebrow" id="qrEyebrow" data-i18n="qr_eyebrow_default">Your check-in code</div>
     <h3 class="qr-name" id="qrName">—</h3>
     <div class="qr-canvas-wrap"><canvas id="qrCanvas" width="240" height="240"></canvas></div>
-    <p class="qr-help" id="qrHelpText">Save this or screenshot it. Scan it at the store on Thursday to check in instantly — or just show it to whoever's at the table.</p>
+    <p class="qr-help" id="qrHelpText" data-i18n="qr_help_default">Save this or screenshot it. Scan it at the store on Thursday to check in instantly — or just show it to whoever's at the table.</p>
     <div class="qr-link-row">
       <a id="qrLink" class="qr-link" href="#" target="_blank" rel="noopener">—</a>
-      <button class="qr-copy" id="qrCopyLink" type="button" title="Copy link">Copy</button>
+      <button class="qr-copy" id="qrCopyLink" type="button" title="Copy link" data-i18n="qr_copy_btn">Copy</button>
     </div>
     <div class="qr-actions">
-      <button class="btn gold" id="qrDownload" type="button">Download</button>
-      <button class="btn ghost" id="qrScanInstead" type="button">Scan a runner instead</button>
+      <button class="btn gold" id="qrDownload" type="button" data-i18n="qr_download_btn">Download</button>
+      <button class="btn ghost" id="qrScanInstead" type="button" data-i18n="qr_scan_instead_btn">Scan a runner instead</button>
     </div>
   </div>
 </div>
@@ -691,14 +703,14 @@
 <div class="qr-overlay" id="scanOverlay">
   <div class="qr-card scan-card">
     <button class="qr-close" id="scanClose" aria-label="Close">×</button>
-    <div class="qr-eyebrow">Scan a runner's QR</div>
+    <div class="qr-eyebrow" data-i18n="scan_eyebrow">Scan a runner's QR</div>
     <div class="scan-video-wrap">
       <video id="scanVideo" playsinline autoplay muted></video>
       <div class="scan-frame"></div>
       <div class="scan-confirm" id="scanConfirm"></div>
     </div>
     <canvas id="scanCanvas" style="display:none;"></canvas>
-    <p class="qr-help" id="scanStatus">Point the camera at a runner's QR code.</p>
+    <p class="qr-help" id="scanStatus" data-i18n="scan_status_default">Point the camera at a runner's QR code.</p>
   </div>
 </div>
 
@@ -750,6 +762,205 @@ async function storeSet(key, value, shared){
   catch(e){ console.error('localStorage set failed', e); }
 }
 
+/* ----------------------------------------------------------------
+   Language / translations
+------------------------------------------------------------------ */
+const I18N = {
+  en: {
+    nav_club:'Run Club', nav_join:'Join', nav_checkin:'Check In', nav_wall:'Wall', nav_shop:'Shop',
+    hero_eyebrow:'Concept store · Río Piedras',
+    hero_h1:'Growth<br>&amp; <em>balance.</em>',
+    hero_sub:"Golden Soul Club is a running and everyday-wear shop built as a gathering place first. Every Thursday at 6:00 PM, that philosophy leaves the shelves and hits the street with the Golden Soul Run Club, free and open to every pace.",
+    hero_btn_join:'Join the run club', hero_btn_shop:'Shop the store',
+    clock_label:'Next Golden Soul run in', clock_days:'Days', clock_hrs:'Hrs', clock_min:'Min', clock_sec:'Sec',
+    clock_meta:'6:00 PM · The store',
+    club_kicker:'Golden Soul Run Club', club_h2:'Same time, every week.',
+    fact1_t:'Every Thursday, 6:00 PM', fact1_b:'Rain or shine — we start together right outside the store.',
+    fact2_t:'Meet at the store', fact2_b:'The shop doubles as clubhouse. Show up before 6:00, leave your bag behind the counter, head out together.',
+    fact3_t:'Choose 5K, 8K, or 10K', fact3_b:'All three loops end back at the store — for coffee, or whatever the neighbors are serving that week.',
+    fact4_t:'Bring reflective gear', fact4_b:"The sun's down before the run ends. A light layer, water, and ID cover it — the rest is optional.",
+    fact5_t:'Free, every week, open to everyone', fact5_b:"You don't need to sign up to show up. It just helps us plan pace groups and know who's coming.",
+    join_kicker:'Join the club', join_h2:'Get on the list.',
+    join_tag:'Free to join. Helps us plan pace groups and water stops each week.',
+    runners_on_list:'runners on the list', live_label:'Live',
+    field_name:'Name', placeholder_name:'Your name', field_email:'Email', field_pace_group:'Pace group',
+    pace_corredores:'Corredores', pace_caminantes:'Caminantes',
+    waiver_label:'Release of responsibility',
+    waiver_title:'Release of Responsibility — Golden Soul Run Club',
+    waiver_p1:'Running and related physical activity carry inherent risks, including but not limited to falls, collisions with other participants, vehicles, or objects, adverse weather, road or trail conditions, and medical events such as cardiac or heat-related illness.',
+    waiver_p2:'By signing up, I confirm that I am physically able to participate and that I voluntarily assume all risks associated with this activity. I release Golden Soul Club, its owners, staff, and run leaders from liability for injury, loss, or damage arising from my participation, except where caused by gross negligence or intentional misconduct.',
+    waiver_p3:'I consent to receive emergency medical care if needed, and understand Golden Soul Club is not responsible for the cost of that care. I understand participation is voluntary and I may leave the group run at any time.',
+    waiver_check_label:'I have read and agree to the release of responsibility above.',
+    join_submit:'Sign up for Thursdays',
+    checkin_kicker:'This week', checkin_h2:"Who's running today.",
+    checkin_note:'This is separate from club sign-up. It helps us track who\'s showing up this Thursday.',
+    checkin_title_default:'Running this Thursday?', checkin_title_confirmed:"You're set for Thursday.",
+    checkin_your_name:'Your name', checkin_im_in:"I'm in", checkin_im_in_name:"I'm in — ",
+    checkin_confirmed_tap:"You're in ✓  ·  tap to cancel", checkin_not_you:'Not you?', checkin_my_qr:'My QR code',
+    checkin_empty:'No one has checked in yet — be the first.',
+    checkin_status_confirmed_suffix:' checked in so far.',
+    checkin_status_zero:'Be the first to check in this week.',
+    scan_trigger:"Scan a runner's QR to check them in",
+    wall_kicker:'Runner to runner', wall_h2:'The club wall.',
+    wall_tag:'Trade routes, ask about the group, or post your splits. Visible to everyone in the club.',
+    field_your_name:'Your name', field_message:'Message',
+    placeholder_wall_msg:'Anyone up for the 10K loop this week?', wall_submit:'Post to the wall',
+    shop_kicker:'Featured picks', shop_h2:'Running. Everyday.<br>Same pursuit.',
+    shop_tag:'A few pieces made to move between a Thursday long run and the rest of your week.',
+    shop_all_link:'Shop the full collection', see_product:'See Product', sold_out:'Sold out',
+    foot_tagline:'In the pursuit of continued growth and balance. A concept store and running club in Río Piedras.',
+    foot_store_h4:'Store', foot_hours:'Open daily · check hours',
+    foot_runclub_h4:'Run club', foot_how_it_works:'How it works', foot_sign_up:'Sign up',
+    foot_check_in:'Check in', foot_community_wall:'Community wall',
+    foot_newsletter_h4:'Stay in the loop', foot_newsletter_sub:'Restocks, new drops, and Thursday route changes.',
+    newsletter_placeholder:'Email', newsletter_submit:'Sign up',
+    foot_runners_in_club:' runners in the club',
+    storage_notice:"Running on local device storage — sign-ups aren't shared across visitors yet.",
+    storage_notice_full:"Running on local device storage — sign-ups aren't shared across visitors yet. Add Supabase credentials to go live.",
+    qr_eyebrow_default:'Your check-in code', qr_eyebrow_joined:"You're on the list — here's your code",
+    qr_help_default:"Save this or screenshot it. Scan it at the store on Thursday to check in instantly — or just show it to whoever's at the table.",
+    qr_copy_btn:'Copy', qr_download_btn:'Download', qr_scan_instead_btn:'Scan a runner instead',
+    qr_fallback_line1:"QR code didn't load.", qr_fallback_line2:'Try refreshing the page.',
+    qr_fallback_help:'Your QR code couldn\'t be generated — this usually means the QR library failed to load. Refresh the page and try again, or use "My QR code" from the check-in section later.',
+    scan_eyebrow:"Scan a runner's QR", scan_status_default:"Point the camera at a runner's QR code.",
+    scan_status_no_camera:"Couldn't access the camera — check your browser's camera permission for this site.",
+    scan_checked_in:'checked in', scan_not_recognized:'QR code not recognized',
+    msg_pick_pace:'Pick a pace group first.',
+    msg_agree_waiver:'You need to agree to the release of responsibility to join.',
+    msg_error_retry:'Something went wrong — try again.',
+    msg_updated:'Your sign-up was updated.', msg_on_list:"You're on the list for Thursday.",
+    msg_posted:'Posted to the wall.', msg_subscribed:"You're signed up.",
+    toast_welcome:'Welcome to the club, ', toast_qr_failed:'You\'re signed up, but your QR code didn\'t load — try "My QR code" below.',
+    toast_enter_name:'Enter your name to check in.',
+    toast_checked_in:'Checked in — see you Thursday, ',
+    toast_already_off:"You're off this week's list.",
+    toast_no_qr_email:'No QR code found for that email yet.', toast_qr_load_failed:'Could not load your QR code.',
+    toast_newsletter_added:'Added to the newsletter list.',
+    toast_popup_blocked:"Couldn't open a new tab — check your browser's pop-up settings.",
+    toast_link_copied:'Link copied.', toast_copy_failed:"Couldn't copy — long-press the link to copy it instead.",
+    toast_checkedin_prefix:"You're checked in, ",
+    toast_checkedin_link:", see you Thursday.", toast_qr_no_match:"That QR code didn't match anyone — try signing up first.",
+    qr_longpress_save:'Long-press the code above to save it.', default_runner_name:'Runner',
+    time_just_now:'just now', time_m_ago:'m ago', time_h_ago:'h ago', time_d_ago:'d ago',
+  },
+  es: {
+    nav_club:'Run Club', nav_join:'Únete', nav_checkin:'Check-in', nav_wall:'Muro', nav_shop:'Tienda',
+    hero_eyebrow:'Tienda concepto · Río Piedras',
+    hero_h1:'Crecimiento<br>y <em>equilibrio.</em>',
+    hero_sub:'Golden Soul Club es una tienda de running y ropa diaria, pensada primero como punto de encuentro. Cada jueves a las 6:00 PM, esa filosofía sale de los estantes y llega a la calle con el Golden Soul Run Club, gratis y abierto a todos los ritmos.',
+    hero_btn_join:'Únete al run club', hero_btn_shop:'Visita la tienda',
+    clock_label:'Próxima carrera Golden Soul en', clock_days:'Días', clock_hrs:'Hrs', clock_min:'Min', clock_sec:'Seg',
+    clock_meta:'6:00 PM · La tienda',
+    club_kicker:'Golden Soul Run Club', club_h2:'La misma hora, cada semana.',
+    fact1_t:'Cada jueves, 6:00 PM', fact1_b:'Llueva o truene — comenzamos juntos justo afuera de la tienda.',
+    fact2_t:'Nos vemos en la tienda', fact2_b:'La tienda también es nuestro punto de encuentro. Llega antes de las 6:00, deja tu bulto detrás del mostrador, y salimos juntos.',
+    fact3_t:'Elige 5K, 8K o 10K', fact3_b:'Las tres rutas terminan de vuelta en la tienda — para café, o lo que los vecinos estén sirviendo esa semana.',
+    fact4_t:'Trae ropa reflectiva', fact4_b:'El sol se pone antes de terminar la carrera. Una capa ligera, agua e identificación son suficientes — el resto es opcional.',
+    fact5_t:'Gratis, cada semana, abierto a todos', fact5_b:'No necesitas inscribirte para participar. Solo nos ayuda a planificar los grupos y saber quién viene.',
+    join_kicker:'Únete al club', join_h2:'Apúntate a la lista.',
+    join_tag:'Gratis unirte. Nos ayuda a planificar los grupos y las paradas de agua cada semana.',
+    runners_on_list:'corredores en la lista', live_label:'En vivo',
+    field_name:'Nombre', placeholder_name:'Tu nombre', field_email:'Correo electrónico', field_pace_group:'Grupo',
+    pace_corredores:'Corredores', pace_caminantes:'Caminantes',
+    waiver_label:'Exención de responsabilidad',
+    waiver_title:'Exención de Responsabilidad — Golden Soul Run Club',
+    waiver_p1:'Correr y las actividades físicas relacionadas conllevan riesgos inherentes, incluyendo pero sin limitarse a caídas, colisiones con otros participantes, vehículos u objetos, condiciones climáticas adversas, condiciones de la ruta o el sendero, y eventos médicos como afecciones cardíacas o relacionadas con el calor.',
+    waiver_p2:'Al inscribirme, confirmo que estoy físicamente apto para participar y que asumo voluntariamente todos los riesgos asociados con esta actividad. Libero a Golden Soul Club, sus dueños, personal y líderes de carrera de responsabilidad por lesiones, pérdidas o daños derivados de mi participación, excepto en casos de negligencia grave o conducta intencional.',
+    waiver_p3:'Consiento recibir atención médica de emergencia si fuera necesario, y entiendo que Golden Soul Club no es responsable del costo de dicha atención. Entiendo que la participación es voluntaria y que puedo retirarme de la carrera grupal en cualquier momento.',
+    waiver_check_label:'He leído y acepto la exención de responsabilidad anterior.',
+    join_submit:'Inscríbete para los jueves',
+    checkin_kicker:'Esta semana', checkin_h2:'Quién corre hoy.',
+    checkin_note:'Esto es distinto a inscribirte al club. Nos ayuda a saber quién viene este jueves.',
+    checkin_title_default:'¿Corres este jueves?', checkin_title_confirmed:'Ya estás listo para el jueves.',
+    checkin_your_name:'Tu nombre', checkin_im_in:'Voy', checkin_im_in_name:'Voy — ',
+    checkin_confirmed_tap:'Confirmado ✓  ·  toca para cancelar', checkin_not_you:'¿No eres tú?', checkin_my_qr:'Mi código QR',
+    checkin_empty:'Nadie ha hecho check-in todavía — sé el primero.',
+    checkin_status_confirmed_suffix:' ya confirmaron.',
+    checkin_status_zero:'Sé el primero en confirmar esta semana.',
+    scan_trigger:'Escanea el código QR de un corredor para registrarlo',
+    wall_kicker:'De corredor a corredor', wall_h2:'El muro del club.',
+    wall_tag:'Comparte rutas, pregunta sobre el grupo, o publica tus tiempos. Visible para todo el club.',
+    field_your_name:'Tu nombre', field_message:'Mensaje',
+    placeholder_wall_msg:'¿Alguien se anima a la ruta de 10K esta semana?', wall_submit:'Publicar en el muro',
+    shop_kicker:'Selección destacada', shop_h2:'Running. Diario.<br>Un mismo propósito.',
+    shop_tag:'Algunas piezas hechas para moverte entre la carrera larga del jueves y el resto de tu semana.',
+    shop_all_link:'Ver la colección completa', see_product:'Ver producto', sold_out:'Agotado',
+    foot_tagline:'En la búsqueda de crecimiento y equilibrio continuo. Una tienda concepto y run club en Río Piedras.',
+    foot_store_h4:'Tienda', foot_hours:'Abierto diario · consulta el horario',
+    foot_runclub_h4:'Run club', foot_how_it_works:'Cómo funciona', foot_sign_up:'Inscríbete',
+    foot_check_in:'Check-in', foot_community_wall:'Muro comunitario',
+    foot_newsletter_h4:'Mantente al tanto', foot_newsletter_sub:'Reabastecimientos, lanzamientos nuevos, y cambios de ruta de los jueves.',
+    newsletter_placeholder:'Correo', newsletter_submit:'Suscribirme',
+    foot_runners_in_club:' corredores en el club',
+    storage_notice:'Funcionando con almacenamiento local — las inscripciones no se comparten entre visitantes todavía.',
+    storage_notice_full:'Funcionando con almacenamiento local — las inscripciones no se comparten entre visitantes todavía. Añade las credenciales de Supabase para activarlo.',
+    qr_eyebrow_default:'Tu código de check-in', qr_eyebrow_joined:'Ya estás en la lista — aquí está tu código',
+    qr_help_default:'Guárdalo o tómale captura. Escanéalo en la tienda el jueves para hacer check-in al instante — o muéstraselo a quien esté en la mesa.',
+    qr_copy_btn:'Copiar', qr_download_btn:'Descargar', qr_scan_instead_btn:'Escanear a un corredor',
+    qr_fallback_line1:'El código QR no cargó.', qr_fallback_line2:'Intenta recargar la página.',
+    qr_fallback_help:'No se pudo generar tu código QR — usualmente significa que la librería de QR no cargó. Recarga la página e intenta de nuevo, o usa "Mi código QR" desde la sección de check-in más adelante.',
+    scan_eyebrow:'Escanea el QR de un corredor', scan_status_default:'Apunta la cámara al código QR de un corredor.',
+    scan_status_no_camera:'No se pudo acceder a la cámara — revisa el permiso de cámara de tu navegador para este sitio.',
+    scan_checked_in:'check-in confirmado', scan_not_recognized:'Código QR no reconocido',
+    msg_pick_pace:'Elige un grupo primero.',
+    msg_agree_waiver:'Debes aceptar la exención de responsabilidad para unirte.',
+    msg_error_retry:'Algo salió mal — intenta de nuevo.',
+    msg_updated:'Tu inscripción fue actualizada.', msg_on_list:'Ya estás en la lista para el jueves.',
+    msg_posted:'Publicado en el muro.', msg_subscribed:'Ya estás suscrito.',
+    toast_welcome:'Bienvenido al club, ', toast_qr_failed:'Ya estás inscrito, pero tu código QR no cargó — prueba "Mi código QR" más abajo.',
+    toast_enter_name:'Escribe tu nombre para hacer check-in.',
+    toast_checked_in:'Check-in confirmado — nos vemos el jueves, ',
+    toast_already_off:'Ya no estás en la lista de esta semana.',
+    toast_no_qr_email:'No se encontró un código QR para ese correo todavía.', toast_qr_load_failed:'No se pudo cargar tu código QR.',
+    toast_newsletter_added:'Añadido a la lista de correo.',
+    toast_popup_blocked:'No se pudo abrir una pestaña nueva — revisa la configuración de ventanas emergentes de tu navegador.',
+    toast_link_copied:'Enlace copiado.', toast_copy_failed:'No se pudo copiar — mantén presionado el enlace para copiarlo.',
+    toast_checkedin_prefix:'Ya hiciste check-in, ',
+    toast_checkedin_link:', nos vemos el jueves.', toast_qr_no_match:'Ese código QR no coincide con nadie — intenta inscribirte primero.',
+    qr_longpress_save:'Mantén presionado el código para guardarlo.', default_runner_name:'Corredor',
+    time_just_now:'justo ahora', time_m_ago:'m', time_h_ago:'h', time_d_ago:'d',
+  }
+};
+
+let currentLang = localStorage.getItem('gsc_lang') || 'en';
+function tr(key){
+  return (I18N[currentLang] && I18N[currentLang][key]) || I18N.en[key] || key;
+}
+function applyLanguage(lang){
+  currentLang = (lang === 'es') ? 'es' : 'en';
+  localStorage.setItem('gsc_lang', currentLang);
+  document.documentElement.lang = currentLang;
+
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    el.textContent = tr(el.getAttribute('data-i18n'));
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    el.innerHTML = tr(el.getAttribute('data-i18n-html'));
+  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    el.placeholder = tr(el.getAttribute('data-i18n-placeholder'));
+  });
+
+  const langToggle = document.getElementById('langToggle');
+  const mobileLangToggle = document.getElementById('mobileLangToggle');
+  if(langToggle) langToggle.textContent = currentLang === 'en' ? 'ES' : 'EN';
+  if(mobileLangToggle) mobileLangToggle.textContent = currentLang === 'en' ? 'Español' : 'English';
+
+  document.querySelectorAll('.pace-opt').forEach(btn => {
+    const p = btn.dataset.pace;
+    btn.textContent = p === 'Corredores' ? tr('pace_corredores') : tr('pace_caminantes');
+  });
+
+  // Re-render everything that builds its own text in JS, so it picks
+  // up the new language instead of staying stuck in the old one.
+  if(typeof renderProducts === 'function') renderProducts();
+  if(typeof renderRoster === 'function') renderRoster();
+  if(typeof renderCheckins === 'function') renderCheckins();
+  if(typeof renderWall === 'function') renderWall();
+  if(typeof updateStorageNotice === 'function') updateStorageNotice();
+  if(typeof updateDateLabels === 'function') updateDateLabels();
+}
+
 /* ---------------- Toast ---------------- */
 let toastTimer;
 function showToast(msg){
@@ -788,6 +999,16 @@ mobileMenu.querySelectorAll('a').forEach(a => {
   });
 });
 
+/* ---------------- Language toggle ---------------- */
+document.getElementById('langToggle').addEventListener('click', () => {
+  applyLanguage(currentLang === 'en' ? 'es' : 'en');
+});
+document.getElementById('mobileLangToggle').addEventListener('click', () => {
+  applyLanguage(currentLang === 'en' ? 'es' : 'en');
+  mobileMenu.classList.remove('open');
+  navBurger.setAttribute('aria-expanded', 'false');
+});
+
 /* ---------------- Route divider draw-on-scroll ---------------- */
 const routeObserver = new IntersectionObserver((entries)=>{
   entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in-view'); });
@@ -807,9 +1028,14 @@ function getNextRunDate(){
 }
 function weekKeyFor(date){ return date.toISOString().slice(0,10); }
 let nextRun = getNextRunDate();
-const dateFmt = new Intl.DateTimeFormat('en-US', { weekday:'long', month:'short', day:'numeric' });
-document.getElementById('nextDateLabel').textContent = dateFmt.format(nextRun);
-document.getElementById('checkinDateTag').textContent = 'Checking in for ' + dateFmt.format(nextRun);
+function updateDateLabels(){
+  const fmt = new Intl.DateTimeFormat(currentLang === 'es' ? 'es-PR' : 'en-US', { weekday:'long', month:'short', day:'numeric' });
+  const formatted = fmt.format(nextRun);
+  document.getElementById('nextDateLabel').textContent = formatted;
+  const prefix = currentLang === 'es' ? 'Confirmando para el ' : 'Checking in for ';
+  document.getElementById('checkinDateTag').textContent = prefix + formatted;
+}
+updateDateLabels();
 
 function pad(n){ return String(n).padStart(2,'0'); }
 function tickCountdown(){
@@ -959,8 +1185,8 @@ function renderProducts(){
     const card = document.createElement('div');
     card.className = 'product-card';
     const seeProduct = p.url
-      ? `<a class="add-btn" href="${p.url}" target="_blank" rel="noopener">See Product</a>`
-      : `<span class="add-btn" style="opacity:0.5; cursor:default;">See Product</span>`;
+      ? `<a class="add-btn" href="${p.url}" target="_blank" rel="noopener">${tr('see_product')}</a>`
+      : `<span class="add-btn" style="opacity:0.5; cursor:default;">${tr('see_product')}</span>`;
     card.innerHTML = `
       <div class="product-art">${productArt(p)}</div>
       <div class="product-collection">${escapeHtml(p.collection)}</div>
@@ -968,7 +1194,7 @@ function renderProducts(){
       <div class="product-name">${escapeHtml(p.name)}</div>
       <div class="product-foot">
         <span class="price mono">$${p.price}</span>
-        ${p.soldOut ? '<span class="sold-out">Sold out</span>' : seeProduct}
+        ${p.soldOut ? `<span class="sold-out">${tr('sold_out')}</span>` : seeProduct}
       </div>`;
     grid.appendChild(card);
   });
@@ -1011,7 +1237,7 @@ document.querySelectorAll('.pace-opt').forEach(btn=>{
   });
 });
 
-const PACE_COLORS = { Recovery:'#cbe552', Steady:'#c8a978', Tempo:'#e7c364', Speed:'#a8532c' };
+const PACE_COLORS = { Corredores:'#e7c364', Caminantes:'#cbe552' };
 
 async function fetchRoster(){
   if(supabaseConfigured){
@@ -1036,10 +1262,10 @@ async function renderRoster(){
     countEl.parentElement.classList.add('tick');
   }
   lastRosterCount = newCount;
-  document.getElementById('footRosterLine').textContent = newCount + ' runners in the club';
+  document.getElementById('footRosterLine').textContent = newCount + tr('foot_runners_in_club');
   const bar = document.getElementById('rosterBar');
   bar.innerHTML = '';
-  const groups = ['Recovery','Steady','Tempo','Speed'];
+  const groups = ['Corredores','Caminantes'];
   const max = Math.max(1, ...groups.map(g => roster.filter(r=>r.pace===g).length));
   groups.forEach(g=>{
     const count = roster.filter(r=>r.pace===g).length;
@@ -1058,15 +1284,15 @@ document.getElementById('joinForm').addEventListener('submit', async (e)=>{
   const email = document.getElementById('jEmail').value.trim();
   const msg = document.getElementById('joinMsg');
   const waiverAgreed = document.getElementById('waiverAgree').checked;
-  if(!selectedPace){ msg.textContent = 'Pick a pace group first.'; msg.className='form-msg'; return; }
-  if(!waiverAgreed){ msg.textContent = 'You need to agree to the release of responsibility to join.'; msg.className='form-msg'; return; }
+  if(!selectedPace){ msg.textContent = tr('msg_pick_pace'); msg.className='form-msg'; return; }
+  if(!waiverAgreed){ msg.textContent = tr('msg_agree_waiver'); msg.className='form-msg'; return; }
 
   let isUpdate = false;
   let token = null;
 
   if(supabaseConfigured){
     const { data, error } = await sb.rpc('join_roster', { p_name: name, p_email: email, p_pace: selectedPace, p_waiver_agreed: waiverAgreed });
-    if(error){ console.error('join_roster failed', error); msg.textContent = 'Something went wrong — try again.'; msg.className='form-msg'; return; }
+    if(error){ console.error('join_roster failed', error); msg.textContent = tr('msg_error_retry'); msg.className='form-msg'; return; }
     console.log('join_roster response:', data);
     isUpdate = !data.is_new;
     token = data.token;
@@ -1085,22 +1311,22 @@ document.getElementById('joinForm').addEventListener('submit', async (e)=>{
   }
 
   await saveProfile({ name, email, pace: selectedPace });
-  msg.textContent = isUpdate ? 'Your sign-up was updated.' : "You're on the list for Thursday.";
+  msg.textContent = isUpdate ? tr('msg_updated') : tr('msg_on_list');
   msg.className = 'form-msg ok';
   document.getElementById('wName').value = name;
   await renderRoster();
   await renderCheckins();
-  showToast('Welcome to the club, ' + name.split(' ')[0] + '.');
+  showToast(tr('toast_welcome') + name.split(' ')[0] + '.');
 
   if(token){
     try{
       openQrModal(token, name, { justJoined: true });
     }catch(err){
       console.error('openQrModal threw an error:', err);
-      showToast("You're signed up, but your QR code didn't load — try \"My QR code\" below.");
+      showToast(tr('toast_qr_failed'));
     }
   } else {
-    showToast("You're signed up, but your QR code didn't load — try \"My QR code\" below.");
+    showToast(tr('toast_qr_failed'));
   }
 });
 
@@ -1122,11 +1348,11 @@ async function fetchCheckins(){
 }
 
 async function doCheckin(name){
-  if(!name){ showToast('Enter your name to check in.'); return; }
+  if(!name){ showToast(tr('toast_enter_name')); return; }
   const week = currentWeekKey();
   if(supabaseConfigured){
     const { error } = await sb.from('checkins').upsert({ name, week_key: week }, { onConflict: 'name,week_key' });
-    if(error){ console.error('checkin failed', error); showToast('Something went wrong — try again.'); return; }
+    if(error){ console.error('checkin failed', error); showToast(tr('msg_error_retry')); return; }
   } else {
     const key = 'gsc:checkins:' + week;
     const list = (await storeGet(key, true)) || [];
@@ -1138,14 +1364,14 @@ async function doCheckin(name){
   await saveProfile({ name });
   quickEditMode = false;
   await renderCheckins();
-  showToast('Checked in — see you Thursday, ' + name.split(' ')[0] + '.');
+  showToast(tr('toast_checked_in') + name.split(' ')[0] + '.');
 }
 
 async function cancelCheckin(name){
   const week = currentWeekKey();
   if(supabaseConfigured){
     const { error } = await sb.from('checkins').delete().match({ name, week_key: week });
-    if(error){ console.error('cancel checkin failed', error); showToast('Something went wrong — try again.'); return; }
+    if(error){ console.error('cancel checkin failed', error); showToast(tr('msg_error_retry')); return; }
   } else {
     const key = 'gsc:checkins:' + week;
     const list = (await storeGet(key, true)) || [];
@@ -1153,7 +1379,7 @@ async function cancelCheckin(name){
     await storeSet(key, updated, true);
   }
   await renderCheckins();
-  showToast("You're off this week's list.");
+  showToast(tr('toast_already_off'));
 }
 
 function buildCheckinAction(list){
@@ -1168,12 +1394,12 @@ function buildCheckinAction(list){
     row.style.cssText = 'display:flex; gap:10px; flex-wrap:wrap; align-items:center;';
     const input = document.createElement('input');
     input.className = 'field';
-    input.placeholder = 'Your name';
+    input.placeholder = tr('checkin_your_name');
     input.style.cssText = 'border:2px solid var(--ink); padding:12px 14px; font-size:14px; min-width:200px;';
     input.value = name || '';
     const submit = document.createElement('button');
     submit.className = 'btn gold';
-    submit.textContent = "I'm in";
+    submit.textContent = tr('checkin_im_in');
     submit.onclick = () => doCheckin(input.value.trim());
     input.addEventListener('keydown', (e) => {
       if(e.key === 'Enter'){ e.preventDefault(); doCheckin(input.value.trim()); }
@@ -1186,20 +1412,20 @@ function buildCheckinAction(list){
     // Returning runner — one tap, no typing.
     const btn = document.createElement('button');
     btn.className = 'btn' + (checkedIn ? ' checked' : ' gold');
-    btn.textContent = checkedIn ? "You're in ✓  ·  tap to cancel" : "I'm in — " + name;
+    btn.textContent = checkedIn ? tr('checkin_confirmed_tap') : tr('checkin_im_in_name') + name;
     btn.onclick = () => checkedIn ? cancelCheckin(name) : doCheckin(name);
     action.appendChild(btn);
 
     const edit = document.createElement('button');
     edit.className = 'edit-link';
-    edit.textContent = 'Not you?';
+    edit.textContent = tr('checkin_not_you');
     edit.onclick = () => { quickEditMode = true; buildCheckinAction(list); };
     action.appendChild(edit);
 
     if(profile && profile.email){
       const qrLink = document.createElement('button');
       qrLink.className = 'edit-link';
-      qrLink.textContent = 'My QR code';
+      qrLink.textContent = tr('checkin_my_qr');
       qrLink.onclick = () => showMyQr();
       action.appendChild(qrLink);
     }
@@ -1211,7 +1437,7 @@ async function renderCheckins(){
   const wrap = document.getElementById('checkinList');
   wrap.innerHTML = '';
   if(list.length === 0){
-    wrap.innerHTML = '<div class="wall-empty">No one has checked in yet — be the first.</div>';
+    wrap.innerHTML = `<div class="wall-empty">${tr('checkin_empty')}</div>`;
   } else {
     list.forEach(c=>{
       const chip = document.createElement('div');
@@ -1225,10 +1451,10 @@ async function renderCheckins(){
   const status = document.getElementById('checkinStatus');
   const name = profile && profile.name;
   const checkedIn = !!(name && list.some(c => c.name === name));
-  document.getElementById('checkinTitle').textContent = checkedIn ? "You're set for Thursday." : 'Running this Thursday?';
-  status.textContent = checkedIn
-    ? list.length + ' runner' + (list.length===1?'':'s') + ' checked in so far.'
-    : (list.length === 0 ? 'Be the first to check in this week.' : list.length + ' runner' + (list.length===1?'':'s') + ' checked in so far.');
+  document.getElementById('checkinTitle').textContent = checkedIn ? tr('checkin_title_confirmed') : tr('checkin_title_default');
+  status.textContent = (list.length === 0 && !checkedIn)
+    ? tr('checkin_status_zero')
+    : list.length + tr('checkin_status_confirmed_suffix');
   buildCheckinAction(list);
   return list;
 }
@@ -1237,11 +1463,11 @@ async function renderCheckins(){
 const relTime = (ts)=>{
   const diff = Date.now() - ts;
   const mins = Math.floor(diff/60000);
-  if(mins < 1) return 'just now';
-  if(mins < 60) return mins + 'm ago';
+  if(mins < 1) return tr('time_just_now');
+  if(mins < 60) return mins + tr('time_m_ago');
   const hrs = Math.floor(mins/60);
-  if(hrs < 24) return hrs + 'h ago';
-  return Math.floor(hrs/24) + 'd ago';
+  if(hrs < 24) return hrs + tr('time_h_ago');
+  return Math.floor(hrs/24) + tr('time_d_ago');
 };
 
 async function fetchWall(){
@@ -1266,13 +1492,14 @@ async function renderWall(){
   const feed = document.getElementById('wallFeed');
   feed.innerHTML = '';
   const sorted = [...posts].sort((a,b)=>b.ts-a.ts);
+  const youLabel = currentLang === 'es' ? 'Tú' : 'You';
   sorted.forEach(p=>{
     const isYou = profile && profile.name && p.name === profile.name;
     const el = document.createElement('div');
     el.className = 'wall-post';
     el.innerHTML = `
       <div class="wall-head">
-        <span class="wall-name">${escapeHtml(p.name)}${isYou ? '<span class="tag">You</span>' : ''}</span>
+        <span class="wall-name">${escapeHtml(p.name)}${isYou ? `<span class="tag">${youLabel}</span>` : ''}</span>
         <span class="wall-time mono">${relTime(p.ts)}</span>
       </div>
       <div class="wall-text">${escapeHtml(p.message)}</div>`;
@@ -1292,7 +1519,7 @@ document.getElementById('wallForm').addEventListener('submit', async (e)=>{
   const msg = document.getElementById('wallMsg');
   if(supabaseConfigured){
     const { error } = await sb.from('wall_posts').insert({ name, message });
-    if(error){ console.error('wall post failed', error); msg.textContent = 'Something went wrong — try again.'; msg.className='form-msg'; return; }
+    if(error){ console.error('wall post failed', error); msg.textContent = tr('msg_error_retry'); msg.className='form-msg'; return; }
   } else {
     const posts = (await storeGet('gsc:wall', true)) || [];
     const updated = [...posts, { id:'w'+Date.now(), name, message, ts: Date.now() }];
@@ -1300,7 +1527,7 @@ document.getElementById('wallForm').addEventListener('submit', async (e)=>{
   }
   await saveProfile({ name });
   document.getElementById('wMsg').value = '';
-  msg.textContent = 'Posted to the wall.';
+  msg.textContent = tr('msg_posted');
   msg.className = 'form-msg ok';
   await renderWall();
 });
@@ -1312,7 +1539,7 @@ document.getElementById('newsForm').addEventListener('submit', async (e)=>{
   const msg = document.getElementById('newsMsg');
   if(supabaseConfigured){
     const { error } = await sb.from('newsletter').upsert({ email }, { onConflict: 'email', ignoreDuplicates: true });
-    if(error){ console.error('newsletter signup failed', error); msg.textContent = 'Something went wrong — try again.'; return; }
+    if(error){ console.error('newsletter signup failed', error); msg.textContent = tr('msg_error_retry'); return; }
   } else {
     const list = (await storeGet('gsc:newsletter', true)) || [];
     if(!list.includes(email)){
@@ -1321,8 +1548,8 @@ document.getElementById('newsForm').addEventListener('submit', async (e)=>{
     }
   }
   document.getElementById('newsEmail').value = '';
-  msg.textContent = "You're signed up.";
-  showToast('Added to the newsletter list.');
+  msg.textContent = tr('msg_subscribed');
+  showToast(tr('toast_newsletter_added'));
 });
 
 /* ---------------- Roster: realtime ---------------- */
@@ -1374,7 +1601,7 @@ function openQrModal(token, name, opts={}){
   const overlay = document.getElementById('qrOverlay');
   const help = document.getElementById('qrHelpText');
   document.getElementById('qrName').textContent = name;
-  document.getElementById('qrEyebrow').textContent = opts.justJoined ? "You're on the list — here's your code" : 'Your check-in code';
+  document.getElementById('qrEyebrow').textContent = opts.justJoined ? tr('qr_eyebrow_joined') : tr('qr_eyebrow_default');
 
   const url = checkinUrlFor(token);
   const linkEl = document.getElementById('qrLink');
@@ -1391,7 +1618,7 @@ function openQrModal(token, name, opts={}){
         console.error('QR render failed', err);
         showQrFallback(canvas, help);
       } else if(help){
-        help.textContent = "Save this or screenshot it. Scan it at the store on Thursday to check in instantly — or just show it to whoever's at the table.";
+        help.textContent = tr('qr_help_default');
       }
     });
   } else {
@@ -1407,9 +1634,9 @@ function showQrFallback(canvas, help){
   ctx.fillStyle = '#18140f';
   ctx.font = '13px sans-serif';
   ctx.textAlign = 'center';
-  ctx.fillText("QR code didn't load.", canvas.width/2, canvas.height/2 - 8);
-  ctx.fillText('Try refreshing the page.', canvas.width/2, canvas.height/2 + 12);
-  if(help) help.textContent = "Your QR code couldn't be generated — this usually means the QR library failed to load. Refresh the page and try again, or use \"My QR code\" from the check-in section later.";
+  ctx.fillText(tr('qr_fallback_line1'), canvas.width/2, canvas.height/2 - 8);
+  ctx.fillText(tr('qr_fallback_line2'), canvas.width/2, canvas.height/2 + 12);
+  if(help) help.textContent = tr('qr_fallback_help');
 }
 function closeQrModal(){
   document.getElementById('qrOverlay').classList.remove('show');
@@ -1429,16 +1656,16 @@ document.getElementById('qrDownload').addEventListener('click', () => {
     const win = window.open();
     if(win){
       win.document.write(
-        '<!DOCTYPE html><html><head><title>Your check-in QR code</title>' +
+        '<!DOCTYPE html><html><head><title>' + tr('qr_eyebrow_default') + '</title>' +
         '<meta name="viewport" content="width=device-width, initial-scale=1"></head>' +
         '<body style="margin:0; min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; background:#18140f; font-family:sans-serif;">' +
-        '<img src="' + dataUrl + '" alt="Check-in QR code" style="max-width:85%; height:auto; border-radius:4px;">' +
-        '<p style="color:#e7c364; font-size:14px; margin-top:20px;">Long-press the code above to save it.</p>' +
+        '<img src="' + dataUrl + '" alt="QR" style="max-width:85%; height:auto; border-radius:4px;">' +
+        '<p style="color:#e7c364; font-size:14px; margin-top:20px;">' + tr('qr_longpress_save') + '</p>' +
         '</body></html>'
       );
       win.document.close();
     } else {
-      showToast("Couldn't open a new tab — check your browser's pop-up settings.");
+      showToast(tr('toast_popup_blocked'));
     }
   } else {
     const link = document.createElement('a');
@@ -1455,10 +1682,10 @@ document.getElementById('qrCopyLink').addEventListener('click', async () => {
   const url = document.getElementById('qrLink').href;
   try{
     await navigator.clipboard.writeText(url);
-    showToast('Link copied.');
+    showToast(tr('toast_link_copied'));
   }catch(err){
     console.error('clipboard copy failed', err);
-    showToast("Couldn't copy — long-press the link to copy it instead.");
+    showToast(tr('toast_copy_failed'));
   }
 });
 
@@ -1467,15 +1694,15 @@ async function showMyQr(){
   let token = null;
   if(supabaseConfigured){
     const { data, error } = await sb.rpc('get_my_token', { p_email: profile.email });
-    if(error){ console.error('get_my_token failed', error); showToast('Could not load your QR code.'); return; }
+    if(error){ console.error('get_my_token failed', error); showToast(tr('toast_qr_load_failed')); return; }
     token = data;
   } else {
     const roster = (await storeGet('gsc:roster', true)) || [];
     const mine = roster.find(r => r.email.toLowerCase() === profile.email.toLowerCase());
     token = mine ? mine.checkin_token : null;
   }
-  if(!token){ showToast('No QR code found for that email yet.'); return; }
-  openQrModal(token, profile.name || 'Runner');
+  if(!token){ showToast(tr('toast_no_qr_email')); return; }
+  openQrModal(token, profile.name || tr('default_runner_name'));
 }
 
 async function checkinByToken(token){
@@ -1508,9 +1735,9 @@ async function handleCheckinUrlParam(){
   document.getElementById('checkin').scrollIntoView({ behavior: 'smooth', block: 'start' });
   if(name){
     await saveProfile({ name });
-    showToast("You're checked in, " + name.split(' ')[0] + '. See you Thursday.');
+    showToast(tr('toast_checkedin_prefix') + name.split(' ')[0] + tr('toast_checkedin_link'));
   } else {
-    showToast("That QR code didn't match anyone — try signing up first.");
+    showToast(tr('toast_qr_no_match'));
   }
 }
 
@@ -1522,7 +1749,7 @@ async function openScanner(){
   const overlay = document.getElementById('scanOverlay');
   const status = document.getElementById('scanStatus');
   overlay.classList.add('show');
-  status.textContent = 'Point the camera at a runner\'s QR code.';
+  status.textContent = tr('scan_status_default');
   try{
     scanStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
     const video = document.getElementById('scanVideo');
@@ -1531,7 +1758,7 @@ async function openScanner(){
     scanLoop();
   }catch(err){
     console.error('camera access failed', err);
-    status.textContent = "Couldn't access the camera — check your browser's camera permission for this site.";
+    status.textContent = tr('scan_status_no_camera');
   }
 }
 function closeScanner(){
@@ -1583,26 +1810,31 @@ async function handleScannedText(text){
   const name = await checkinByToken(token);
   const confirm = document.getElementById('scanConfirm');
   if(name){
-    confirm.innerHTML = `<span><span class="tick">✓</span>${escapeHtml(name)}<br><span style="font-size:13px; font-family:'IBM Plex Mono'; color:var(--steel);">checked in</span></span>`;
+    confirm.innerHTML = `<span><span class="tick">✓</span>${escapeHtml(name)}<br><span style="font-size:13px; font-family:'IBM Plex Mono'; color:var(--steel);">${tr('scan_checked_in')}</span></span>`;
     await renderCheckins();
   } else {
-    confirm.innerHTML = `<span style="font-family:'IBM Plex Mono'; font-size:15px;">QR code not recognized</span>`;
+    confirm.innerHTML = `<span style="font-family:'IBM Plex Mono'; font-size:15px;">${tr('scan_not_recognized')}</span>`;
   }
   confirm.classList.add('show');
   setTimeout(() => confirm.classList.remove('show'), 1400);
 }
 
 /* ---------------- Init ---------------- */
-(async function init(){
+function updateStorageNotice(){
   const notice = document.getElementById('storageNotice');
-  if(notice){
-    if(supabaseConfigured){
-      notice.style.display = 'none';
-    } else if(!hasClaudeStorage){
-      notice.querySelector('span').textContent = 'Running on local device storage — sign-ups aren\'t shared across visitors yet. Add Supabase credentials to go live.';
-      notice.style.display = 'flex';
-    }
+  if(!notice) return;
+  if(supabaseConfigured){
+    notice.style.display = 'none';
+  } else if(!hasClaudeStorage){
+    const textEl = document.getElementById('storageNoticeText');
+    if(textEl) textEl.textContent = tr('storage_notice_full');
+    notice.style.display = 'flex';
   }
+}
+
+(async function init(){
+  applyLanguage(currentLang);
+  updateStorageNotice();
   const liveBadge = document.getElementById('liveBadge');
   if(liveBadge) liveBadge.style.display = supabaseConfigured ? 'inline-flex' : 'none';
   const rosterLiveBadge = document.getElementById('rosterLiveBadge');
