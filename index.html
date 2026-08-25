@@ -96,8 +96,8 @@
     height:66px;
   }
   .brand{ display:flex; align-items:center; gap:10px; }
-  .brand-mark{ height:28px; width:auto; flex-shrink:0; display:block; }
-  .brand-wordmark{ height:15px; width:auto; display:block; }
+  .brand-logo{ height:34px; width:auto; flex-shrink:0; display:block; }
+  .foot-brand .brand-logo{ height:52px; }
   .navlinks{ display:flex; gap:2px; align-items:center; }
   .navlinks a{
     text-decoration:none; color:var(--paper); opacity:0.75;
@@ -309,8 +309,6 @@
   footer{ background:var(--ink); color:var(--paper); padding:56px 0 32px; }
   .foot-grid{ display:grid; grid-template-columns:1.3fr 0.9fr 0.9fr 1.1fr; gap:36px; }
   .foot-brand{ display:flex; align-items:center; gap:12px; }
-  .foot-brand .brand-mark{ height:36px; }
-  .foot-brand .brand-wordmark{ height:19px; }
   footer p{ color:#c7bda3; font-size:14px; line-height:1.6; }
   footer h4{ font-family:'IBM Plex Mono'; font-size:11px; text-transform:uppercase; letter-spacing:0.1em; color:var(--gold-bright); margin-bottom:14px; }
   .foot-links{ list-style:none; padding:0; margin:0; display:grid; gap:8px; }
@@ -416,8 +414,7 @@
 <nav class="nav">
   <div class="nav-inner">
     <div class="brand">
-      <img src="assets/heart-white.png" alt="" class="brand-mark">
-      <img src="assets/wordmark-white.png" alt="Golden Soul Club" class="brand-wordmark">
+      <img src="assets/logo-runclub.png" alt="Golden Soul Run Club" class="brand-logo">
     </div>
     <div class="navlinks" id="navlinks">
       <a href="#club" data-i18n="nav_club">Run Club</a>
@@ -447,7 +444,7 @@
       <div>
         <span class="eyebrow" data-i18n="hero_eyebrow">Concept store · Río Piedras</span>
         <h1 data-i18n-html="hero_h1">Growth<br>&amp; <em>balance.</em></h1>
-        <p class="hero-sub" data-i18n="hero_sub">Golden Soul Club is a running and everyday-wear shop built as a gathering place first. Every Thursday at 6:00 PM, that philosophy leaves the shelves and hits the street with the Golden Soul Run Club, free and open to every pace.</p>
+        <p class="hero-sub" data-i18n="hero_sub">Run Club by Golden Soul Club. We meet on Thursdays at 6:00 p.m. to rack up miles for the soul through the urban center of Río Piedras.</p>
         <div class="hero-actions">
           <a href="#join" class="btn gold" data-i18n="hero_btn_join">Join the run club</a>
           <a href="#shop" class="btn ghost" data-i18n="hero_btn_shop">Shop the store</a>
@@ -478,27 +475,23 @@
     <div class="club-grid" style="grid-template-columns:1fr;">
       <div style="max-width:640px;">
         <span class="kicker" style="color:var(--gold-bright)" data-i18n="club_kicker">Golden Soul Run Club</span>
-        <h2 style="color:var(--paper); font-size:clamp(28px,4vw,42px)" data-i18n="club_h2">Same time, every week.</h2>
+        <h2 style="color:var(--paper); font-size:clamp(28px,4vw,42px)" data-i18n="club_h2">Same time, every week</h2>
         <ul class="fact-list">
           <li>
             <span class="fact-num">01</span>
-            <div class="fact-body"><b data-i18n="fact1_t">Every Thursday, 6:00 PM</b><span data-i18n="fact1_b">Rain or shine — we start together right outside the store.</span></div>
+            <div class="fact-body"><b data-i18n="fact1_t">Every Thursday, 6:00 PM</b><span data-i18n="fact1_b">We start together right outside the store.</span></div>
           </li>
           <li>
             <span class="fact-num">02</span>
-            <div class="fact-body"><b data-i18n="fact2_t">Meet at the store</b><span data-i18n="fact2_b">The shop doubles as clubhouse. Show up before 6:00, leave your bag behind the counter, head out together.</span></div>
+            <div class="fact-body"><b data-i18n="fact2_t">Meet at the store</b><span data-i18n="fact2_b">The shop doubles as a clubhouse. Show before 6:00 p.m., leave your bag in one of our lockers, and stay hydrated in our oasis.</span></div>
           </li>
           <li>
             <span class="fact-num">03</span>
-            <div class="fact-body"><b data-i18n="fact3_t">Choose 5K, 8K, or 10K</b><span data-i18n="fact3_b">All three loops end back at the store — for coffee, or whatever the neighbors are serving that week.</span></div>
+            <div class="fact-body"><b data-i18n="fact3_t">Distance: 5K</b><span data-i18n="fact3_b">Run or Walk</span></div>
           </li>
           <li>
             <span class="fact-num">04</span>
-            <div class="fact-body"><b data-i18n="fact4_t">Bring reflective gear</b><span data-i18n="fact4_b">The sun's down before the run ends. A light layer, water, and ID cover it — the rest is optional.</span></div>
-          </li>
-          <li>
-            <span class="fact-num">05</span>
-            <div class="fact-body"><b data-i18n="fact5_t">Free, every week, open to everyone</b><span data-i18n="fact5_b">You don't need to sign up to show up. It just helps us plan pace groups and know who's coming.</span></div>
+            <div class="fact-body"><b data-i18n="fact4_t">Free, every week, open to everyone</b><span data-i18n="fact4_b">Together, we keep racking up miles for the heart.</span></div>
           </li>
         </ul>
       </div>
@@ -510,10 +503,8 @@
   <div class="wrap">
     <div class="section-head">
       <div>
-        <span class="kicker" data-i18n="join_kicker">Join the club</span>
-        <h2 data-i18n="join_h2">Get on the list.</h2>
+        <h2 data-i18n="join_h2">Join the Club</h2>
       </div>
-      <div class="section-tag" data-i18n="join_tag">Free to join. Helps us plan pace groups and water stops each week.</div>
     </div>
     <div class="join-grid">
       <div class="roster-card">
@@ -624,9 +615,8 @@
     <div class="section-head">
       <div>
         <span class="kicker" data-i18n="shop_kicker">Featured picks</span>
-        <h2 data-i18n-html="shop_h2">Running. Everyday.<br>Same pursuit.</h2>
+        <h2 data-i18n-html="shop_h2">Running Essentials</h2>
       </div>
-      <div class="section-tag" data-i18n="shop_tag">A few pieces made to move between a Thursday long run and the rest of your week.</div>
     </div>
     <div class="product-grid" id="productGrid"></div>
     <a href="https://thegoldensoulclub.com" target="_blank" rel="noopener" class="shop-all-link">
@@ -641,8 +631,7 @@
     <div class="foot-grid">
       <div>
         <div class="foot-brand">
-          <img src="assets/heart-white.png" alt="" class="brand-mark">
-          <img src="assets/wordmark-white.png" alt="Golden Soul Club" class="brand-wordmark">
+          <img src="assets/logo-runclub.png" alt="Golden Soul Run Club" class="brand-logo">
         </div>
         <p style="max-width:280px; margin-top:14px;" data-i18n="foot_tagline">In the pursuit of continued growth and balance. A concept store and running club in Río Piedras.</p>
       </div>
@@ -665,7 +654,7 @@
       </div>
       <div>
         <h4 data-i18n="foot_newsletter_h4">Stay in the loop</h4>
-        <p style="margin-bottom:12px;" data-i18n="foot_newsletter_sub">Restocks, new drops, and Thursday route changes.</p>
+        <p style="margin-bottom:12px;" data-i18n="foot_newsletter_sub">New releases and upcoming events</p>
         <form id="newsForm">
           <div class="news-row">
             <input id="newsEmail" type="email" placeholder="Email" data-i18n-placeholder="newsletter_placeholder" required>
@@ -777,18 +766,16 @@ const I18N_FALLBACK = {
     nav_club:'Run Club', nav_join:'Join', nav_checkin:'Check In', nav_wall:'Wall', nav_shop:'Shop',
     hero_eyebrow:'Concept store · Río Piedras',
     hero_h1:'Growth<br>&amp; <em>balance.</em>',
-    hero_sub:"Golden Soul Club is a running and everyday-wear shop built as a gathering place first. Every Thursday at 6:00 PM, that philosophy leaves the shelves and hits the street with the Golden Soul Run Club, free and open to every pace.",
+    hero_sub:"Run Club by Golden Soul Club. We meet on Thursdays at 6:00 p.m. to rack up miles for the soul through the urban center of Río Piedras.",
     hero_btn_join:'Join the run club', hero_btn_shop:'Shop the store',
     clock_label:'Next Golden Soul run in', clock_days:'Days', clock_hrs:'Hrs', clock_min:'Min', clock_sec:'Sec',
     clock_meta:'6:00 PM · The store',
-    club_kicker:'Golden Soul Run Club', club_h2:'Same time, every week.',
-    fact1_t:'Every Thursday, 6:00 PM', fact1_b:'Rain or shine — we start together right outside the store.',
-    fact2_t:'Meet at the store', fact2_b:'The shop doubles as clubhouse. Show up before 6:00, leave your bag behind the counter, head out together.',
-    fact3_t:'Choose 5K, 8K, or 10K', fact3_b:'All three loops end back at the store — for coffee, or whatever the neighbors are serving that week.',
-    fact4_t:'Bring reflective gear', fact4_b:"The sun's down before the run ends. A light layer, water, and ID cover it — the rest is optional.",
-    fact5_t:'Free, every week, open to everyone', fact5_b:"You don't need to sign up to show up. It just helps us plan pace groups and know who's coming.",
-    join_kicker:'Join the club', join_h2:'Get on the list.',
-    join_tag:'Free to join. Helps us plan pace groups and water stops each week.',
+    club_kicker:'Golden Soul Run Club', club_h2:'Same time, every week',
+    fact1_t:'Every Thursday, 6:00 PM', fact1_b:'We start together right outside the store.',
+    fact2_t:'Meet at the store', fact2_b:'The shop doubles as a clubhouse. Show before 6:00 p.m., leave your bag in one of our lockers, and stay hydrated in our oasis.',
+    fact3_t:'Distance: 5K', fact3_b:'Run or Walk',
+    fact4_t:'Free, every week, open to everyone', fact4_b:"Together, we keep racking up miles for the heart.",
+    join_h2:'Join the Club',
     runners_on_list:'runners on the list', live_label:'Live',
     field_name:'Name', placeholder_name:'Your name', field_email:'Email', field_pace_group:'Pace group',
     pace_corredores:'Corredores', pace_caminantes:'Caminantes',
@@ -799,7 +786,7 @@ const I18N_FALLBACK = {
     waiver_p3:'I consent to receive emergency medical care if needed, and understand Golden Soul Club is not responsible for the cost of that care. I understand participation is voluntary and I may leave the group run at any time.',
     waiver_check_label:'I have read and agree to the release of responsibility above.',
     join_submit:'Sign up for Thursdays',
-    checkin_kicker:'This week', checkin_h2:"Who's running today.",
+    checkin_kicker:'This week', checkin_h2:"Who's running today?",
     checkin_note:'This is separate from club sign-up. It helps us track who\'s showing up this Thursday.',
     checkin_title_default:'Running this Thursday?', checkin_title_confirmed:"You're set for Thursday.",
     checkin_your_name:'Your name', checkin_im_in:"I'm in", checkin_im_in_name:"I'm in — ",
@@ -812,14 +799,13 @@ const I18N_FALLBACK = {
     wall_tag:'Trade routes, ask about the group, or post your splits. Visible to everyone in the club.',
     field_your_name:'Your name', field_message:'Message',
     placeholder_wall_msg:'Anyone up for the 10K loop this week?', wall_submit:'Post to the wall',
-    shop_kicker:'Featured picks', shop_h2:'Running. Everyday.<br>Same pursuit.',
-    shop_tag:'A few pieces made to move between a Thursday long run and the rest of your week.',
+    shop_kicker:'Featured picks', shop_h2:'Running Essentials',
     shop_all_link:'Shop the full collection', see_product:'See Product', sold_out:'Sold out',
-    foot_tagline:'In the pursuit of continued growth and balance. A concept store and running club in Río Piedras.',
-    foot_store_h4:'Store', foot_hours:'Open daily · check hours',
+    foot_tagline:'In the pursuit of continued growth and balance. Miles for the soul. A concept store and running club in Río Piedras.',
+    foot_store_h4:'Store', foot_hours:'Open Tuesdays through Saturdays, 12:00 p.m. to 5:00 p.m.',
     foot_runclub_h4:'Run club', foot_how_it_works:'How it works', foot_sign_up:'Sign up',
     foot_check_in:'Check in', foot_community_wall:'Community wall',
-    foot_newsletter_h4:'Stay in the loop', foot_newsletter_sub:'Restocks, new drops, and Thursday route changes.',
+    foot_newsletter_h4:'Stay in the loop', foot_newsletter_sub:'New releases and upcoming events',
     newsletter_placeholder:'Email', newsletter_submit:'Sign up',
     foot_runners_in_club:' runners in the club',
     storage_notice:"Running on local device storage — sign-ups aren't shared across visitors yet.",
@@ -853,19 +839,17 @@ const I18N_FALLBACK = {
   es: {
     nav_club:'Run Club', nav_join:'Únete', nav_checkin:'Check-in', nav_wall:'Muro', nav_shop:'Tienda',
     hero_eyebrow:'Tienda concepto · Río Piedras',
-    hero_h1:'Crecimiento<br>y <em>equilibrio.</em>',
-    hero_sub:'Golden Soul Club es una tienda de running y ropa diaria, pensada primero como punto de encuentro. Cada jueves a las 6:00 PM, esa filosofía sale de los estantes y llega a la calle con el Golden Soul Run Club, gratis y abierto a todos los ritmos.',
+    hero_h1:'Crecimiento<br>y <em>balance.</em>',
+    hero_sub:"Run Club por Golden Soul Club. Nos encontramos los jueves a las 6:00 p.m. pa' sumar millas pa'l alma por el casco urbano de Río Piedras.",
     hero_btn_join:'Únete al run club', hero_btn_shop:'Visita la tienda',
     clock_label:'Próxima carrera Golden Soul en', clock_days:'Días', clock_hrs:'Hrs', clock_min:'Min', clock_sec:'Seg',
     clock_meta:'6:00 PM · La tienda',
-    club_kicker:'Golden Soul Run Club', club_h2:'La misma hora, cada semana.',
-    fact1_t:'Cada jueves, 6:00 PM', fact1_b:'Llueva o truene — comenzamos juntos justo afuera de la tienda.',
-    fact2_t:'Nos vemos en la tienda', fact2_b:'La tienda también es nuestro punto de encuentro. Llega antes de las 6:00, deja tu bulto detrás del mostrador, y salimos juntos.',
-    fact3_t:'Elige 5K, 8K o 10K', fact3_b:'Las tres rutas terminan de vuelta en la tienda — para café, o lo que los vecinos estén sirviendo esa semana.',
-    fact4_t:'Trae ropa reflectiva', fact4_b:'El sol se pone antes de terminar la carrera. Una capa ligera, agua e identificación son suficientes — el resto es opcional.',
-    fact5_t:'Gratis, cada semana, abierto a todos', fact5_b:'No necesitas inscribirte para participar. Solo nos ayuda a planificar los grupos y saber quién viene.',
-    join_kicker:'Únete al club', join_h2:'Apúntate a la lista.',
-    join_tag:'Gratis unirte. Nos ayuda a planificar los grupos y las paradas de agua cada semana.',
+    club_kicker:'Golden Soul Run Club', club_h2:'La misma hora, cada semana',
+    fact1_t:'Cada jueves, 6:00 PM', fact1_b:'Comenzamos juntos justo afuera de la tienda.',
+    fact2_t:'Nos vemos en la tienda', fact2_b:'La tienda también es nuestro punto de encuentro. Llega antes de las 6:00 p.m., deja tu bulto en uno de nuestros lockers y mantente hidratado.',
+    fact3_t:'Distancia: 5K', fact3_b:'Corre o camina',
+    fact4_t:'Libre de costo, cada semana, abierto a todos', fact4_b:"Juntos seguimos sumando millas pa'l corazón.",
+    join_h2:'Únete al club',
     runners_on_list:'corredores en la lista', live_label:'En vivo',
     field_name:'Nombre', placeholder_name:'Tu nombre', field_email:'Correo electrónico', field_pace_group:'Grupo',
     pace_corredores:'Corredores', pace_caminantes:'Caminantes',
@@ -876,7 +860,7 @@ const I18N_FALLBACK = {
     waiver_p3:'Consiento recibir atención médica de emergencia si fuera necesario, y entiendo que Golden Soul Club no es responsable del costo de dicha atención. Entiendo que la participación es voluntaria y que puedo retirarme de la carrera grupal en cualquier momento.',
     waiver_check_label:'He leído y acepto la exención de responsabilidad anterior.',
     join_submit:'Inscríbete para los jueves',
-    checkin_kicker:'Esta semana', checkin_h2:'Quién corre hoy.',
+    checkin_kicker:'Esta semana', checkin_h2:'¿Quién corre hoy?',
     checkin_note:'Esto es distinto a inscribirte al club. Nos ayuda a saber quién viene este jueves.',
     checkin_title_default:'¿Corres este jueves?', checkin_title_confirmed:'Ya estás listo para el jueves.',
     checkin_your_name:'Tu nombre', checkin_im_in:'Voy', checkin_im_in_name:'Voy — ',
@@ -889,14 +873,13 @@ const I18N_FALLBACK = {
     wall_tag:'Comparte rutas, pregunta sobre el grupo, o publica tus tiempos. Visible para todo el club.',
     field_your_name:'Tu nombre', field_message:'Mensaje',
     placeholder_wall_msg:'¿Alguien se anima a la ruta de 10K esta semana?', wall_submit:'Publicar en el muro',
-    shop_kicker:'Selección destacada', shop_h2:'Running. Diario.<br>Un mismo propósito.',
-    shop_tag:'Algunas piezas hechas para moverte entre la carrera larga del jueves y el resto de tu semana.',
+    shop_kicker:'Selección destacada', shop_h2:'Running Essentials',
     shop_all_link:'Ver la colección completa', see_product:'Ver producto', sold_out:'Agotado',
-    foot_tagline:'En la búsqueda de crecimiento y equilibrio continuo. Una tienda concepto y run club en Río Piedras.',
-    foot_store_h4:'Tienda', foot_hours:'Abierto diario · consulta el horario',
+    foot_tagline:"En busca del crecimiento y el balance constantes. Millas pa'l alma. Una tienda conceptual y club de corredores en Río Piedras.",
+    foot_store_h4:'Tienda', foot_hours:'Abierto de martes a sábado, 12:00 p.m. a 5:00 p.m.',
     foot_runclub_h4:'Run club', foot_how_it_works:'Cómo funciona', foot_sign_up:'Inscríbete',
     foot_check_in:'Check-in', foot_community_wall:'Muro comunitario',
-    foot_newsletter_h4:'Mantente al tanto', foot_newsletter_sub:'Reabastecimientos, lanzamientos nuevos, y cambios de ruta de los jueves.',
+    foot_newsletter_h4:'Mantente al tanto', foot_newsletter_sub:'Lanzamientos nuevos y futuros eventos',
     newsletter_placeholder:'Correo', newsletter_submit:'Suscribirme',
     foot_runners_in_club:' corredores en el club',
     storage_notice:'Funcionando con almacenamiento local — las inscripciones no se comparten entre visitantes todavía.',

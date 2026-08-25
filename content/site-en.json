@@ -1,0 +1,157 @@
+{
+  "nav": {
+    "nav_club": "Run Club",
+    "nav_join": "Join",
+    "nav_checkin": "Check In",
+    "nav_wall": "Wall",
+    "nav_shop": "Shop"
+  },
+  "hero": {
+    "hero_eyebrow": "Concept store · Río Piedras",
+    "hero_h1": "Growth<br>&amp; <em>balance.</em>",
+    "hero_sub": "Run Club by Golden Soul Club. We meet on Thursdays at 6:00 p.m. to rack up miles for the soul through the urban center of Río Piedras.",
+    "hero_btn_join": "Join the run club",
+    "hero_btn_shop": "Shop the store",
+    "clock_label": "Next Golden Soul run in",
+    "clock_days": "Days",
+    "clock_hrs": "Hrs",
+    "clock_min": "Min",
+    "clock_sec": "Sec",
+    "clock_meta": "6:00 PM · The store"
+  },
+  "club": {
+    "club_kicker": "Golden Soul Run Club",
+    "club_h2": "Same time, every week",
+    "fact1_t": "Every Thursday, 6:00 PM",
+    "fact1_b": "We start together right outside the store.",
+    "fact2_t": "Meet at the store",
+    "fact2_b": "The shop doubles as a clubhouse. Show before 6:00 p.m., leave your bag in one of our lockers, and stay hydrated in our oasis.",
+    "fact3_t": "Distance: 5K",
+    "fact3_b": "Run or Walk",
+    "fact4_t": "Free, every week, open to everyone",
+    "fact4_b": "Together, we keep racking up miles for the heart."
+  },
+  "join": {
+    "join_h2": "Join the Club",
+    "runners_on_list": "runners on the list",
+    "live_label": "Live",
+    "field_name": "Name",
+    "placeholder_name": "Your name",
+    "field_email": "Email",
+    "field_pace_group": "Pace group",
+    "pace_corredores": "Corredores",
+    "pace_caminantes": "Caminantes",
+    "join_submit": "Sign up for Thursdays"
+  },
+  "waiver": {
+    "waiver_label": "Release of responsibility",
+    "waiver_title": "Release of Responsibility — Golden Soul Run Club",
+    "waiver_p1": "Running and related physical activity carry inherent risks, including but not limited to falls, collisions with other participants, vehicles, or objects, adverse weather, road or trail conditions, and medical events such as cardiac or heat-related illness.",
+    "waiver_p2": "By signing up, I confirm that I am physically able to participate and that I voluntarily assume all risks associated with this activity. I release Golden Soul Club, its owners, staff, and run leaders from liability for injury, loss, or damage arising from my participation, except where caused by gross negligence or intentional misconduct.",
+    "waiver_p3": "I consent to receive emergency medical care if needed, and understand Golden Soul Club is not responsible for the cost of that care. I understand participation is voluntary and I may leave the group run at any time.",
+    "waiver_check_label": "I have read and agree to the release of responsibility above."
+  },
+  "checkin": {
+    "checkin_kicker": "This week",
+    "checkin_h2": "Who's running today?",
+    "checkin_note": "This is separate from club sign-up. It helps us track who's showing up this Thursday.",
+    "checkin_title_default": "Running this Thursday?",
+    "checkin_title_confirmed": "You're set for Thursday.",
+    "checkin_your_name": "Your name",
+    "checkin_im_in": "I'm in",
+    "checkin_im_in_name": "I'm in — ",
+    "checkin_confirmed_tap": "You're in ✓  ·  tap to cancel",
+    "checkin_not_you": "Not you?",
+    "checkin_my_qr": "My QR code",
+    "checkin_empty": "No one has checked in yet — be the first.",
+    "checkin_status_confirmed_suffix": " checked in so far.",
+    "checkin_status_zero": "Be the first to check in this week.",
+    "scan_trigger": "Scan a runner's QR to check them in"
+  },
+  "wall": {
+    "wall_kicker": "Runner to runner",
+    "wall_h2": "The club wall.",
+    "wall_tag": "Trade routes, ask about the group, or post your splits. Visible to everyone in the club.",
+    "field_your_name": "Your name",
+    "field_message": "Message",
+    "placeholder_wall_msg": "Anyone up for the 10K loop this week?",
+    "wall_submit": "Post to the wall"
+  },
+  "shop": {
+    "shop_kicker": "Featured picks",
+    "shop_h2": "Running Essentials",
+    "shop_all_link": "Shop the full collection",
+    "see_product": "See Product",
+    "sold_out": "Sold out"
+  },
+  "footer": {
+    "foot_tagline": "In the pursuit of continued growth and balance. Miles for the soul. A concept store and running club in Río Piedras.",
+    "foot_store_h4": "Store",
+    "foot_hours": "Open Tuesdays through Saturdays, 12:00 p.m. to 5:00 p.m.",
+    "foot_runclub_h4": "Run club",
+    "foot_how_it_works": "How it works",
+    "foot_sign_up": "Sign up",
+    "foot_check_in": "Check in",
+    "foot_community_wall": "Community wall",
+    "foot_newsletter_h4": "Stay in the loop",
+    "foot_newsletter_sub": "New releases and upcoming events",
+    "newsletter_placeholder": "Email",
+    "newsletter_submit": "Sign up",
+    "foot_runners_in_club": " runners in the club"
+  },
+  "storage": {
+    "storage_notice": "Running on local device storage — sign-ups aren't shared across visitors yet.",
+    "storage_notice_full": "Running on local device storage — sign-ups aren't shared across visitors yet. Add Supabase credentials to go live."
+  },
+  "qr_modal": {
+    "qr_eyebrow_default": "Your check-in code",
+    "qr_eyebrow_joined": "You're on the list — here's your code",
+    "qr_help_default": "Save this or screenshot it. Scan it at the store on Thursday to check in instantly — or just show it to whoever's at the table.",
+    "qr_copy_btn": "Copy",
+    "qr_download_btn": "Download",
+    "qr_scan_instead_btn": "Scan a runner instead",
+    "qr_fallback_line1": "QR code didn't load.",
+    "qr_fallback_line2": "Try refreshing the page.",
+    "qr_fallback_help": "Your QR code couldn't be generated — this usually means the QR library failed to load. Refresh the page and try again, or use \"My QR code\" from the check-in section later.",
+    "qr_longpress_save": "Long-press the code above to save it.",
+    "default_runner_name": "Runner"
+  },
+  "scanner": {
+    "scan_eyebrow": "Scan a runner's QR",
+    "scan_status_default": "Point the camera at a runner's QR code.",
+    "scan_status_no_camera": "Couldn't access the camera — check your browser's camera permission for this site.",
+    "scan_checked_in": "checked in",
+    "scan_not_recognized": "QR code not recognized"
+  },
+  "messages": {
+    "msg_pick_pace": "Pick a pace group first.",
+    "msg_agree_waiver": "You need to agree to the release of responsibility to join.",
+    "msg_error_retry": "Something went wrong — try again.",
+    "msg_updated": "Your sign-up was updated.",
+    "msg_on_list": "You're on the list for Thursday.",
+    "msg_posted": "Posted to the wall.",
+    "msg_subscribed": "You're signed up."
+  },
+  "toasts": {
+    "toast_welcome": "Welcome to the club, ",
+    "toast_qr_failed": "You're signed up, but your QR code didn't load — try \"My QR code\" below.",
+    "toast_enter_name": "Enter your name to check in.",
+    "toast_checked_in": "Checked in — see you Thursday, ",
+    "toast_already_off": "You're off this week's list.",
+    "toast_no_qr_email": "No QR code found for that email yet.",
+    "toast_qr_load_failed": "Could not load your QR code.",
+    "toast_newsletter_added": "Added to the newsletter list.",
+    "toast_popup_blocked": "Couldn't open a new tab — check your browser's pop-up settings.",
+    "toast_link_copied": "Link copied.",
+    "toast_copy_failed": "Couldn't copy — long-press the link to copy it instead.",
+    "toast_checkedin_prefix": "You're checked in, ",
+    "toast_checkedin_link": ", see you Thursday.",
+    "toast_qr_no_match": "That QR code didn't match anyone — try signing up first."
+  },
+  "time": {
+    "time_just_now": "just now",
+    "time_m_ago": "m ago",
+    "time_h_ago": "h ago",
+    "time_d_ago": "d ago"
+  }
+}

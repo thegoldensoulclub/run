@@ -1,0 +1,157 @@
+{
+  "nav": {
+    "nav_club": "Run Club",
+    "nav_join": "Únete",
+    "nav_checkin": "Check-in",
+    "nav_wall": "Muro",
+    "nav_shop": "Tienda"
+  },
+  "hero": {
+    "hero_eyebrow": "Tienda concepto · Río Piedras",
+    "hero_h1": "Crecimiento<br>y <em>balance.</em>",
+    "hero_sub": "Run Club por Golden Soul Club. Nos encontramos los jueves a las 6:00 p.m. pa' sumar millas pa'l alma por el casco urbano de Río Piedras.",
+    "hero_btn_join": "Únete al run club",
+    "hero_btn_shop": "Visita la tienda",
+    "clock_label": "Próxima carrera Golden Soul en",
+    "clock_days": "Días",
+    "clock_hrs": "Hrs",
+    "clock_min": "Min",
+    "clock_sec": "Seg",
+    "clock_meta": "6:00 PM · La tienda"
+  },
+  "club": {
+    "club_kicker": "Golden Soul Run Club",
+    "club_h2": "La misma hora, cada semana",
+    "fact1_t": "Cada jueves, 6:00 PM",
+    "fact1_b": "Comenzamos juntos justo afuera de la tienda.",
+    "fact2_t": "Nos vemos en la tienda",
+    "fact2_b": "La tienda también es nuestro punto de encuentro. Llega antes de las 6:00 p.m., deja tu bulto en uno de nuestros lockers y mantente hidratado.",
+    "fact3_t": "Distancia: 5K",
+    "fact3_b": "Corre o camina",
+    "fact4_t": "Libre de costo, cada semana, abierto a todos",
+    "fact4_b": "Juntos seguimos sumando millas pa'l corazón."
+  },
+  "join": {
+    "join_h2": "Únete al club",
+    "runners_on_list": "corredores en la lista",
+    "live_label": "En vivo",
+    "field_name": "Nombre",
+    "placeholder_name": "Tu nombre",
+    "field_email": "Correo electrónico",
+    "field_pace_group": "Grupo",
+    "pace_corredores": "Corredores",
+    "pace_caminantes": "Caminantes",
+    "join_submit": "Inscríbete para los jueves"
+  },
+  "waiver": {
+    "waiver_label": "Exención de responsabilidad",
+    "waiver_title": "Exención de Responsabilidad — Golden Soul Run Club",
+    "waiver_p1": "Correr y las actividades físicas relacionadas conllevan riesgos inherentes, incluyendo pero sin limitarse a caídas, colisiones con otros participantes, vehículos u objetos, condiciones climáticas adversas, condiciones de la ruta o el sendero, y eventos médicos como afecciones cardíacas o relacionadas con el calor.",
+    "waiver_p2": "Al inscribirme, confirmo que estoy físicamente apto para participar y que asumo voluntariamente todos los riesgos asociados con esta actividad. Libero a Golden Soul Club, sus dueños, personal y líderes de carrera de responsabilidad por lesiones, pérdidas o daños derivados de mi participación, excepto en casos de negligencia grave o conducta intencional.",
+    "waiver_p3": "Consiento recibir atención médica de emergencia si fuera necesario, y entiendo que Golden Soul Club no es responsable del costo de dicha atención. Entiendo que la participación es voluntaria y que puedo retirarme de la carrera grupal en cualquier momento.",
+    "waiver_check_label": "He leído y acepto la exención de responsabilidad anterior."
+  },
+  "checkin": {
+    "checkin_kicker": "Esta semana",
+    "checkin_h2": "¿Quién corre hoy?",
+    "checkin_note": "Esto es distinto a inscribirte al club. Nos ayuda a saber quién viene este jueves.",
+    "checkin_title_default": "¿Corres este jueves?",
+    "checkin_title_confirmed": "Ya estás listo para el jueves.",
+    "checkin_your_name": "Tu nombre",
+    "checkin_im_in": "Voy",
+    "checkin_im_in_name": "Voy — ",
+    "checkin_confirmed_tap": "Confirmado ✓  ·  toca para cancelar",
+    "checkin_not_you": "¿No eres tú?",
+    "checkin_my_qr": "Mi código QR",
+    "checkin_empty": "Nadie ha hecho check-in todavía — sé el primero.",
+    "checkin_status_confirmed_suffix": " ya confirmaron.",
+    "checkin_status_zero": "Sé el primero en confirmar esta semana.",
+    "scan_trigger": "Escanea el código QR de un corredor para registrarlo"
+  },
+  "wall": {
+    "wall_kicker": "De corredor a corredor",
+    "wall_h2": "El muro del club.",
+    "wall_tag": "Comparte rutas, pregunta sobre el grupo, o publica tus tiempos. Visible para todo el club.",
+    "field_your_name": "Tu nombre",
+    "field_message": "Mensaje",
+    "placeholder_wall_msg": "¿Alguien se anima a la ruta de 10K esta semana?",
+    "wall_submit": "Publicar en el muro"
+  },
+  "shop": {
+    "shop_kicker": "Selección destacada",
+    "shop_h2": "Running Essentials",
+    "shop_all_link": "Ver la colección completa",
+    "see_product": "Ver producto",
+    "sold_out": "Agotado"
+  },
+  "footer": {
+    "foot_tagline": "En busca del crecimiento y el balance constantes. Millas pa'l alma. Una tienda conceptual y club de corredores en Río Piedras.",
+    "foot_store_h4": "Tienda",
+    "foot_hours": "Abierto de martes a sábado, 12:00 p.m. a 5:00 p.m.",
+    "foot_runclub_h4": "Run club",
+    "foot_how_it_works": "Cómo funciona",
+    "foot_sign_up": "Inscríbete",
+    "foot_check_in": "Check-in",
+    "foot_community_wall": "Muro comunitario",
+    "foot_newsletter_h4": "Mantente al tanto",
+    "foot_newsletter_sub": "Lanzamientos nuevos y futuros eventos",
+    "newsletter_placeholder": "Correo",
+    "newsletter_submit": "Suscribirme",
+    "foot_runners_in_club": " corredores en el club"
+  },
+  "storage": {
+    "storage_notice": "Funcionando con almacenamiento local — las inscripciones no se comparten entre visitantes todavía.",
+    "storage_notice_full": "Funcionando con almacenamiento local — las inscripciones no se comparten entre visitantes todavía. Añade las credenciales de Supabase para activarlo."
+  },
+  "qr_modal": {
+    "qr_eyebrow_default": "Tu código de check-in",
+    "qr_eyebrow_joined": "Ya estás en la lista — aquí está tu código",
+    "qr_help_default": "Guárdalo o tómale captura. Escanéalo en la tienda el jueves para hacer check-in al instante — o muéstraselo a quien esté en la mesa.",
+    "qr_copy_btn": "Copiar",
+    "qr_download_btn": "Descargar",
+    "qr_scan_instead_btn": "Escanear a un corredor",
+    "qr_fallback_line1": "El código QR no cargó.",
+    "qr_fallback_line2": "Intenta recargar la página.",
+    "qr_fallback_help": "No se pudo generar tu código QR — usualmente significa que la librería de QR no cargó. Recarga la página e intenta de nuevo, o usa \"Mi código QR\" desde la sección de check-in más adelante.",
+    "qr_longpress_save": "Mantén presionado el código para guardarlo.",
+    "default_runner_name": "Corredor"
+  },
+  "scanner": {
+    "scan_eyebrow": "Escanea el QR de un corredor",
+    "scan_status_default": "Apunta la cámara al código QR de un corredor.",
+    "scan_status_no_camera": "No se pudo acceder a la cámara — revisa el permiso de cámara de tu navegador para este sitio.",
+    "scan_checked_in": "check-in confirmado",
+    "scan_not_recognized": "Código QR no reconocido"
+  },
+  "messages": {
+    "msg_pick_pace": "Elige un grupo primero.",
+    "msg_agree_waiver": "Debes aceptar la exención de responsabilidad para unirte.",
+    "msg_error_retry": "Algo salió mal — intenta de nuevo.",
+    "msg_updated": "Tu inscripción fue actualizada.",
+    "msg_on_list": "Ya estás en la lista para el jueves.",
+    "msg_posted": "Publicado en el muro.",
+    "msg_subscribed": "Ya estás suscrito."
+  },
+  "toasts": {
+    "toast_welcome": "Bienvenido al club, ",
+    "toast_qr_failed": "Ya estás inscrito, pero tu código QR no cargó — prueba \"Mi código QR\" más abajo.",
+    "toast_enter_name": "Escribe tu nombre para hacer check-in.",
+    "toast_checked_in": "Check-in confirmado — nos vemos el jueves, ",
+    "toast_already_off": "Ya no estás en la lista de esta semana.",
+    "toast_no_qr_email": "No se encontró un código QR para ese correo todavía.",
+    "toast_qr_load_failed": "No se pudo cargar tu código QR.",
+    "toast_newsletter_added": "Añadido a la lista de correo.",
+    "toast_popup_blocked": "No se pudo abrir una pestaña nueva — revisa la configuración de ventanas emergentes de tu navegador.",
+    "toast_link_copied": "Enlace copiado.",
+    "toast_copy_failed": "No se pudo copiar — mantén presionado el enlace para copiarlo.",
+    "toast_checkedin_prefix": "Ya hiciste check-in, ",
+    "toast_checkedin_link": ", nos vemos el jueves.",
+    "toast_qr_no_match": "Ese código QR no coincide con nadie — intenta inscribirte primero."
+  },
+  "time": {
+    "time_just_now": "justo ahora",
+    "time_m_ago": "m",
+    "time_h_ago": "h",
+    "time_d_ago": "d"
+  }
+}

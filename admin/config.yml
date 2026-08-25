@@ -1,0 +1,465 @@
+backend:
+  name: github
+  repo: thegoldensoulclub/run   # owner/repo — update if this isn't exactly right
+  branch: main
+
+# Sign-in uses a GitHub personal access token by default (click "Sign In
+# with Token" on the login screen) — no OAuth app or proxy server needed
+# for a single editor. See the note at the bottom of this file.
+
+media_folder: "assets/products"
+public_folder: "assets/products"
+
+collections:
+  - name: "products"
+    label: "Shop Products"
+    files:
+      - name: "products"
+        label: "Product Catalog"
+        file: "content/products.json"
+        fields:
+          - name: "products"
+            label: "Products"
+            widget: "list"
+            summary: "{{fields.name}} — ${{fields.price}} {{fields.featured}}"
+            fields:
+              - { name: "name", label: "Name", widget: "string" }
+              - { name: "collection", label: "Collection", widget: "select", options: ["Running", "Everyday Wear"] }
+              - { name: "cat", label: "Category (e.g. Tops, Shorts, Headwear)", widget: "string" }
+              - { name: "price", label: "Price (USD)", widget: "number", value_type: "int", min: 0 }
+              - { name: "featured", label: "Featured on homepage", widget: "boolean", default: false }
+              - { name: "soldOut", label: "Sold out", widget: "boolean", default: false }
+              - { name: "url", label: "Product page URL (thegoldensoulclub.com)", widget: "string", required: false }
+              - { name: "image", label: "Image URL", widget: "string", required: false, hint: "Right-click the product photo on thegoldensoulclub.com → Copy image address. Add &format=jpg to the end if it's a .heic file." }
+              - name: "icon"
+                label: "Fallback icon (only used if no Image URL is set)"
+                widget: "select"
+                required: false
+                options: ["shoe", "tee", "short", "jacket", "cap", "sock", "singlet", "sweater", "jersey"]
+
+  - name: "site_text"
+    label: "Page Text"
+    files:
+      - name: "site_text_en"
+        label: "Page Text — English"
+        file: "content/site-en.json"
+        fields:
+          - name: "nav"
+            label: "Navigation"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { name: "nav_club", label: "Nav: Run Club link", widget: "string" }
+              - { name: "nav_join", label: "Nav: Join link", widget: "string" }
+              - { name: "nav_checkin", label: "Nav: Check In link", widget: "string" }
+              - { name: "nav_wall", label: "Nav: Wall link", widget: "string" }
+              - { name: "nav_shop", label: "Nav: Shop link", widget: "string" }
+          - name: "hero"
+            label: "Hero (top of page)"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { name: "hero_eyebrow", label: "Small line above the headline", widget: "string" }
+              - { name: "hero_h1", label: "Main headline (HTML — keep <br> and <em> tags)", widget: "string" }
+              - { name: "hero_sub", label: "Paragraph under the headline", widget: "text" }
+              - { name: "hero_btn_join", label: "Button: Join the run club", widget: "string" }
+              - { name: "hero_btn_shop", label: "Button: Shop the store", widget: "string" }
+              - { name: "clock_label", label: "Countdown label", widget: "string" }
+              - { name: "clock_days", label: "Countdown unit: Days", widget: "string" }
+              - { name: "clock_hrs", label: "Countdown unit: Hours", widget: "string" }
+              - { name: "clock_min", label: "Countdown unit: Minutes", widget: "string" }
+              - { name: "clock_sec", label: "Countdown unit: Seconds", widget: "string" }
+              - { name: "clock_meta", label: "Time/location line under countdown", widget: "string" }
+          - name: "club"
+            label: "Run Club Section"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { name: "club_kicker", label: "Small label above section title", widget: "string" }
+              - { name: "club_h2", label: "Section title", widget: "string" }
+              - { name: "fact1_t", label: "Fact 1 title", widget: "string" }
+              - { name: "fact1_b", label: "Fact 1 description", widget: "string" }
+              - { name: "fact2_t", label: "Fact 2 title", widget: "string" }
+              - { name: "fact2_b", label: "Fact 2 description", widget: "string" }
+              - { name: "fact3_t", label: "Fact 3 title", widget: "string" }
+              - { name: "fact3_b", label: "Fact 3 description", widget: "string" }
+              - { name: "fact4_t", label: "Fact 4 title", widget: "string" }
+              - { name: "fact4_b", label: "Fact 4 description", widget: "string" }
+          - name: "join"
+            label: "Join / Sign-up Form"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { name: "join_h2", label: "Section title", widget: "string" }
+              - { name: "runners_on_list", label: "Label next to the runner count", widget: "string" }
+              - { name: "live_label", label: "'Live' badge text", widget: "string" }
+              - { name: "field_name", label: "Form field label: Name", widget: "string" }
+              - { name: "placeholder_name", label: "Form placeholder: Name field", widget: "string" }
+              - { name: "field_email", label: "Form field label: Email", widget: "string" }
+              - { name: "field_pace_group", label: "Form field label: Pace group", widget: "string" }
+              - { name: "pace_corredores", label: "Pace option: Corredores", widget: "string" }
+              - { name: "pace_caminantes", label: "Pace option: Caminantes", widget: "string" }
+              - { name: "join_submit", label: "Submit button text", widget: "string" }
+          - name: "waiver"
+            label: "Release of Responsibility"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { name: "waiver_label", label: "Small label above the waiver box", widget: "string" }
+              - { name: "waiver_title", label: "Waiver document title", widget: "string" }
+              - { name: "waiver_p1", label: "Waiver paragraph 1", widget: "text" }
+              - { name: "waiver_p2", label: "Waiver paragraph 2", widget: "text" }
+              - { name: "waiver_p3", label: "Waiver paragraph 3", widget: "text" }
+              - { name: "waiver_check_label", label: "Checkbox agreement text", widget: "string" }
+          - name: "checkin"
+            label: "Check-in Section"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { name: "checkin_kicker", label: "Small label above section title", widget: "string" }
+              - { name: "checkin_h2", label: "Section title", widget: "string" }
+              - { name: "checkin_note", label: "Clarifying note under the title", widget: "text" }
+              - { name: "checkin_title_default", label: "Card title (not checked in yet)", widget: "string" }
+              - { name: "checkin_title_confirmed", label: "Card title (checked in)", widget: "string" }
+              - { name: "checkin_your_name", label: "Name field placeholder", widget: "string" }
+              - { name: "checkin_im_in", label: "Button text (first-time)", widget: "string" }
+              - { name: "checkin_im_in_name", label: "Button text prefix (returning, before name)", widget: "string" }
+              - { name: "checkin_confirmed_tap", label: "Button text (already checked in)", widget: "string" }
+              - { name: "checkin_not_you", label: "'Not you?' link text", widget: "string" }
+              - { name: "checkin_my_qr", label: "'My QR code' link text", widget: "string" }
+              - { name: "checkin_empty", label: "Empty state (nobody checked in yet)", widget: "string" }
+              - { name: "checkin_status_confirmed_suffix", label: "Status text suffix (after the number)", widget: "string" }
+              - { name: "checkin_status_zero", label: "Status text (zero checked in)", widget: "string" }
+              - { name: "scan_trigger", label: "'Scan a runner's QR' button text", widget: "string" }
+          - name: "wall"
+            label: "Community Wall"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { name: "wall_kicker", label: "Small label above section title", widget: "string" }
+              - { name: "wall_h2", label: "Section title", widget: "string" }
+              - { name: "wall_tag", label: "Subtitle text", widget: "text" }
+              - { name: "field_your_name", label: "Form field label: Your name", widget: "string" }
+              - { name: "field_message", label: "Form field label: Message", widget: "string" }
+              - { name: "placeholder_wall_msg", label: "Message field placeholder", widget: "string" }
+              - { name: "wall_submit", label: "Submit button text", widget: "string" }
+          - name: "shop"
+            label: "Shop Section"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { name: "shop_kicker", label: "Small label above section title", widget: "string" }
+              - { name: "shop_h2", label: "Section title (HTML — keep <br> tag)", widget: "string" }
+              - { name: "shop_all_link", label: "'Shop the full collection' link text", widget: "string" }
+              - { name: "see_product", label: "Product card button text", widget: "string" }
+              - { name: "sold_out", label: "'Sold out' badge text", widget: "string" }
+          - name: "footer"
+            label: "Footer"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { name: "foot_tagline", label: "Tagline under the logo", widget: "text" }
+              - { name: "foot_store_h4", label: "Column heading: Store", widget: "string" }
+              - { name: "foot_hours", label: "Store hours line", widget: "string" }
+              - { name: "foot_runclub_h4", label: "Column heading: Run club", widget: "string" }
+              - { name: "foot_how_it_works", label: "Link: How it works", widget: "string" }
+              - { name: "foot_sign_up", label: "Link: Sign up", widget: "string" }
+              - { name: "foot_check_in", label: "Link: Check in", widget: "string" }
+              - { name: "foot_community_wall", label: "Link: Community wall", widget: "string" }
+              - { name: "foot_newsletter_h4", label: "Column heading: Newsletter", widget: "string" }
+              - { name: "foot_newsletter_sub", label: "Newsletter description", widget: "string" }
+              - { name: "newsletter_placeholder", label: "Email field placeholder", widget: "string" }
+              - { name: "newsletter_submit", label: "Newsletter submit button", widget: "string" }
+              - { name: "foot_runners_in_club", label: "Text after the runner count (bottom of footer)", widget: "string" }
+          - name: "storage"
+            label: "Storage Notice (technical — safe to ignore)"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { name: "storage_notice", label: "(technical, rarely shown)", widget: "string" }
+              - { name: "storage_notice_full", label: "(technical, rarely shown)", widget: "string" }
+          - name: "qr_modal"
+            label: "QR Code Popup"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { name: "qr_eyebrow_default", label: "Popup label (returning visitor)", widget: "string" }
+              - { name: "qr_eyebrow_joined", label: "Popup label (just signed up)", widget: "string" }
+              - { name: "qr_help_default", label: "Help text under the QR code", widget: "text" }
+              - { name: "qr_copy_btn", label: "'Copy' button", widget: "string" }
+              - { name: "qr_download_btn", label: "'Download' button", widget: "string" }
+              - { name: "qr_scan_instead_btn", label: "'Scan a runner instead' button", widget: "string" }
+              - { name: "qr_fallback_line1", label: "Error text on QR image, line 1", widget: "string" }
+              - { name: "qr_fallback_line2", label: "Error text on QR image, line 2", widget: "string" }
+              - { name: "qr_fallback_help", label: "Help text if the QR code fails to load", widget: "text" }
+              - { name: "qr_longpress_save", label: "Mobile 'long-press to save' hint", widget: "string" }
+              - { name: "default_runner_name", label: "Default name if none is set", widget: "string" }
+          - name: "scanner"
+            label: "Staff QR Scanner"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { name: "scan_eyebrow", label: "Scanner popup title", widget: "string" }
+              - { name: "scan_status_default", label: "Scanner instructions", widget: "string" }
+              - { name: "scan_status_no_camera", label: "Error: camera access denied", widget: "string" }
+              - { name: "scan_checked_in", label: "Label shown after a successful scan", widget: "string" }
+              - { name: "scan_not_recognized", label: "Message: QR code not recognized", widget: "string" }
+          - name: "messages"
+            label: "Form Messages"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { name: "msg_pick_pace", label: "Error: no pace group picked", widget: "string" }
+              - { name: "msg_agree_waiver", label: "Error: waiver not agreed to", widget: "string" }
+              - { name: "msg_error_retry", label: "Generic error message", widget: "string" }
+              - { name: "msg_updated", label: "Success: sign-up updated", widget: "string" }
+              - { name: "msg_on_list", label: "Success: new sign-up", widget: "string" }
+              - { name: "msg_posted", label: "Success: wall post submitted", widget: "string" }
+              - { name: "msg_subscribed", label: "Success: newsletter sign-up", widget: "string" }
+          - name: "toasts"
+            label: "Toast Notifications"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { name: "toast_welcome", label: "Toast prefix: 'Welcome to the club, '", widget: "string" }
+              - { name: "toast_qr_failed", label: "Toast: QR code failed to generate", widget: "string" }
+              - { name: "toast_enter_name", label: "Toast: name required to check in", widget: "string" }
+              - { name: "toast_checked_in", label: "Toast prefix: checked in", widget: "string" }
+              - { name: "toast_already_off", label: "Toast: check-in canceled", widget: "string" }
+              - { name: "toast_no_qr_email", label: "Toast: no QR found for that email", widget: "string" }
+              - { name: "toast_qr_load_failed", label: "Toast: couldn't load QR code", widget: "string" }
+              - { name: "toast_newsletter_added", label: "Toast: added to newsletter", widget: "string" }
+              - { name: "toast_popup_blocked", label: "Toast: pop-up blocked (mobile QR download)", widget: "string" }
+              - { name: "toast_link_copied", label: "Toast: link copied", widget: "string" }
+              - { name: "toast_copy_failed", label: "Toast: copy failed", widget: "string" }
+              - { name: "toast_checkedin_prefix", label: "Toast prefix (scanned QR link)", widget: "string" }
+              - { name: "toast_checkedin_link", label: "Toast suffix (scanned QR link)", widget: "string" }
+              - { name: "toast_qr_no_match", label: "Toast: scanned QR not recognized", widget: "string" }
+          - name: "time"
+            label: "Relative Time Labels (e.g. 'm ago')"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { name: "time_just_now", label: "'just now'", widget: "string" }
+              - { name: "time_m_ago", label: "minutes-ago suffix", widget: "string" }
+              - { name: "time_h_ago", label: "hours-ago suffix", widget: "string" }
+              - { name: "time_d_ago", label: "days-ago suffix", widget: "string" }
+      - name: "site_text_es"
+        label: "Page Text — Spanish (Español)"
+        file: "content/site-es.json"
+        fields:
+          - name: "nav"
+            label: "Navigation"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { name: "nav_club", label: "Nav: Run Club link", widget: "string" }
+              - { name: "nav_join", label: "Nav: Join link", widget: "string" }
+              - { name: "nav_checkin", label: "Nav: Check In link", widget: "string" }
+              - { name: "nav_wall", label: "Nav: Wall link", widget: "string" }
+              - { name: "nav_shop", label: "Nav: Shop link", widget: "string" }
+          - name: "hero"
+            label: "Hero (top of page)"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { name: "hero_eyebrow", label: "Small line above the headline", widget: "string" }
+              - { name: "hero_h1", label: "Main headline (HTML — keep <br> and <em> tags)", widget: "string" }
+              - { name: "hero_sub", label: "Paragraph under the headline", widget: "text" }
+              - { name: "hero_btn_join", label: "Button: Join the run club", widget: "string" }
+              - { name: "hero_btn_shop", label: "Button: Shop the store", widget: "string" }
+              - { name: "clock_label", label: "Countdown label", widget: "string" }
+              - { name: "clock_days", label: "Countdown unit: Days", widget: "string" }
+              - { name: "clock_hrs", label: "Countdown unit: Hours", widget: "string" }
+              - { name: "clock_min", label: "Countdown unit: Minutes", widget: "string" }
+              - { name: "clock_sec", label: "Countdown unit: Seconds", widget: "string" }
+              - { name: "clock_meta", label: "Time/location line under countdown", widget: "string" }
+          - name: "club"
+            label: "Run Club Section"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { name: "club_kicker", label: "Small label above section title", widget: "string" }
+              - { name: "club_h2", label: "Section title", widget: "string" }
+              - { name: "fact1_t", label: "Fact 1 title", widget: "string" }
+              - { name: "fact1_b", label: "Fact 1 description", widget: "string" }
+              - { name: "fact2_t", label: "Fact 2 title", widget: "string" }
+              - { name: "fact2_b", label: "Fact 2 description", widget: "string" }
+              - { name: "fact3_t", label: "Fact 3 title", widget: "string" }
+              - { name: "fact3_b", label: "Fact 3 description", widget: "string" }
+              - { name: "fact4_t", label: "Fact 4 title", widget: "string" }
+              - { name: "fact4_b", label: "Fact 4 description", widget: "string" }
+          - name: "join"
+            label: "Join / Sign-up Form"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { name: "join_h2", label: "Section title", widget: "string" }
+              - { name: "runners_on_list", label: "Label next to the runner count", widget: "string" }
+              - { name: "live_label", label: "'Live' badge text", widget: "string" }
+              - { name: "field_name", label: "Form field label: Name", widget: "string" }
+              - { name: "placeholder_name", label: "Form placeholder: Name field", widget: "string" }
+              - { name: "field_email", label: "Form field label: Email", widget: "string" }
+              - { name: "field_pace_group", label: "Form field label: Pace group", widget: "string" }
+              - { name: "pace_corredores", label: "Pace option: Corredores", widget: "string" }
+              - { name: "pace_caminantes", label: "Pace option: Caminantes", widget: "string" }
+              - { name: "join_submit", label: "Submit button text", widget: "string" }
+          - name: "waiver"
+            label: "Release of Responsibility"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { name: "waiver_label", label: "Small label above the waiver box", widget: "string" }
+              - { name: "waiver_title", label: "Waiver document title", widget: "string" }
+              - { name: "waiver_p1", label: "Waiver paragraph 1", widget: "text" }
+              - { name: "waiver_p2", label: "Waiver paragraph 2", widget: "text" }
+              - { name: "waiver_p3", label: "Waiver paragraph 3", widget: "text" }
+              - { name: "waiver_check_label", label: "Checkbox agreement text", widget: "string" }
+          - name: "checkin"
+            label: "Check-in Section"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { name: "checkin_kicker", label: "Small label above section title", widget: "string" }
+              - { name: "checkin_h2", label: "Section title", widget: "string" }
+              - { name: "checkin_note", label: "Clarifying note under the title", widget: "text" }
+              - { name: "checkin_title_default", label: "Card title (not checked in yet)", widget: "string" }
+              - { name: "checkin_title_confirmed", label: "Card title (checked in)", widget: "string" }
+              - { name: "checkin_your_name", label: "Name field placeholder", widget: "string" }
+              - { name: "checkin_im_in", label: "Button text (first-time)", widget: "string" }
+              - { name: "checkin_im_in_name", label: "Button text prefix (returning, before name)", widget: "string" }
+              - { name: "checkin_confirmed_tap", label: "Button text (already checked in)", widget: "string" }
+              - { name: "checkin_not_you", label: "'Not you?' link text", widget: "string" }
+              - { name: "checkin_my_qr", label: "'My QR code' link text", widget: "string" }
+              - { name: "checkin_empty", label: "Empty state (nobody checked in yet)", widget: "string" }
+              - { name: "checkin_status_confirmed_suffix", label: "Status text suffix (after the number)", widget: "string" }
+              - { name: "checkin_status_zero", label: "Status text (zero checked in)", widget: "string" }
+              - { name: "scan_trigger", label: "'Scan a runner's QR' button text", widget: "string" }
+          - name: "wall"
+            label: "Community Wall"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { name: "wall_kicker", label: "Small label above section title", widget: "string" }
+              - { name: "wall_h2", label: "Section title", widget: "string" }
+              - { name: "wall_tag", label: "Subtitle text", widget: "text" }
+              - { name: "field_your_name", label: "Form field label: Your name", widget: "string" }
+              - { name: "field_message", label: "Form field label: Message", widget: "string" }
+              - { name: "placeholder_wall_msg", label: "Message field placeholder", widget: "string" }
+              - { name: "wall_submit", label: "Submit button text", widget: "string" }
+          - name: "shop"
+            label: "Shop Section"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { name: "shop_kicker", label: "Small label above section title", widget: "string" }
+              - { name: "shop_h2", label: "Section title (HTML — keep <br> tag)", widget: "string" }
+              - { name: "shop_all_link", label: "'Shop the full collection' link text", widget: "string" }
+              - { name: "see_product", label: "Product card button text", widget: "string" }
+              - { name: "sold_out", label: "'Sold out' badge text", widget: "string" }
+          - name: "footer"
+            label: "Footer"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { name: "foot_tagline", label: "Tagline under the logo", widget: "text" }
+              - { name: "foot_store_h4", label: "Column heading: Store", widget: "string" }
+              - { name: "foot_hours", label: "Store hours line", widget: "string" }
+              - { name: "foot_runclub_h4", label: "Column heading: Run club", widget: "string" }
+              - { name: "foot_how_it_works", label: "Link: How it works", widget: "string" }
+              - { name: "foot_sign_up", label: "Link: Sign up", widget: "string" }
+              - { name: "foot_check_in", label: "Link: Check in", widget: "string" }
+              - { name: "foot_community_wall", label: "Link: Community wall", widget: "string" }
+              - { name: "foot_newsletter_h4", label: "Column heading: Newsletter", widget: "string" }
+              - { name: "foot_newsletter_sub", label: "Newsletter description", widget: "string" }
+              - { name: "newsletter_placeholder", label: "Email field placeholder", widget: "string" }
+              - { name: "newsletter_submit", label: "Newsletter submit button", widget: "string" }
+              - { name: "foot_runners_in_club", label: "Text after the runner count (bottom of footer)", widget: "string" }
+          - name: "storage"
+            label: "Storage Notice (technical — safe to ignore)"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { name: "storage_notice", label: "(technical, rarely shown)", widget: "string" }
+              - { name: "storage_notice_full", label: "(technical, rarely shown)", widget: "string" }
+          - name: "qr_modal"
+            label: "QR Code Popup"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { name: "qr_eyebrow_default", label: "Popup label (returning visitor)", widget: "string" }
+              - { name: "qr_eyebrow_joined", label: "Popup label (just signed up)", widget: "string" }
+              - { name: "qr_help_default", label: "Help text under the QR code", widget: "text" }
+              - { name: "qr_copy_btn", label: "'Copy' button", widget: "string" }
+              - { name: "qr_download_btn", label: "'Download' button", widget: "string" }
+              - { name: "qr_scan_instead_btn", label: "'Scan a runner instead' button", widget: "string" }
+              - { name: "qr_fallback_line1", label: "Error text on QR image, line 1", widget: "string" }
+              - { name: "qr_fallback_line2", label: "Error text on QR image, line 2", widget: "string" }
+              - { name: "qr_fallback_help", label: "Help text if the QR code fails to load", widget: "text" }
+              - { name: "qr_longpress_save", label: "Mobile 'long-press to save' hint", widget: "string" }
+              - { name: "default_runner_name", label: "Default name if none is set", widget: "string" }
+          - name: "scanner"
+            label: "Staff QR Scanner"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { name: "scan_eyebrow", label: "Scanner popup title", widget: "string" }
+              - { name: "scan_status_default", label: "Scanner instructions", widget: "string" }
+              - { name: "scan_status_no_camera", label: "Error: camera access denied", widget: "string" }
+              - { name: "scan_checked_in", label: "Label shown after a successful scan", widget: "string" }
+              - { name: "scan_not_recognized", label: "Message: QR code not recognized", widget: "string" }
+          - name: "messages"
+            label: "Form Messages"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { name: "msg_pick_pace", label: "Error: no pace group picked", widget: "string" }
+              - { name: "msg_agree_waiver", label: "Error: waiver not agreed to", widget: "string" }
+              - { name: "msg_error_retry", label: "Generic error message", widget: "string" }
+              - { name: "msg_updated", label: "Success: sign-up updated", widget: "string" }
+              - { name: "msg_on_list", label: "Success: new sign-up", widget: "string" }
+              - { name: "msg_posted", label: "Success: wall post submitted", widget: "string" }
+              - { name: "msg_subscribed", label: "Success: newsletter sign-up", widget: "string" }
+          - name: "toasts"
+            label: "Toast Notifications"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { name: "toast_welcome", label: "Toast prefix: 'Welcome to the club, '", widget: "string" }
+              - { name: "toast_qr_failed", label: "Toast: QR code failed to generate", widget: "string" }
+              - { name: "toast_enter_name", label: "Toast: name required to check in", widget: "string" }
+              - { name: "toast_checked_in", label: "Toast prefix: checked in", widget: "string" }
+              - { name: "toast_already_off", label: "Toast: check-in canceled", widget: "string" }
+              - { name: "toast_no_qr_email", label: "Toast: no QR found for that email", widget: "string" }
+              - { name: "toast_qr_load_failed", label: "Toast: couldn't load QR code", widget: "string" }
+              - { name: "toast_newsletter_added", label: "Toast: added to newsletter", widget: "string" }
+              - { name: "toast_popup_blocked", label: "Toast: pop-up blocked (mobile QR download)", widget: "string" }
+              - { name: "toast_link_copied", label: "Toast: link copied", widget: "string" }
+              - { name: "toast_copy_failed", label: "Toast: copy failed", widget: "string" }
+              - { name: "toast_checkedin_prefix", label: "Toast prefix (scanned QR link)", widget: "string" }
+              - { name: "toast_checkedin_link", label: "Toast suffix (scanned QR link)", widget: "string" }
+              - { name: "toast_qr_no_match", label: "Toast: scanned QR not recognized", widget: "string" }
+          - name: "time"
+            label: "Relative Time Labels (e.g. 'm ago')"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { name: "time_just_now", label: "'just now'", widget: "string" }
+              - { name: "time_m_ago", label: "minutes-ago suffix", widget: "string" }
+              - { name: "time_h_ago", label: "hours-ago suffix", widget: "string" }
+              - { name: "time_d_ago", label: "days-ago suffix", widget: "string" }
+
+# ---------------------------------------------------------------------
+# NOTE on signing in:
+# On the login screen, click "Sign In with Token" rather than the
+# GitHub button. It'll link you to GitHub's token creation page with
+# the right scope (repo access) pre-selected — generate one, paste it
+# in. This is the simplest method for a single editor and doesn't
+# require setting up a separate OAuth app.
+#
+# If you later want other people (e.g. the store owner) to log in
+# with their own GitHub account via a "Login with GitHub" button
+# instead of pasting a token, that needs an OAuth app + a small proxy
+# (Sveltia's docs call this "Sveltia CMS Authenticator", deployable
+# free on Cloudflare Workers) — a separate, optional step.
+# ---------------------------------------------------------------------
