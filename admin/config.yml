@@ -130,6 +130,7 @@ collections:
               - { name: "checkin_find_me_link", label: "'Already signed up? Find me by email' link", widget: "string" }
               - { name: "checkin_find_me_placeholder", label: "Email lookup field placeholder", widget: "string" }
               - { name: "checkin_find_me_btn", label: "Email lookup submit button", widget: "string" }
+              - { name: "checkin_back_link", label: "Back link in email lookup form", widget: "string" }
               - { name: "checkin_empty", label: "Empty state (nobody checked in yet)", widget: "string" }
               - { name: "checkin_status_confirmed_suffix", label: "Status text suffix (after the number)", widget: "string" }
               - { name: "checkin_status_zero", label: "Status text (zero checked in)", widget: "string" }
@@ -339,6 +340,7 @@ collections:
               - { name: "checkin_find_me_link", label: "'Already signed up? Find me by email' link", widget: "string" }
               - { name: "checkin_find_me_placeholder", label: "Email lookup field placeholder", widget: "string" }
               - { name: "checkin_find_me_btn", label: "Email lookup submit button", widget: "string" }
+              - { name: "checkin_back_link", label: "Back link in email lookup form", widget: "string" }
               - { name: "checkin_empty", label: "Empty state (nobody checked in yet)", widget: "string" }
               - { name: "checkin_status_confirmed_suffix", label: "Status text suffix (after the number)", widget: "string" }
               - { name: "checkin_status_zero", label: "Status text (zero checked in)", widget: "string" }
