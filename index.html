@@ -791,7 +791,7 @@ const I18N_FALLBACK = {
     checkin_title_default:'Running this Thursday?', checkin_title_confirmed:"You're set for Thursday.",
     checkin_your_name:'Your name', checkin_im_in:"I'm in", checkin_im_in_name:"I'm in — ",
     checkin_confirmed_tap:"You're in ✓  ·  tap to cancel", checkin_not_you:'Not you?', checkin_my_qr:'My QR code',
-    checkin_find_me_link:"Already signed up? Find me by email", checkin_find_me_placeholder:'Your email', checkin_find_me_btn:'Find me',
+    checkin_find_me_link:"Already signed up? Find me by email", checkin_find_me_placeholder:'Your email', checkin_find_me_btn:'Find me', checkin_back_link:'← Back',
     checkin_empty:'No one has checked in yet — be the first.',
     checkin_status_confirmed_suffix:' checked in so far.',
     checkin_status_zero:'Be the first to check in this week.',
@@ -867,7 +867,7 @@ const I18N_FALLBACK = {
     checkin_title_default:'¿Corres este jueves?', checkin_title_confirmed:'Ya estás listo para el jueves.',
     checkin_your_name:'Tu nombre', checkin_im_in:'Voy', checkin_im_in_name:'Voy — ',
     checkin_confirmed_tap:'Confirmado ✓  ·  toca para cancelar', checkin_not_you:'¿No eres tú?', checkin_my_qr:'Mi código QR',
-    checkin_find_me_link:'¿Ya te inscribiste? Búscate por correo', checkin_find_me_placeholder:'Tu correo', checkin_find_me_btn:'Buscarme',
+    checkin_find_me_link:'¿Ya te inscribiste? Búscate por correo', checkin_find_me_placeholder:'Tu correo', checkin_find_me_btn:'Buscarme', checkin_back_link:'← Volver',
     checkin_empty:'Nadie ha hecho check-in todavía — sé el primero.',
     checkin_status_confirmed_suffix:' ya confirmaron.',
     checkin_status_zero:'Sé el primero en confirmar esta semana.',
@@ -1467,9 +1467,10 @@ function buildCheckinAction(list){
     findLink.type = 'button';
     findLink.textContent = tr('checkin_find_me_link');
     findLink.onclick = () => {
+      row.style.display = 'none';
       findWrap.innerHTML = '';
       const findRow = document.createElement('div');
-      findRow.style.cssText = 'display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:4px;';
+      findRow.style.cssText = 'display:flex; gap:10px; flex-wrap:wrap; align-items:center;';
       const emailInput = document.createElement('input');
       emailInput.type = 'email';
       emailInput.className = 'field';
@@ -1497,6 +1498,19 @@ function buildCheckinAction(list){
       findRow.appendChild(emailInput);
       findRow.appendChild(findBtn);
       findWrap.appendChild(findRow);
+
+      const backLink = document.createElement('button');
+      backLink.className = 'edit-link';
+      backLink.type = 'button';
+      backLink.style.cssText = 'margin-top:10px; display:block;';
+      backLink.textContent = tr('checkin_back_link');
+      backLink.onclick = () => {
+        row.style.display = 'flex';
+        findWrap.innerHTML = '';
+        findWrap.appendChild(findLink);
+        input.focus();
+      };
+      findWrap.appendChild(backLink);
       emailInput.focus();
     };
     findWrap.appendChild(findLink);
