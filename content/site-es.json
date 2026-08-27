@@ -25,9 +25,9 @@
     "fact1_t": "Cada jueves, 6:00 PM",
     "fact1_b": "Comenzamos juntos justo afuera de la tienda.",
     "fact2_t": "Nos vemos en la tienda",
-    "fact2_b": "La tienda también es nuestro punto de encuentro. Llega antes de las 6:00 p.m., deja tu bulto en uno de nuestros lockers y mantente hidratado en nuestro oasis.",
+    "fact2_b": "La tienda también es nuestro punto de encuentro. Llega antes de las 6:00 p.m., deja tu bulto en uno de nuestros lockers y mantente hidratado.",
     "fact3_t": "Distancia: 5K",
-    "fact3_b": "Corre o camina.",
+    "fact3_b": "Corre o camina",
     "fact4_t": "Libre de costo, cada semana, abierto a todos",
     "fact4_b": "Juntos seguimos sumando millas pa'l corazón."
   },
@@ -66,7 +66,10 @@
     "checkin_empty": "Nadie ha hecho check-in todavía — sé el primero.",
     "checkin_status_confirmed_suffix": " ya confirmaron.",
     "checkin_status_zero": "Sé el primero en confirmar esta semana.",
-    "scan_trigger": "Escanea el código QR de un corredor para registrarlo"
+    "scan_trigger": "Escanea el código QR de un corredor para registrarlo",
+    "checkin_find_me_link": "¿Ya te inscribiste? Búscate por correo",
+    "checkin_find_me_placeholder": "Tu correo",
+    "checkin_find_me_btn": "Buscarme"
   },
   "wall": {
     "wall_kicker": "De corredor a corredor",
@@ -146,7 +149,9 @@
     "toast_copy_failed": "No se pudo copiar — mantén presionado el enlace para copiarlo.",
     "toast_checkedin_prefix": "Ya hiciste check-in, ",
     "toast_checkedin_link": ", nos vemos el jueves.",
-    "toast_qr_no_match": "Ese código QR no coincide con nadie — intenta inscribirte primero."
+    "toast_qr_no_match": "Ese código QR no coincide con nadie — intenta inscribirte primero.",
+    "toast_found_email": "Bienvenido de vuelta, ",
+    "toast_not_found_email": "No encontramos una inscripción con ese correo — intenta inscribirte primero."
   },
   "time": {
     "time_just_now": "justo ahora",

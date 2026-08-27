@@ -27,7 +27,7 @@
     "fact2_t": "Meet at the store",
     "fact2_b": "The shop doubles as a clubhouse. Show before 6:00 p.m., leave your bag in one of our lockers, and stay hydrated in our oasis.",
     "fact3_t": "Distance: 5K",
-    "fact3_b": "Run or walk.",
+    "fact3_b": "Run or Walk",
     "fact4_t": "Free, every week, open to everyone",
     "fact4_b": "Together, we keep racking up miles for the heart."
   },
@@ -66,7 +66,10 @@
     "checkin_empty": "No one has checked in yet — be the first.",
     "checkin_status_confirmed_suffix": " checked in so far.",
     "checkin_status_zero": "Be the first to check in this week.",
-    "scan_trigger": "Scan a runner's QR to check them in"
+    "scan_trigger": "Scan a runner's QR to check them in",
+    "checkin_find_me_link": "Already signed up? Find me by email",
+    "checkin_find_me_placeholder": "Your email",
+    "checkin_find_me_btn": "Find me"
   },
   "wall": {
     "wall_kicker": "Runner to runner",
@@ -146,7 +149,9 @@
     "toast_copy_failed": "Couldn't copy — long-press the link to copy it instead.",
     "toast_checkedin_prefix": "You're checked in, ",
     "toast_checkedin_link": ", see you Thursday.",
-    "toast_qr_no_match": "That QR code didn't match anyone — try signing up first."
+    "toast_qr_no_match": "That QR code didn't match anyone — try signing up first.",
+    "toast_found_email": "Welcome back, ",
+    "toast_not_found_email": "No sign-up found for that email — try joining first."
   },
   "time": {
     "time_just_now": "just now",
