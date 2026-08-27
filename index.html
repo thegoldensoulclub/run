@@ -791,6 +791,7 @@ const I18N_FALLBACK = {
     checkin_title_default:'Running this Thursday?', checkin_title_confirmed:"You're set for Thursday.",
     checkin_your_name:'Your name', checkin_im_in:"I'm in", checkin_im_in_name:"I'm in — ",
     checkin_confirmed_tap:"You're in ✓  ·  tap to cancel", checkin_not_you:'Not you?', checkin_my_qr:'My QR code',
+    checkin_find_me_link:"Already signed up? Find me by email", checkin_find_me_placeholder:'Your email', checkin_find_me_btn:'Find me',
     checkin_empty:'No one has checked in yet — be the first.',
     checkin_status_confirmed_suffix:' checked in so far.',
     checkin_status_zero:'Be the first to check in this week.',
@@ -828,6 +829,7 @@ const I18N_FALLBACK = {
     toast_checked_in:'Checked in — see you Thursday, ',
     toast_already_off:"You're off this week's list.",
     toast_no_qr_email:'No QR code found for that email yet.', toast_qr_load_failed:'Could not load your QR code.',
+    toast_found_email:'Welcome back, ', toast_not_found_email:"No sign-up found for that email — try joining first.",
     toast_newsletter_added:'Added to the newsletter list.',
     toast_popup_blocked:"Couldn't open a new tab — check your browser's pop-up settings.",
     toast_link_copied:'Link copied.', toast_copy_failed:"Couldn't copy — long-press the link to copy it instead.",
@@ -865,6 +867,7 @@ const I18N_FALLBACK = {
     checkin_title_default:'¿Corres este jueves?', checkin_title_confirmed:'Ya estás listo para el jueves.',
     checkin_your_name:'Tu nombre', checkin_im_in:'Voy', checkin_im_in_name:'Voy — ',
     checkin_confirmed_tap:'Confirmado ✓  ·  toca para cancelar', checkin_not_you:'¿No eres tú?', checkin_my_qr:'Mi código QR',
+    checkin_find_me_link:'¿Ya te inscribiste? Búscate por correo', checkin_find_me_placeholder:'Tu correo', checkin_find_me_btn:'Buscarme',
     checkin_empty:'Nadie ha hecho check-in todavía — sé el primero.',
     checkin_status_confirmed_suffix:' ya confirmaron.',
     checkin_status_zero:'Sé el primero en confirmar esta semana.',
@@ -902,6 +905,7 @@ const I18N_FALLBACK = {
     toast_checked_in:'Check-in confirmado — nos vemos el jueves, ',
     toast_already_off:'Ya no estás en la lista de esta semana.',
     toast_no_qr_email:'No se encontró un código QR para ese correo todavía.', toast_qr_load_failed:'No se pudo cargar tu código QR.',
+    toast_found_email:'Bienvenido de vuelta, ', toast_not_found_email:'No encontramos una inscripción con ese correo — intenta inscribirte primero.',
     toast_newsletter_added:'Añadido a la lista de correo.',
     toast_popup_blocked:'No se pudo abrir una pestaña nueva — revisa la configuración de ventanas emergentes de tu navegador.',
     toast_link_copied:'Enlace copiado.', toast_copy_failed:'No se pudo copiar — mantén presionado el enlace para copiarlo.',
@@ -1452,6 +1456,51 @@ function buildCheckinAction(list){
     row.appendChild(submit);
     action.appendChild(row);
     input.focus();
+
+    // Recovery path for anyone whose browser doesn't remember them —
+    // cleared storage, a different device, a friend's phone, etc.
+    // Looks them up by email instead of requiring a fresh sign-up.
+    const findWrap = document.createElement('div');
+    findWrap.style.cssText = 'margin-top:12px;';
+    const findLink = document.createElement('button');
+    findLink.className = 'edit-link';
+    findLink.type = 'button';
+    findLink.textContent = tr('checkin_find_me_link');
+    findLink.onclick = () => {
+      findWrap.innerHTML = '';
+      const findRow = document.createElement('div');
+      findRow.style.cssText = 'display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:4px;';
+      const emailInput = document.createElement('input');
+      emailInput.type = 'email';
+      emailInput.className = 'field';
+      emailInput.placeholder = tr('checkin_find_me_placeholder');
+      emailInput.style.cssText = 'border:2px solid var(--ink); padding:12px 14px; font-size:14px; min-width:220px;';
+      const findBtn = document.createElement('button');
+      findBtn.className = 'btn ghost';
+      findBtn.type = 'button';
+      findBtn.textContent = tr('checkin_find_me_btn');
+      const doLookup = async () => {
+        const email = emailInput.value.trim();
+        if(!email) return;
+        const result = await lookupByEmail(email);
+        if(result && result.name){
+          await saveProfile({ name: result.name, email, pace: result.pace });
+          quickEditMode = false;
+          showToast(tr('toast_found_email') + result.name.split(' ')[0] + '.');
+          await renderCheckins();
+        } else {
+          showToast(tr('toast_not_found_email'));
+        }
+      };
+      emailInput.addEventListener('keydown', (e) => { if(e.key === 'Enter'){ e.preventDefault(); doLookup(); } });
+      findBtn.onclick = doLookup;
+      findRow.appendChild(emailInput);
+      findRow.appendChild(findBtn);
+      findWrap.appendChild(findRow);
+      emailInput.focus();
+    };
+    findWrap.appendChild(findLink);
+    action.appendChild(findWrap);
   } else {
     // Returning runner — one tap, no typing.
     const btn = document.createElement('button');
@@ -1733,20 +1782,28 @@ document.getElementById('qrCopyLink').addEventListener('click', async () => {
   }
 });
 
+// Looks up a person by email — used both for "My QR code" and for
+// the "Already signed up?" recovery flow when a browser has no local
+// profile (cleared storage, new device, different browser, etc).
+// Returns { name, pace, token } or null if no sign-up exists.
+async function lookupByEmail(email){
+  if(supabaseConfigured){
+    const { data, error } = await sb.rpc('get_my_token', { p_email: email });
+    if(error){ console.error('get_my_token failed', error); return null; }
+    if(!data || !data.token) return null;
+    return { name: data.name, pace: data.pace, token: data.token };
+  }
+  const roster = (await storeGet('gsc:roster', true)) || [];
+  const mine = roster.find(r => r.email.toLowerCase() === email.toLowerCase());
+  if(!mine) return null;
+  return { name: mine.name, pace: mine.pace, token: mine.checkin_token };
+}
+
 async function showMyQr(){
   if(!profile || !profile.email) return;
-  let token = null;
-  if(supabaseConfigured){
-    const { data, error } = await sb.rpc('get_my_token', { p_email: profile.email });
-    if(error){ console.error('get_my_token failed', error); showToast(tr('toast_qr_load_failed')); return; }
-    token = data;
-  } else {
-    const roster = (await storeGet('gsc:roster', true)) || [];
-    const mine = roster.find(r => r.email.toLowerCase() === profile.email.toLowerCase());
-    token = mine ? mine.checkin_token : null;
-  }
-  if(!token){ showToast(tr('toast_no_qr_email')); return; }
-  openQrModal(token, profile.name || tr('default_runner_name'));
+  const result = await lookupByEmail(profile.email);
+  if(!result){ showToast(tr('toast_no_qr_email')); return; }
+  openQrModal(result.token, result.name || profile.name || tr('default_runner_name'));
 }
 
 async function checkinByToken(token){
