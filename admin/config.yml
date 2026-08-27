@@ -127,6 +127,9 @@ collections:
               - { name: "checkin_confirmed_tap", label: "Button text (already checked in)", widget: "string" }
               - { name: "checkin_not_you", label: "'Not you?' link text", widget: "string" }
               - { name: "checkin_my_qr", label: "'My QR code' link text", widget: "string" }
+              - { name: "checkin_find_me_link", label: "'Already signed up? Find me by email' link", widget: "string" }
+              - { name: "checkin_find_me_placeholder", label: "Email lookup field placeholder", widget: "string" }
+              - { name: "checkin_find_me_btn", label: "Email lookup submit button", widget: "string" }
               - { name: "checkin_empty", label: "Empty state (nobody checked in yet)", widget: "string" }
               - { name: "checkin_status_confirmed_suffix", label: "Status text suffix (after the number)", widget: "string" }
               - { name: "checkin_status_zero", label: "Status text (zero checked in)", widget: "string" }
@@ -227,6 +230,8 @@ collections:
               - { name: "toast_checked_in", label: "Toast prefix: checked in", widget: "string" }
               - { name: "toast_already_off", label: "Toast: check-in canceled", widget: "string" }
               - { name: "toast_no_qr_email", label: "Toast: no QR found for that email", widget: "string" }
+              - { name: "toast_found_email", label: "Toast: found by email lookup, name prefix", widget: "string" }
+              - { name: "toast_not_found_email", label: "Toast: email lookup found nothing", widget: "string" }
               - { name: "toast_qr_load_failed", label: "Toast: couldn't load QR code", widget: "string" }
               - { name: "toast_newsletter_added", label: "Toast: added to newsletter", widget: "string" }
               - { name: "toast_popup_blocked", label: "Toast: pop-up blocked (mobile QR download)", widget: "string" }
@@ -331,6 +336,9 @@ collections:
               - { name: "checkin_confirmed_tap", label: "Button text (already checked in)", widget: "string" }
               - { name: "checkin_not_you", label: "'Not you?' link text", widget: "string" }
               - { name: "checkin_my_qr", label: "'My QR code' link text", widget: "string" }
+              - { name: "checkin_find_me_link", label: "'Already signed up? Find me by email' link", widget: "string" }
+              - { name: "checkin_find_me_placeholder", label: "Email lookup field placeholder", widget: "string" }
+              - { name: "checkin_find_me_btn", label: "Email lookup submit button", widget: "string" }
               - { name: "checkin_empty", label: "Empty state (nobody checked in yet)", widget: "string" }
               - { name: "checkin_status_confirmed_suffix", label: "Status text suffix (after the number)", widget: "string" }
               - { name: "checkin_status_zero", label: "Status text (zero checked in)", widget: "string" }
@@ -431,6 +439,8 @@ collections:
               - { name: "toast_checked_in", label: "Toast prefix: checked in", widget: "string" }
               - { name: "toast_already_off", label: "Toast: check-in canceled", widget: "string" }
               - { name: "toast_no_qr_email", label: "Toast: no QR found for that email", widget: "string" }
+              - { name: "toast_found_email", label: "Toast: found by email lookup, name prefix", widget: "string" }
+              - { name: "toast_not_found_email", label: "Toast: email lookup found nothing", widget: "string" }
               - { name: "toast_qr_load_failed", label: "Toast: couldn't load QR code", widget: "string" }
               - { name: "toast_newsletter_added", label: "Toast: added to newsletter", widget: "string" }
               - { name: "toast_popup_blocked", label: "Toast: pop-up blocked (mobile QR download)", widget: "string" }
