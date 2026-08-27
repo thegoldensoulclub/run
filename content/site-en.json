@@ -69,7 +69,8 @@
     "scan_trigger": "Scan a runner's QR to check them in",
     "checkin_find_me_link": "Already signed up? Find me by email",
     "checkin_find_me_placeholder": "Your email",
-    "checkin_find_me_btn": "Find me"
+    "checkin_find_me_btn": "Find me",
+    "checkin_back_link": "← Back"
   },
   "wall": {
     "wall_kicker": "Runner to runner",

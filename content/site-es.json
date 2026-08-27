@@ -69,7 +69,8 @@
     "scan_trigger": "Escanea el código QR de un corredor para registrarlo",
     "checkin_find_me_link": "¿Ya te inscribiste? Búscate por correo",
     "checkin_find_me_placeholder": "Tu correo",
-    "checkin_find_me_btn": "Buscarme"
+    "checkin_find_me_btn": "Buscarme",
+    "checkin_back_link": "← Volver"
   },
   "wall": {
     "wall_kicker": "De corredor a corredor",
