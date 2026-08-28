@@ -117,7 +117,8 @@ collections:
             collapsed: true
             fields:
               - { name: "checkin_kicker", label: "Small label above section title", widget: "string" }
-              - { name: "checkin_h2", label: "Section title", widget: "string" }
+              - { name: "checkin_h2_today", label: "Section title (when today is the run day)", widget: "string" }
+              - { name: "checkin_h2_upcoming", label: "Section title (any other day)", widget: "string" }
               - { name: "checkin_note", label: "Clarifying note under the title", widget: "text" }
               - { name: "checkin_title_default", label: "Card title (not checked in yet)", widget: "string" }
               - { name: "checkin_title_confirmed", label: "Card title (checked in)", widget: "string" }
@@ -134,6 +135,7 @@ collections:
               - { name: "checkin_empty", label: "Empty state (nobody checked in yet)", widget: "string" }
               - { name: "checkin_status_confirmed_suffix", label: "Status text suffix (after the number)", widget: "string" }
               - { name: "checkin_status_zero", label: "Status text (zero checked in)", widget: "string" }
+              - { name: "checkin_closed_message", label: "Message shown before check-in opens (5:30 PM)", widget: "string" }
               - { name: "scan_trigger", label: "'Scan a runner's QR' button text", widget: "string" }
           - name: "wall"
             label: "Community Wall"
@@ -327,7 +329,8 @@ collections:
             collapsed: true
             fields:
               - { name: "checkin_kicker", label: "Small label above section title", widget: "string" }
-              - { name: "checkin_h2", label: "Section title", widget: "string" }
+              - { name: "checkin_h2_today", label: "Section title (when today is the run day)", widget: "string" }
+              - { name: "checkin_h2_upcoming", label: "Section title (any other day)", widget: "string" }
               - { name: "checkin_note", label: "Clarifying note under the title", widget: "text" }
               - { name: "checkin_title_default", label: "Card title (not checked in yet)", widget: "string" }
               - { name: "checkin_title_confirmed", label: "Card title (checked in)", widget: "string" }
@@ -344,6 +347,7 @@ collections:
               - { name: "checkin_empty", label: "Empty state (nobody checked in yet)", widget: "string" }
               - { name: "checkin_status_confirmed_suffix", label: "Status text suffix (after the number)", widget: "string" }
               - { name: "checkin_status_zero", label: "Status text (zero checked in)", widget: "string" }
+              - { name: "checkin_closed_message", label: "Message shown before check-in opens (5:30 PM)", widget: "string" }
               - { name: "scan_trigger", label: "'Scan a runner's QR' button text", widget: "string" }
           - name: "wall"
             label: "Community Wall"
