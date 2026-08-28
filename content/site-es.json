@@ -72,7 +72,8 @@
     "checkin_back_link": "← Volver",
     "checkin_h2_today": "¿Quién corre hoy?",
     "checkin_h2_upcoming": "¿Quién corre este jueves?",
-    "checkin_closed_message": "El check-in abre a las 5:30 p.m."
+    "checkin_closed_message": "El check-in abre a las 5:30 p.m.",
+    "checkin_closed_after_message": "El check-in de este jueves ya cerró — ¡nos vemos la próxima semana!"
   },
   "wall": {
     "wall_kicker": "De corredor a corredor",

@@ -72,7 +72,8 @@
     "checkin_back_link": "← Back",
     "checkin_h2_today": "Who's running today?",
     "checkin_h2_upcoming": "Who's running this Thursday?",
-    "checkin_closed_message": "Check-in opens at 5:30 PM."
+    "checkin_closed_message": "Check-in opens at 5:30 PM.",
+    "checkin_closed_after_message": "Thursday's check-in has closed — see you next week!"
   },
   "wall": {
     "wall_kicker": "Runner to runner",
