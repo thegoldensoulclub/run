@@ -479,7 +479,7 @@
         <ul class="fact-list">
           <li>
             <span class="fact-num">01</span>
-            <div class="fact-body"><b data-i18n="fact1_t">Every Thursday, 6:00 PM</b><span data-i18n="fact1_b">We start together right outside the store.</span></div>
+            <div class="fact-body"><b data-i18n="fact1_t">Every Thursday, 6:00 PM</b><span data-i18n="fact1_b">Meet up at the store at 6:00 p.m., we head out at 6:30 p.m.</span></div>
           </li>
           <li>
             <span class="fact-num">02</span>
@@ -555,7 +555,7 @@
     <div class="section-head">
       <div>
         <span class="kicker" data-i18n="checkin_kicker">This week</span>
-        <h2 data-i18n="checkin_h2">Who's running today.</h2>
+        <h2 id="checkinH2">Who's running today?</h2>
       </div>
       <div class="section-tag" id="checkinDateTag">—</div>
     </div>
@@ -771,7 +771,7 @@ const I18N_FALLBACK = {
     clock_label:'Next Golden Soul run in', clock_days:'Days', clock_hrs:'Hrs', clock_min:'Min', clock_sec:'Sec',
     clock_meta:'6:00 PM · The store',
     club_kicker:'Golden Soul Run Club', club_h2:'Same time, every week',
-    fact1_t:'Every Thursday, 6:00 PM', fact1_b:'We start together right outside the store.',
+    fact1_t:'Every Thursday, 6:00 PM', fact1_b:'Meet up at the store at 6:00 p.m., we head out at 6:30 p.m.',
     fact2_t:'Meet at the store', fact2_b:'The shop doubles as a clubhouse. Show before 6:00 p.m., leave your bag in one of our lockers, and stay hydrated in our oasis.',
     fact3_t:'Distance: 5K', fact3_b:'Run or Walk',
     fact4_t:'Free, every week, open to everyone', fact4_b:"Together, we keep racking up miles for the heart.",
@@ -786,7 +786,7 @@ const I18N_FALLBACK = {
     waiver_p3:'I consent to receive emergency medical care if needed, and understand Golden Soul Club is not responsible for the cost of that care. I understand participation is voluntary and I may leave the group run at any time.',
     waiver_check_label:'I have read and agree to the release of responsibility above.',
     join_submit:'Sign up for Thursdays',
-    checkin_kicker:'This week', checkin_h2:"Who's running today?",
+    checkin_kicker:'This week', checkin_h2_today:"Who's running today?", checkin_h2_upcoming:"Who's running this Thursday?",
     checkin_note:'This is separate from club sign-up. It helps us track who\'s showing up this Thursday.',
     checkin_title_default:'Running this Thursday?', checkin_title_confirmed:"You're set for Thursday.",
     checkin_your_name:'Your name', checkin_im_in:"I'm in", checkin_im_in_name:"I'm in — ",
@@ -794,7 +794,7 @@ const I18N_FALLBACK = {
     checkin_find_me_link:"Already signed up? Find me by email", checkin_find_me_placeholder:'Your email', checkin_find_me_btn:'Find me', checkin_back_link:'← Back',
     checkin_empty:'No one has checked in yet — be the first.',
     checkin_status_confirmed_suffix:' checked in so far.',
-    checkin_status_zero:'Be the first to check in this week.',
+    checkin_status_zero:'Be the first to check in this week.', checkin_closed_message:'Check-in opens at 5:30 PM.',
     scan_trigger:"Scan a runner's QR to check them in",
     wall_kicker:'Runner to runner', wall_h2:'The club wall.',
     wall_tag:'Trade routes, ask about the group, or post your splits. Visible to everyone in the club.',
@@ -847,7 +847,7 @@ const I18N_FALLBACK = {
     clock_label:'Próxima carrera Golden Soul en', clock_days:'Días', clock_hrs:'Hrs', clock_min:'Min', clock_sec:'Seg',
     clock_meta:'6:00 PM · La tienda',
     club_kicker:'Golden Soul Run Club', club_h2:'La misma hora, cada semana',
-    fact1_t:'Cada jueves, 6:00 PM', fact1_b:'Comenzamos juntos justo afuera de la tienda.',
+    fact1_t:'Cada jueves, 6:00 PM', fact1_b:'Nos encontramos frente a la tienda a las 6:00 p.m., salimos a las 6:30 p.m.',
     fact2_t:'Nos vemos en la tienda', fact2_b:'La tienda también es nuestro punto de encuentro. Llega antes de las 6:00 p.m., deja tu bulto en uno de nuestros lockers y mantente hidratado.',
     fact3_t:'Distancia: 5K', fact3_b:'Corre o camina',
     fact4_t:'Libre de costo, cada semana, abierto a todos', fact4_b:"Juntos seguimos sumando millas pa'l corazón.",
@@ -862,7 +862,7 @@ const I18N_FALLBACK = {
     waiver_p3:'Consiento recibir atención médica de emergencia si fuera necesario, y entiendo que Golden Soul Club no es responsable del costo de dicha atención. Entiendo que la participación es voluntaria y que puedo retirarme de la carrera grupal en cualquier momento.',
     waiver_check_label:'He leído y acepto la exención de responsabilidad anterior.',
     join_submit:'Inscríbete para los jueves',
-    checkin_kicker:'Esta semana', checkin_h2:'¿Quién corre hoy?',
+    checkin_kicker:'Esta semana', checkin_h2_today:'¿Quién corre hoy?', checkin_h2_upcoming:'¿Quién corre este jueves?',
     checkin_note:'Esto es distinto a inscribirte al club. Nos ayuda a saber quién viene este jueves.',
     checkin_title_default:'¿Corres este jueves?', checkin_title_confirmed:'Ya estás listo para el jueves.',
     checkin_your_name:'Tu nombre', checkin_im_in:'Voy', checkin_im_in_name:'Voy — ',
@@ -870,7 +870,7 @@ const I18N_FALLBACK = {
     checkin_find_me_link:'¿Ya te inscribiste? Búscate por correo', checkin_find_me_placeholder:'Tu correo', checkin_find_me_btn:'Buscarme', checkin_back_link:'← Volver',
     checkin_empty:'Nadie ha hecho check-in todavía — sé el primero.',
     checkin_status_confirmed_suffix:' ya confirmaron.',
-    checkin_status_zero:'Sé el primero en confirmar esta semana.',
+    checkin_status_zero:'Sé el primero en confirmar esta semana.', checkin_closed_message:'El check-in abre a las 5:30 p.m.',
     scan_trigger:'Escanea el código QR de un corredor para registrarlo',
     wall_kicker:'De corredor a corredor', wall_h2:'El muro del club.',
     wall_tag:'Comparte rutas, pregunta sobre el grupo, o publica tus tiempos. Visible para todo el club.',
@@ -1055,24 +1055,41 @@ function getNextRunDate(){
   const day = now.getDay();
   let diff = (4 - day + 7) % 7;
   target.setDate(now.getDate() + diff);
-  target.setHours(18,0,0,0);
-  if(target <= now){ target.setDate(target.getDate() + 7); }
+  target.setHours(18,0,0,0); // 6:00 PM doors — what the countdown counts down to
+  // Only roll over to next Thursday once the whole DAY has passed (midnight),
+  // not once 6:00 PM itself passes — otherwise anyone checking in later that
+  // same evening (doors 6:00, run starts 6:30) would get misattributed to
+  // next week's run instead of tonight's.
+  const endOfDay = new Date(target);
+  endOfDay.setHours(23,59,59,999);
+  if(endOfDay < now){ target.setDate(target.getDate() + 7); }
   return target;
 }
 function weekKeyFor(date){ return date.toISOString().slice(0,10); }
 let nextRun = getNextRunDate();
+function isRunToday(){
+  const now = new Date();
+  return now.toDateString() === nextRun.toDateString();
+}
+function isCheckinOpen(){
+  if(!isRunToday()) return false;
+  const now = new Date();
+  return now.getHours() > 17 || (now.getHours() === 17 && now.getMinutes() >= 30);
+}
 function updateDateLabels(){
   const fmt = new Intl.DateTimeFormat(currentLang === 'es' ? 'es-PR' : 'en-US', { weekday:'long', month:'short', day:'numeric' });
   const formatted = fmt.format(nextRun);
   document.getElementById('nextDateLabel').textContent = formatted;
   const prefix = currentLang === 'es' ? 'Confirmando para el ' : 'Checking in for ';
   document.getElementById('checkinDateTag').textContent = prefix + formatted;
+  document.getElementById('checkinH2').textContent = isRunToday() ? tr('checkin_h2_today') : tr('checkin_h2_upcoming');
 }
 updateDateLabels();
 
 function pad(n){ return String(n).padStart(2,'0'); }
 function tickCountdown(){
   nextRun = getNextRunDate();
+  updateDateLabels();
   const now = new Date();
   let ms = nextRun - now;
   if(ms < 0) ms = 0;
@@ -1435,6 +1452,18 @@ function buildCheckinAction(list){
   action.innerHTML = '';
   const name = profile && profile.name;
   const checkedIn = !!(name && list.some(c => c.name === name));
+
+  if(!checkedIn && !isCheckinOpen()){
+    // Not open yet — don't show the form at all. Someone who's
+    // already checked in (e.g. scanned their QR early) still sees
+    // their normal confirmed state below, this only blocks new
+    // check-ins before the window opens.
+    const closedMsg = document.createElement('div');
+    closedMsg.className = 'checkin-status';
+    closedMsg.textContent = tr('checkin_closed_message');
+    action.appendChild(closedMsg);
+    return;
+  }
 
   if(!name || quickEditMode){
     // Quick one-field entry — only needed the first time, or if editing the name.
@@ -1964,6 +1993,11 @@ function updateStorageNotice(){
   subscribeWallRealtime();
   subscribeRosterRealtime();
   await handleCheckinUrlParam();
+
+  // Re-checks the 5:30 PM gate periodically, so if someone has the
+  // page open waiting, the check-in form appears on its own the
+  // moment it opens — no refresh needed.
+  setInterval(renderCheckins, 30000);
 })();
 </script>
 </body>
