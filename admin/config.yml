@@ -136,6 +136,7 @@ collections:
               - { name: "checkin_status_confirmed_suffix", label: "Status text suffix (after the number)", widget: "string" }
               - { name: "checkin_status_zero", label: "Status text (zero checked in)", widget: "string" }
               - { name: "checkin_closed_message", label: "Message shown before check-in opens (5:30 PM)", widget: "string" }
+              - { name: "checkin_closed_after_message", label: "Message shown after check-in closes (8:30 PM)", widget: "string" }
               - { name: "scan_trigger", label: "'Scan a runner's QR' button text", widget: "string" }
           - name: "wall"
             label: "Community Wall"
@@ -348,6 +349,7 @@ collections:
               - { name: "checkin_status_confirmed_suffix", label: "Status text suffix (after the number)", widget: "string" }
               - { name: "checkin_status_zero", label: "Status text (zero checked in)", widget: "string" }
               - { name: "checkin_closed_message", label: "Message shown before check-in opens (5:30 PM)", widget: "string" }
+              - { name: "checkin_closed_after_message", label: "Message shown after check-in closes (8:30 PM)", widget: "string" }
               - { name: "scan_trigger", label: "'Scan a runner's QR' button text", widget: "string" }
           - name: "wall"
             label: "Community Wall"
