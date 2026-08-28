@@ -23,7 +23,7 @@
     "club_kicker": "Golden Soul Run Club",
     "club_h2": "La misma hora, cada semana",
     "fact1_t": "Cada jueves, 6:00 PM",
-    "fact1_b": "Comenzamos juntos justo afuera de la tienda.",
+    "fact1_b": "Nos encontramos frente a la tienda a las 6:00 p.m., salimos a las 6:30 p.m.",
     "fact2_t": "Nos vemos en la tienda",
     "fact2_b": "La tienda también es nuestro punto de encuentro. Llega antes de las 6:00 p.m., deja tu bulto en uno de nuestros lockers y mantente hidratado.",
     "fact3_t": "Distancia: 5K",
@@ -53,7 +53,6 @@
   },
   "checkin": {
     "checkin_kicker": "Esta semana",
-    "checkin_h2": "¿Quién corre hoy?",
     "checkin_note": "Esto es distinto a inscribirte al club. Nos ayuda a saber quién viene este jueves.",
     "checkin_title_default": "¿Corres este jueves?",
     "checkin_title_confirmed": "Ya estás listo para el jueves.",
@@ -70,7 +69,10 @@
     "checkin_find_me_link": "¿Ya te inscribiste? Búscate por correo",
     "checkin_find_me_placeholder": "Tu correo",
     "checkin_find_me_btn": "Buscarme",
-    "checkin_back_link": "← Volver"
+    "checkin_back_link": "← Volver",
+    "checkin_h2_today": "¿Quién corre hoy?",
+    "checkin_h2_upcoming": "¿Quién corre este jueves?",
+    "checkin_closed_message": "El check-in abre a las 5:30 p.m."
   },
   "wall": {
     "wall_kicker": "De corredor a corredor",

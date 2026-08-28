@@ -23,7 +23,7 @@
     "club_kicker": "Golden Soul Run Club",
     "club_h2": "Same time, every week",
     "fact1_t": "Every Thursday, 6:00 PM",
-    "fact1_b": "We start together right outside the store.",
+    "fact1_b": "Meet up at the store at 6:00 p.m., we head out at 6:30 p.m.",
     "fact2_t": "Meet at the store",
     "fact2_b": "The shop doubles as a clubhouse. Show before 6:00 p.m., leave your bag in one of our lockers, and stay hydrated in our oasis.",
     "fact3_t": "Distance: 5K",
@@ -53,7 +53,6 @@
   },
   "checkin": {
     "checkin_kicker": "This week",
-    "checkin_h2": "Who's running today?",
     "checkin_note": "This is separate from club sign-up. It helps us track who's showing up this Thursday.",
     "checkin_title_default": "Running this Thursday?",
     "checkin_title_confirmed": "You're set for Thursday.",
@@ -70,7 +69,10 @@
     "checkin_find_me_link": "Already signed up? Find me by email",
     "checkin_find_me_placeholder": "Your email",
     "checkin_find_me_btn": "Find me",
-    "checkin_back_link": "← Back"
+    "checkin_back_link": "← Back",
+    "checkin_h2_today": "Who's running today?",
+    "checkin_h2_upcoming": "Who's running this Thursday?",
+    "checkin_closed_message": "Check-in opens at 5:30 PM."
   },
   "wall": {
     "wall_kicker": "Runner to runner",
