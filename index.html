@@ -795,6 +795,7 @@ const I18N_FALLBACK = {
     checkin_empty:'No one has checked in yet — be the first.',
     checkin_status_confirmed_suffix:' checked in so far.',
     checkin_status_zero:'Be the first to check in this week.', checkin_closed_message:'Check-in opens at 5:30 PM.',
+    checkin_closed_after_message:"Thursday's check-in has closed — see you next week!",
     scan_trigger:"Scan a runner's QR to check them in",
     wall_kicker:'Runner to runner', wall_h2:'The club wall.',
     wall_tag:'Trade routes, ask about the group, or post your splits. Visible to everyone in the club.',
@@ -871,6 +872,7 @@ const I18N_FALLBACK = {
     checkin_empty:'Nadie ha hecho check-in todavía — sé el primero.',
     checkin_status_confirmed_suffix:' ya confirmaron.',
     checkin_status_zero:'Sé el primero en confirmar esta semana.', checkin_closed_message:'El check-in abre a las 5:30 p.m.',
+    checkin_closed_after_message:'El check-in de este jueves ya cerró — ¡nos vemos la próxima semana!',
     scan_trigger:'Escanea el código QR de un corredor para registrarlo',
     wall_kicker:'De corredor a corredor', wall_h2:'El muro del club.',
     wall_tag:'Comparte rutas, pregunta sobre el grupo, o publica tus tiempos. Visible para todo el club.',
@@ -1074,7 +1076,17 @@ function isRunToday(){
 function isCheckinOpen(){
   if(!isRunToday()) return false;
   const now = new Date();
-  return now.getHours() > 17 || (now.getHours() === 17 && now.getMinutes() >= 30);
+  const afterOpen = now.getHours() > 17 || (now.getHours() === 17 && now.getMinutes() >= 30);
+  const beforeClose = now.getHours() < 20 || (now.getHours() === 20 && now.getMinutes() < 30);
+  return afterOpen && beforeClose;
+}
+// True only on the run day itself, after the 8:30 PM close — used to
+// pick the right closed-state message ("see you next week" instead
+// of "opens at 5:30 PM").
+function isCheckinPastClose(){
+  if(!isRunToday()) return false;
+  const now = new Date();
+  return now.getHours() > 20 || (now.getHours() === 20 && now.getMinutes() >= 30);
 }
 function updateDateLabels(){
   const fmt = new Intl.DateTimeFormat(currentLang === 'es' ? 'es-PR' : 'en-US', { weekday:'long', month:'short', day:'numeric' });
@@ -1460,7 +1472,7 @@ function buildCheckinAction(list){
     // check-ins before the window opens.
     const closedMsg = document.createElement('div');
     closedMsg.className = 'checkin-status';
-    closedMsg.textContent = tr('checkin_closed_message');
+    closedMsg.textContent = isCheckinPastClose() ? tr('checkin_closed_after_message') : tr('checkin_closed_message');
     action.appendChild(closedMsg);
     return;
   }
@@ -1571,8 +1583,16 @@ function buildCheckinAction(list){
 async function renderCheckins(){
   const list = await fetchCheckins();
   const wrap = document.getElementById('checkinList');
+  const status = document.getElementById('checkinStatus');
   wrap.innerHTML = '';
-  if(list.length === 0){
+
+  if(!isRunToday()){
+    // Don't show the roster of who showed up outside of the run day
+    // itself — otherwise it lingers visible for most of the week
+    // until the next Thursday rolls around. The closed-state message
+    // in the action area already explains what's going on.
+    status.textContent = '';
+  } else if(list.length === 0){
     wrap.innerHTML = `<div class="wall-empty">${tr('checkin_empty')}</div>`;
   } else {
     list.forEach(c=>{
@@ -1584,13 +1604,15 @@ async function renderCheckins(){
       wrap.appendChild(chip);
     });
   }
-  const status = document.getElementById('checkinStatus');
+
   const name = profile && profile.name;
   const checkedIn = !!(name && list.some(c => c.name === name));
   document.getElementById('checkinTitle').textContent = checkedIn ? tr('checkin_title_confirmed') : tr('checkin_title_default');
-  status.textContent = (list.length === 0 && !checkedIn)
-    ? tr('checkin_status_zero')
-    : list.length + tr('checkin_status_confirmed_suffix');
+  if(isRunToday()){
+    status.textContent = (list.length === 0 && !checkedIn)
+      ? tr('checkin_status_zero')
+      : list.length + tr('checkin_status_confirmed_suffix');
+  }
   buildCheckinAction(list);
   return list;
 }
